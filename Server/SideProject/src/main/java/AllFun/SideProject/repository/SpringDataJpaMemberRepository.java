@@ -9,17 +9,17 @@ import java.util.Optional;
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long> {
 
     /**
-     * 이메일 검색
+     * check duplicated email
      * @param email
      * @return
      */
     Optional<Member> findByEmail(String email);
 
     /**
-     * 닉네임 검색
+     * check duplicated nickname
      * @param nickname
      * @return
      */
-    Optional<List<Member>> findByNickname(String nickname);
+    Optional<Member> findByNickname(String nickname);
 
 }
