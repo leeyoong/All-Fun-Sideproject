@@ -1,5 +1,8 @@
 package AllFun.SideProject.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 회원 DB
  */
@@ -9,11 +12,11 @@ public class Member {
 
     private String email; // 사용자 이메일 (로그인 ID)
     private String passwd; // 사용자 비밀번호
-    private String birth; // 생년월일 (xxxx.xx.xx)
+    private String birth; // 생년월일 (yyyy-mm-dd)
     private String name; // 사용자 본명
     private String nickname; // 사용자 활동명(별명)
     private String profileImg; // 프로필 이미지가 저장된 경로
-    private String createDate; // 계정 생성 날짜
+    private String createDate; // 계정 생성 날짜 (yyyy-MM-dd HH:mm:ss)
 
     public Long getMemberId() {
         return memberId;
