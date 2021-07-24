@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class EmailCheckDto {
-    private String email;
+public class CheckDto {
+    private String checkItem;
 }

@@ -1,9 +1,6 @@
 package AllFun.SideProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 

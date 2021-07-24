@@ -2,15 +2,16 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.dto.member.CreateMemberDto;
-import AllFun.SideProject.dto.member.EmailCheckDto;
+import AllFun.SideProject.dto.member.CheckDto;
 import AllFun.SideProject.dto.member.LoginDto;
-import AllFun.SideProject.dto.member.NicknameCheckDto;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
@@ -26,8 +27,8 @@ public class MemberController {
      * @return
      */
     @PostMapping("/emailChk")
-    public ResponseEntity<?> emailChk(@RequestBody EmailCheckDto request){
-        Member find = memberService.findByEmail(request.getEmail());
+    public ResponseEntity<?> emailChk(@RequestBody CheckDto request){
+        Member find = memberService.findByEmail(request.getCheckItem());
 
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -43,8 +44,8 @@ public class MemberController {
      * @return
      */
     @PostMapping("/nicknameChk")
-    public ResponseEntity<?> nicknameChk(@RequestBody NicknameCheckDto request){
-        Member find = memberService.findByNickname(request.getNickname());
+    public ResponseEntity<?> nicknameChk(@RequestBody CheckDto request){
+        Member find = memberService.findByNickname(request.getCheckItem());
 
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -53,6 +54,23 @@ public class MemberController {
         }else{
             return ResponseEntity.ok(request);
         }
+    }
+
+    /**
+     * profile image enroll
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/profileEnroll")
+    public ResponseEntity<?> profileEnroll(@RequestPart("profileImg")MultipartFile request) throws IOException {
+        if (request.isEmpty()){
+            HashMap<String, String> result = new HashMap<String,String>();
+            result.put("Error","No Image File");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+        String profileImg = memberService.profileEnroll(request);
+        return ResponseEntity.ok(profileImg);
     }
 
     /**
@@ -87,14 +105,14 @@ public class MemberController {
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
             HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","존재하지 않는 아이디 입니다.");
+            result.put("EmailError","존재하지 않는 아이디 입니다.");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
 
         // Check correct password
         if (find.getPasswd() != request.getPasswd()){
             HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","유효하지 않은 비밀번호 입니다.");
+            result.put("PwdError","유효하지 않은 비밀번호 입니다.");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
 
