@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CheckDto {
-    private String checkItem;
+public class OneItemDto {
+    private String item;
 }

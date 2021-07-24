@@ -6,6 +6,8 @@ import AllFun.SideProject.repository.SpringDataJpaMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -22,6 +24,7 @@ import java.util.UUID;
 @Transactional
 public class MemberService {
     private final SpringDataJpaMemberRepository memberRepository;
+    private final JavaMailSender javaMailSender;
 
     /**
      * check duplicated email
@@ -53,10 +56,12 @@ public class MemberService {
                         member.getNickname(),member.getProfileImg(),member.getCreateDate(),member.getGender());
     }
 
-
-
-
-
+    /**
+     * Enroll Profile
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public String profileEnroll(MultipartFile file) throws IOException{
         UUID uuid = UUID.randomUUID();
         String ogFileName = file.getOriginalFilename();
@@ -70,6 +75,28 @@ public class MemberService {
         return (relativePath+"/"+fileName).toString();
     }
 
+    /**
+     * Email Authentication
+     * @param email
+     * @return
+     */
+    public String sendMail(String email){
+        Random random = new Random();
+        String key = "";
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+
+        for (int i = 0; i < 3; i++) {
+            int index = random.nextInt(25) + 65;
+            key += (char)index;
+        }
+        int numIndex = random.nextInt(9999)+1000;
+        key += numIndex;
+        message.setSubject("인증번호 입력을 위한 메일입니다.");
+        message.setText("인증번호 : " + key);
+        javaMailSender.send(message);
+        return "ok";
+    }
 
 }
 

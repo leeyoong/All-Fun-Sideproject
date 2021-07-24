@@ -2,7 +2,7 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.dto.member.CreateMemberDto;
-import AllFun.SideProject.dto.member.CheckDto;
+import AllFun.SideProject.dto.member.OneItemDto;
 import AllFun.SideProject.dto.member.LoginDto;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,8 @@ public class MemberController {
      * @return
      */
     @PostMapping("/emailChk")
-    public ResponseEntity<?> emailChk(@RequestBody CheckDto request){
-        Member find = memberService.findByEmail(request.getCheckItem());
+    public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
+        Member find = memberService.findByEmail(request.getItem());
 
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -44,8 +44,8 @@ public class MemberController {
      * @return
      */
     @PostMapping("/nicknameChk")
-    public ResponseEntity<?> nicknameChk(@RequestBody CheckDto request){
-        Member find = memberService.findByNickname(request.getCheckItem());
+    public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
+        Member find = memberService.findByNickname(request.getItem());
 
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -71,6 +71,16 @@ public class MemberController {
         }
         String profileImg = memberService.profileEnroll(request);
         return ResponseEntity.ok(profileImg);
+    }
+
+    /**
+     * Email Authentication
+     * @param request
+     * @return
+     */
+    @PostMapping("/sendMail")
+    public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
+        return ResponseEntity.ok(memberService.sendMail(request.getItem()));
     }
 
     /**
