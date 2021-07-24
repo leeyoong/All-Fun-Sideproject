@@ -22,4 +22,25 @@ public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Lon
      */
     Optional<Member> findByNickname(String nickname);
 
+    /**
+     * find user email
+     * @param name
+     * @param birth
+     * @param phone
+     * @param gender
+     * @return
+     */
+    Optional<Member> findByNameAndBirthAndPhoneAndGender(String name, String birth, String phone, String gender);
+
+    /**
+     * find user password
+     * @param name
+     * @param birth
+     * @param phone
+     * @param gender
+     * @param email
+     * @return
+     */
+    Optional<Member> findByNameAndBirthAndPhoneAndGenderAndEmail
+                        (String name, String birth, String phone, String gender,String email);
 }

@@ -53,7 +53,7 @@ public class MemberService {
     public CreateMemberDto save(Member member){
         memberRepository.save(member);
         return new CreateMemberDto(member.getEmail(), member.getPasswd(),member.getBirth(),member.getName(),
-                        member.getNickname(),member.getProfileImg(),member.getCreateDate(),member.getGender());
+                member.getPhone(), member.getNickname(),member.getProfileImg(),member.getCreateDate(),member.getGender());
     }
 
     /**
@@ -98,5 +98,32 @@ public class MemberService {
         return "ok";
     }
 
+    /**
+     * find user email
+     * @param name
+     * @param birth
+     * @param phone
+     * @param gender
+     * @return
+     */
+    public Member findByNameAndBirthAndPhoneAndGender(String name, String birth, String phone, String gender){
+        return memberRepository.findByNameAndBirthAndPhoneAndGender(name, birth, phone, gender)
+                .orElse(null);
+    }
+
+    /**
+     * find user password
+     * @param name
+     * @param birth
+     * @param phone
+     * @param gender
+     * @param email
+     * @return
+     */
+    public Member findByNameAndBirthAndPhoneAndGenderAndEmail
+                (String name, String birth, String phone, String gender, String email){
+        return memberRepository.findByNameAndBirthAndPhoneAndGenderAndEmail(name, birth, phone, gender,email)
+                .orElse(null);
+    }
 }
 

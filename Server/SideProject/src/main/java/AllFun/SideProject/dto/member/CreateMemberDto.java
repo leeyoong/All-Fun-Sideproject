@@ -10,6 +10,7 @@ public class CreateMemberDto {
     private String passwd;
     private String birth;
     private String name;
+    private String phone;
     private String nickname;
     private String profileImg;
     private String createDate;
