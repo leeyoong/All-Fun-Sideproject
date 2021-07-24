@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".passforgot">
+
+    <EditText
+        android:id="@+id/regmailcert2"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="Please enter the code."
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="274dp"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/forgotmailbutton2"
+        android:layout_width="80"
+        android:layout_height="60"
+        android:text="CHECK"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="274dp" />
+
+    <Button
+        android:id="@+id/forgotmailbutton"
+        android:layout_width="370"
+        android:layout_height="wrap_content"
+        android:text="Send code on E-mail"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <EditText
+        android:id="@+id/forgotname3"
+        android:layout_width="275"
+        android:layout_height="60"
+        android:ems="10"
+        android:hint="alstn0723@naver.com"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="100dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/forgottitle4"
+        android:layout_width="80"
+        android:layout_height="60"
+        android:text="E-mail"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <TextView
+        android:id="@+id/passforgottitle"
+        android:layout_width="370"
+        android:layout_height="60"
+        android:text="Password forgot?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/mailforgot"
+        android:layout_width="227dp"
+        android:layout_height="23dp"
+        android:text="Can't remember your own account?"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="174dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

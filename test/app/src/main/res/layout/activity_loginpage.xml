@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginpage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".loginpage"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/passfound"
+            android:layout_width="120"
+            android:layout_height="25dp"
+            android:text="비밀번호 재설정"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="195dp"
+            tools:layout_editor_absoluteY="447dp" />
+
+        <TextView
+            android:id="@+id/idfound"
+            android:layout_width="90"
+            android:layout_height="25dp"
+            android:text="아이디 찾기"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="93dp"
+            tools:layout_editor_absoluteY="447dp" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="370dp"
+            android:layout_height="45dp"
+            android:text="Log in"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="329dp" />
+
+        <Button
+            android:id="@+id/regin"
+            android:layout_width="370"
+            android:layout_height="45"
+            android:text="Register"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="385dp" />
+
+        <EditText
+            android:id="@+id/passname"
+            android:layout_width="370"
+            android:layout_height="70"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="182dp" />
+
+        <EditText
+            android:id="@+id/idname"
+            android:layout_width="370dp"
+            android:layout_height="70dp"
+            android:ems="10"
+            android:hint="ID"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="17dp"
+            tools:layout_editor_absoluteY="101dp" />
+
+        <TextView
+            android:id="@+id/logtitle"
+            android:layout_width="370"
+            android:layout_height="60"
+            android:text="Orphanage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <CheckBox
+            android:id="@+id/autolog"
+            android:layout_width="wrap_content"
+            android:layout_height="50"
+            android:text="자동으로 로그인"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="264dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
