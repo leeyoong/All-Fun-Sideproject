@@ -1,7 +1,6 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Member;
-import AllFun.SideProject.domain.base.MemberRole;
 import AllFun.SideProject.dto.member.CreateMemberDto;
 import AllFun.SideProject.dto.member.FindMemberDto;
 import AllFun.SideProject.dto.member.OneItemDto;
@@ -10,7 +9,6 @@ import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +21,6 @@ import java.util.HashMap;
 public class MemberController {
 
     private final MemberService memberService;
-    //private final PasswordEncoder passwordEncoder;
     /**
      * Check Duplicated Email
      * @param request
@@ -96,15 +93,13 @@ public class MemberController {
         Member newMember = Member.createMember(
                 request.getEmail(),
                 request.getPasswd(),
-                //passwordEncoder.encode(request.getPasswd()),
                 request.getBirth(),
                 request.getName(),
                 request.getPhone(),
                 request.getNickname(),
                 request.getProfileImg(),
                 request.getCreateDate(),
-                request.getGender(),
-                MemberRole.ROLE_USER);
+                request.getGender());
         response = memberService.save(newMember);
         return ResponseEntity.ok(response);
     }

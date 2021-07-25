@@ -1,11 +1,7 @@
 package AllFun.SideProject.domain;
 
-import AllFun.SideProject.domain.base.MemberRole;
 import lombok.*;
 import org.hibernate.annotations.Table;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -20,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member implements UserDetails {
+public class Member{
 
     @Id
     @GeneratedValue
@@ -36,14 +32,10 @@ public class Member implements UserDetails {
     private String createDate; // create member time (yyyy-mm-dd hh:mm:ss)
     private String gender; // gender
 
-    @Enumerated(EnumType.STRING)
-    private MemberRole role;
-
     //private String type; // naver, google, kakao
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
-                                      String nickname, String profileImg, String createDate, String gender,
-                                        MemberRole role){
+                                      String nickname, String profileImg, String createDate, String gender){
         Member member = new Member();
         member.setEmail(email);
         member.setPasswd(passwd);
@@ -54,47 +46,7 @@ public class Member implements UserDetails {
         member.setProfileImg(profileImg);
         member.setCreateDate(createDate);
         member.setGender(gender);
-        member.setRole(role);
         return member;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
-        list.add(new SimpleGrantedAuthority(this.role.toString()));
-
-        return list;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.passwd;
-    }
-
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }
