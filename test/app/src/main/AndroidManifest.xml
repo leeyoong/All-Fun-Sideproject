@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
-        <activity android:name=".passreset"></activity>
+        <activity android:name=".passreset">
+        </activity>
         <activity android:name=".idfound" />
+
         <activity android:name=".passforgot" />
         <activity android:name=".idforgot" />
-        <activity android:name=".loginpage" />
         <activity android:name=".Registerpage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".loginpage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

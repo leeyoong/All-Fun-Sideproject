@@ -2,99 +2,132 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".idforgot">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".idforgot"
-        tools:layout_editor_absoluteX="-37dp"
-        tools:layout_editor_absoluteY="32dp">
 
-        <Button
-            android:id="@+id/forgotbutton"
-            android:layout_width="370"
-            android:layout_height="wrap_content"
-            android:text="教えてください"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="647dp" />
+    <TextView
+        android:id="@+id/hihi2"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:text="Phone number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toStartOf="@+id/forgotphone"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hihi" />
 
-        <TextView
-            android:id="@+id/hihi"
-            android:layout_width="80"
-            android:layout_height="60"
-            android:text="Birth"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="177dp" />
+    <Button
+        android:id="@+id/forgotbutton"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="教えてください"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/idforgottitle"
-            android:layout_width="370"
-            android:layout_height="60"
-            android:text="ID forgot?"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="16dp" />
+    <TextView
+        android:id="@+id/hihi"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="Birth"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/hihi2"
+        app:layout_constraintEnd_toStartOf="@+id/forgotbirth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgottitle2" />
 
-        <TextView
-            android:id="@+id/hihi"
-            android:layout_width="80"
-            android:layout_height="60"
-            android:text="Phone number"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="252dp" />
+    <EditText
+        android:id="@+id/forgotbirth"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/forgotphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hihi"
+        app:layout_constraintTop_toBottomOf="@+id/forgotname" />
 
-        <EditText
-            android:id="@+id/forgotbirth"
-            android:layout_width="275"
-            android:layout_height="60"
-            android:ems="10"
-            android:hint="yyyy-mm-dd"
-            android:inputType="date"
-            tools:layout_editor_absoluteX="115dp"
-            tools:layout_editor_absoluteY="177dp" />
 
-        <EditText
-            android:id="@+id/forgotphone"
-            android:layout_width="275"
-            android:layout_height="60"
-            android:ems="10"
-            android:hint="xxx-xxxx-xxxx"
-            android:inputType="phone"
-            tools:layout_editor_absoluteX="115dp"
-            tools:layout_editor_absoluteY="252dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/forgotphone"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="xxx-xxxx-xxxx"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hihi2"
+        app:layout_constraintTop_toBottomOf="@+id/forgotbirth" />
 
     <TextView
         android:id="@+id/forgottitle2"
-        android:layout_width="80"
-        android:layout_height="60"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintBottom_toTopOf="@+id/hihi"
+        app:layout_constraintEnd_toStartOf="@+id/forgotname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idforgottitle" />
 
     <EditText
         android:id="@+id/forgotname"
-        android:layout_width="275"
-        android:layout_height="60"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/forgotbirth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/forgottitle2"
+        app:layout_constraintTop_toBottomOf="@+id/idforgottitle"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/idforgottitle"
-        android:layout_width="370"
-        android:layout_height="60"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:text="ID forgot?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/forgotname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
