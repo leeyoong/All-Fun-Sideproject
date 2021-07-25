@@ -95,7 +95,34 @@ public class MemberService {
         message.setSubject("인증번호 입력을 위한 메일입니다.");
         message.setText("인증번호 : " + key);
         javaMailSender.send(message);
-        return "ok";
+        return null;
+    }
+
+    /**
+     * Email Authentication
+     * @param email
+     * @return
+     */
+    public String sendMailPw(String email){
+        Random random = new Random();
+        String key = "";
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        String source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (int i = 0; i < 10; i++) {
+            int idx = random.nextInt(source.length());
+            key += source.charAt(idx);
+        }
+        Member member = memberRepository.findByEmail(email).orElse(null);
+        if (member != null){
+            member.setPasswd(key);
+            message.setSubject("임시 비밀번호 입니다.");
+            message.setText("임시 비밀번호 : " + key);
+            javaMailSender.send(message);
+            return "Ok";
+        } else{
+            return "Fail";
+        }
     }
 
     /**
@@ -103,11 +130,10 @@ public class MemberService {
      * @param name
      * @param birth
      * @param phone
-     * @param gender
      * @return
      */
-    public Member findByNameAndBirthAndPhoneAndGender(String name, String birth, String phone, String gender){
-        return memberRepository.findByNameAndBirthAndPhoneAndGender(name, birth, phone, gender)
+    public Member findByNameAndBirthAndPhoneAndGender(String name, String birth, String phone){
+        return memberRepository.findByNameAndBirthAndPhone(name, birth, phone)
                 .orElse(null);
     }
 
@@ -116,13 +142,12 @@ public class MemberService {
      * @param name
      * @param birth
      * @param phone
-     * @param gender
      * @param email
      * @return
      */
     public Member findByNameAndBirthAndPhoneAndGenderAndEmail
-                (String name, String birth, String phone, String gender, String email){
-        return memberRepository.findByNameAndBirthAndPhoneAndGenderAndEmail(name, birth, phone, gender,email)
+                (String name, String birth, String phone, String email){
+        return memberRepository.findByNameAndBirthAndPhoneAndEmail(name, birth, phone,email)
                 .orElse(null);
     }
 }

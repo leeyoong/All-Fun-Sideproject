@@ -27,20 +27,18 @@ public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Lon
      * @param name
      * @param birth
      * @param phone
-     * @param gender
      * @return
      */
-    Optional<Member> findByNameAndBirthAndPhoneAndGender(String name, String birth, String phone, String gender);
+    Optional<Member> findByNameAndBirthAndPhone(String name, String birth, String phone);
 
     /**
      * find user password
      * @param name
      * @param birth
      * @param phone
-     * @param gender
      * @param email
      * @return
      */
-    Optional<Member> findByNameAndBirthAndPhoneAndGenderAndEmail
-                        (String name, String birth, String phone, String gender,String email);
+    Optional<Member> findByNameAndBirthAndPhoneAndEmail
+                        (String name, String birth, String phone,String email);
 }

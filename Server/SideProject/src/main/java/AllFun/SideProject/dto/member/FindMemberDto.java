@@ -12,6 +12,5 @@ public class FindMemberDto {
     @NonNull private String name;
     @NonNull private String birth;
     @NonNull private String phone;
-    @NonNull private String gender;
     private String email;
 }

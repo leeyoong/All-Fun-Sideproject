@@ -31,7 +31,6 @@ public class MemberController {
     @PostMapping("/emailChk")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
         Member find = memberService.findByEmail(request.getItem());
-
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Duplicated Email");
@@ -141,7 +140,7 @@ public class MemberController {
     @PostMapping("/findId")
     public ResponseEntity<?> findId(@RequestBody FindMemberDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGender(
-                request.getName(),request.getBirth(),request.getPhone(),request.getGender());
+                request.getName(),request.getBirth(),request.getPhone());
 
         if (find == null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -152,22 +151,31 @@ public class MemberController {
             return ResponseEntity.ok(email);
         }
     }
+    
     /**
-     * find user password
+     * change user password (if user forgot pw)
      * @param request
      * @return
      */
     @PostMapping("/findPw")
     public ResponseEntity<?> findPw(@RequestBody FindMemberDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
-                (request.getName(), request.getBirth(), request.getPhone(), request.getGender(), request.getEmail());
+                (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
         if (find == null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Wrong Value");
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }else{
-            OneItemDto passwd = new OneItemDto(find.getPasswd());
-            return ResponseEntity.ok(passwd);
+            // 임시 비밀번호 메일로 전송
+            String res = memberService.sendMailPw(find.getEmail());
+            if(res == "Fail"){
+                HashMap<String, String> result = new HashMap<String,String>();
+                result.put("Error","Email Send Fail");
+                return new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
+            }
+            else{
+                return ResponseEntity.ok(null);
+            }
         }
     }
 }
