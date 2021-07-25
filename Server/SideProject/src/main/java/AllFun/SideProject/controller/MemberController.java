@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.base.MemberRole;
 import AllFun.SideProject.dto.member.CreateMemberDto;
 import AllFun.SideProject.dto.member.FindMemberDto;
 import AllFun.SideProject.dto.member.OneItemDto;
@@ -102,7 +103,8 @@ public class MemberController {
                 request.getNickname(),
                 request.getProfileImg(),
                 request.getCreateDate(),
-                request.getGender());
+                request.getGender(),
+                MemberRole.ROLE_USER);
         response = memberService.save(newMember);
         return ResponseEntity.ok(response);
     }
@@ -151,7 +153,7 @@ public class MemberController {
             return ResponseEntity.ok(email);
         }
     }
-    
+
     /**
      * change user password (if user forgot pw)
      * @param request
