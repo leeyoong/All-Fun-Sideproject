@@ -28,14 +28,14 @@ public class Member{
     private String name; // user korean name
     private String phone; //phone number
     private String nickname; // nickname
-    private String profileImg; // profile image location
+    //private String profileImg; // profile image location
     private String createDate; // create member time (yyyy-mm-dd hh:mm:ss)
     private String gender; // gender
 
     //private String type; // naver, google, kakao
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
-                                      String nickname, String profileImg, String createDate, String gender){
+                                      String nickname, String createDate, String gender){
         Member member = new Member();
         member.setEmail(email);
         member.setPasswd(passwd);
@@ -43,7 +43,7 @@ public class Member{
         member.setName(name);
         member.setPhone(phone);
         member.setNickname(nickname);
-        member.setProfileImg(profileImg);
+        //member.setProfileImg(profileImg);
         member.setCreateDate(createDate);
         member.setGender(gender);
         return member;
