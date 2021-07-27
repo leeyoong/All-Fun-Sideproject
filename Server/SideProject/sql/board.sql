@@ -6,6 +6,8 @@ title varchar(255),
 content text,
 createDate varchar(255),
 editDate varchar(255),
+hope int,
+entry int,
 hit int,
 primary key (id)
 );
