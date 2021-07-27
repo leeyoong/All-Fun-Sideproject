@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -113,9 +114,13 @@ public class MemberService {
             int idx = random.nextInt(source.length());
             key += source.charAt(idx);
         }
-        Member member = memberRepository.findByEmail(email).orElse(null);
+        Optional<Member> member = Optional.ofNullable(memberRepository.findByEmail(email).orElse(null));
         if (member != null){
-            member.setPasswd(key);
+            String finalKey = key;
+            member.ifPresent(selectMember->{
+                selectMember.setPasswd(finalKey);
+                memberRepository.save(selectMember);
+            });
             message.setSubject("임시 비밀번호 입니다.");
             message.setText("임시 비밀번호 : " + key);
             javaMailSender.send(message);

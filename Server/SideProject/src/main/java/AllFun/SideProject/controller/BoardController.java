@@ -2,8 +2,10 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Board;
 import AllFun.SideProject.dto.board.CreateBoardDto;
+import AllFun.SideProject.dto.board.EditBoardDto;
 import AllFun.SideProject.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +34,16 @@ public class BoardController {
                 );
         CreateBoardDto response = boardService.save(newBoard);
         return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Edit Board
+     * @param request
+     * @return
+     */
+    @PostMapping("/edit")
+    public ResponseEntity<?> edit(@RequestBody EditBoardDto request){
+
+        return ResponseEntity.ok(null);
     }
 }
