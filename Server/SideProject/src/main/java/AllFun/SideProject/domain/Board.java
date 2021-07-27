@@ -20,14 +20,15 @@ public class Board {
     private String content; // 글의 내용
     private String createDate; //작성날짜
     private String editDate = null; //수정 날짜
-    private int hit = 0; // 조회수
+    private int hit; // 조회수
 
-    public static Board createMember(String nickname, String title, String content, String createDate){
+    public static Board createBoard(String nickname, String title, String content, String createDate){
         Board board = new Board();
         board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
         board.setCreateDate(createDate);
+        board.setHit(0);
         return board;
     }
 }

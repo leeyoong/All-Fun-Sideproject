@@ -53,7 +53,7 @@ public class MemberService {
     public CreateMemberDto save(Member member){
         memberRepository.save(member);
         return new CreateMemberDto(member.getEmail(), member.getPasswd(),member.getBirth(),member.getName(),
-                member.getPhone(), member.getNickname(),member.getProfileImg(),member.getCreateDate(),member.getGender());
+                member.getPhone(), member.getNickname(),member.getCreateDate(),member.getGender());
     }
 
     /**
