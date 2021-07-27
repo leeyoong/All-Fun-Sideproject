@@ -4,9 +4,9 @@ import AllFun.SideProject.domain.Board;
 import AllFun.SideProject.dto.board.CreateBoardDto;
 import AllFun.SideProject.dto.board.EditBoardDto;
 import AllFun.SideProject.dto.board.ReadDetailDto;
+import AllFun.SideProject.dto.board.SearchRequestDto;
 import AllFun.SideProject.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,6 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/boards")
 @RequiredArgsConstructor
-
 public class BoardController {
     private final BoardService boardService;
 
@@ -31,7 +30,6 @@ public class BoardController {
                 request.getNickname(),
                 request.getTitle(),
                 request.getContent(),
-                request.getCreateDate(),
                 request.getProjectMembers()
                 );
         CreateBoardDto response = boardService.save(newBoard);
@@ -39,11 +37,21 @@ public class BoardController {
     }
 
     /**
+     * get board list (recently)
+     * @return
+     */
+    @GetMapping("/list/recent")
+    public ResponseEntity<?> listRecent(){
+
+        return ResponseEntity.ok(null);
+    }
+
+    /**
      * Read Detail Board and Increase hit.
      * @param id
      * @return
      */
-    @PostMapping("/{id}/detail")
+    @GetMapping("/{id}/detail")
     public ResponseEntity<?> readDetail(@PathVariable("id") Long id){
         Board find = boardService.findById(id);
         if (find==null){
@@ -56,6 +64,36 @@ public class BoardController {
             System.out.println("올라간 조회수 : "+response.getHit());
             return ResponseEntity.ok(response);
         }
+    }
+
+    /**
+     * Search by Title
+     * @param request
+     * @return
+     */
+    @GetMapping("/search/title")
+    public ResponseEntity<?> searchTitle(@RequestBody SearchRequestDto request){
+        return ResponseEntity.ok(null);
+    }
+
+    /**
+     * Search By Content
+     * @param request
+     * @return
+     */
+    @GetMapping("/search/content")
+    public ResponseEntity<?> searchContent(@RequestBody SearchRequestDto request){
+        return ResponseEntity.ok(null);
+    }
+
+    /**
+     * Search By Writer
+     * @param request
+     * @return
+     */
+    @GetMapping("search/writer")
+    public ResponseEntity<?> searchWriter(@RequestBody SearchRequestDto request){
+        return ResponseEntity.ok(null);
     }
 
     /**

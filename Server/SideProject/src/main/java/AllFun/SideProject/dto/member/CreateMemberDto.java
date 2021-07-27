@@ -12,7 +12,5 @@ public class CreateMemberDto {
     private String name;
     private String phone;
     private String nickname;
-    //private String profileImg;
-    private String createDate;
     private String gender;
 }

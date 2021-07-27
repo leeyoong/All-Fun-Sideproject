@@ -1,14 +1,12 @@
 package AllFun.SideProject.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
+
 
 
 @Entity
@@ -29,12 +27,12 @@ public class Member{
     private String phone; //phone number
     private String nickname; // nickname
     //private String profileImg; // profile image location
-    private String createDate; // create member time (yyyy-mm-dd hh:mm:ss)
+    private LocalDateTime createDate; // create member time (yyyy-mm-dd hh:mm:ss)
     private String gender; // gender(M / F)
 
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
-                                      String nickname, String createDate, String gender){
+                                      String nickname, String gender){
         Member member = new Member();
         member.setEmail(email);
         member.setPasswd(passwd);
@@ -43,9 +41,12 @@ public class Member{
         member.setPhone(phone);
         member.setNickname(nickname);
         //member.setProfileImg(profileImg);
-        member.setCreateDate(createDate);
         member.setGender(gender);
         return member;
     }
 
+    @PrePersist
+    public void createdAt(){
+        this.createDate = LocalDateTime.now();
+    }
 }

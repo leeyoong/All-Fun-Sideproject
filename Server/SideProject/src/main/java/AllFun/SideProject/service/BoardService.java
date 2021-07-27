@@ -48,13 +48,9 @@ public class BoardService {
 
         Board board = boardRepository.findById(boardId).orElse(null);
 
-        if(board.getEditDate() == null){
-            return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getCreateDate()
-                    ,board.getProjectMembers(),board.getEntryMembers(),board.getHit());
-        }else{
-            return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getEditDate()
-                    ,board.getProjectMembers(),board.getEntryMembers(),board.getHit());
-        }
+        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getCreateDate()
+                ,board.getProjectMembers(),board.getEntryMembers(),board.getHit());
+
     }
 
 }

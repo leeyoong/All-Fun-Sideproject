@@ -97,8 +97,6 @@ public class MemberController {
                 request.getName(),
                 request.getPhone(),
                 request.getNickname(),
-                //request.getProfileImg(),
-                request.getCreateDate(),
                 request.getGender());
         response = memberService.save(newMember);
         return ResponseEntity.ok(response);
