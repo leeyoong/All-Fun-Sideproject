@@ -1,8 +1,6 @@
 package AllFun.SideProject.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

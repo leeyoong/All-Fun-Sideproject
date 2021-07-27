@@ -132,7 +132,7 @@ public class MemberController {
      * @param request
      * @return
      */
-    @PostMapping("/findId")
+    @GetMapping("/findId")
     public ResponseEntity<?> findId(@RequestBody FindMemberDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGender(
                 request.getName(),request.getBirth(),request.getPhone());
@@ -152,7 +152,7 @@ public class MemberController {
      * @param request
      * @return
      */
-    @PostMapping("/findPw")
+    @GetMapping("/findPw")
     public ResponseEntity<?> findPw(@RequestBody FindMemberDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
@@ -173,4 +173,7 @@ public class MemberController {
             }
         }
     }
+
+
+
 }

@@ -4,7 +4,6 @@ import AllFun.SideProject.domain.Board;
 import AllFun.SideProject.dto.board.CreateBoardDto;
 import AllFun.SideProject.dto.board.EditBoardDto;
 import AllFun.SideProject.dto.board.ReadDetailDto;
-import AllFun.SideProject.dto.board.SearchResponseDto;
 import AllFun.SideProject.repository.SpringDataJpaBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -77,6 +76,16 @@ public class BoardService {
             boardRepository.save(selectBoard);
         });
         return request;
+    }
+
+    /**
+     * Delete Board
+     * @param board
+     * @return
+     */
+    public String deleteBoard(Board board){
+        boardRepository.delete(board);
+        return null;
     }
 
 }

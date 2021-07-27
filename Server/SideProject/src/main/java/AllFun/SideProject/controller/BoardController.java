@@ -112,7 +112,14 @@ public class BoardController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        return null;
+        Board board = boardService.findById(id);
+        if (board == null){
+            HashMap<String, String> result = new HashMap<String,String>();
+            result.put("Error","Wrong Board Id");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        } else{
+            return ResponseEntity.ok(boardService.deleteBoard(board));
+        }
     }
 
 }

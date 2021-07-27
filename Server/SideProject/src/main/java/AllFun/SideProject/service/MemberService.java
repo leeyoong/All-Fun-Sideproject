@@ -4,7 +4,6 @@ import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.dto.member.CreateMemberDto;
 import AllFun.SideProject.repository.SpringDataJpaMemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
