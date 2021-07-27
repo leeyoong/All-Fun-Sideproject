@@ -20,7 +20,7 @@ public class Board {
     private String nickname; // member - nickname
     private String title; // 제목
     private String content; // 글의 내용
-    private LocalDateTime createDate; //작성날짜
+    private LocalDateTime create; //작성날짜
     private int projectMembers; // 프로젝트 구성 인원
     private int entryMembers; // 참여 인원
     private int hit; // 조회수
@@ -38,6 +38,6 @@ public class Board {
 
     @PrePersist
     public void createdAt(){
-        this.createDate = LocalDateTime.now();
+        this.create = LocalDateTime.now();
     }
 }

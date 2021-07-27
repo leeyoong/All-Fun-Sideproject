@@ -4,6 +4,7 @@ import AllFun.SideProject.domain.Board;
 import AllFun.SideProject.dto.board.CreateBoardDto;
 import AllFun.SideProject.dto.board.EditBoardDto;
 import AllFun.SideProject.dto.board.ReadDetailDto;
+import AllFun.SideProject.dto.board.SearchResponseDto;
 import AllFun.SideProject.repository.SpringDataJpaBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class BoardService {
      */
     public CreateBoardDto save(Board board){
         boardRepository.save(board);
-        return new CreateBoardDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreateDate(),
+        return new CreateBoardDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreate(),
                                     board.getProjectMembers(),board.getHit());
     }
 
@@ -37,6 +38,11 @@ public class BoardService {
                 .orElse(null);
     }
 
+    public SearchResponseDto listAll(){
+        SearchResponseDto response = null;
+        response.setResponse(boardRepository.findAllOrderByCreateDesc().orElse(null));
+        return response;
+    }
 
     /**
      * read detail board page and increase hit
@@ -54,9 +60,27 @@ public class BoardService {
         });
         Board board = hitUp.get();
 
-        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getCreateDate()
+        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getCreate()
                 ,board.getProjectMembers(),board.getEntryMembers(),board.getHit());
 
+    }
+
+    /**
+     * Search List
+     * @param keyword
+     * @param searchType
+     * @return
+     */
+    public SearchResponseDto searchList(String keyword, String searchType){
+        SearchResponseDto response = null;
+        if (searchType.equals("title")){
+            response.setResponse(boardRepository.findByTitleContainingOrderByCreateDesc(keyword).orElse(null));
+        }else if(searchType.equals("nickname")){
+            response.setResponse(boardRepository.findByNicknameContainingOrderByCreateDesc(keyword).orElse(null));
+        }else if(searchType.equals("content")){
+            response.setResponse(boardRepository.findByContentContainingOrderByCreateDesc(keyword).orElse(null));
+        }
+        return response;
     }
 
     /**

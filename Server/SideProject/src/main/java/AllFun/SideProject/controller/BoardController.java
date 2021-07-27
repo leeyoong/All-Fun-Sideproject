@@ -1,10 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Board;
-import AllFun.SideProject.dto.board.CreateBoardDto;
-import AllFun.SideProject.dto.board.EditBoardDto;
-import AllFun.SideProject.dto.board.ReadDetailDto;
-import AllFun.SideProject.dto.board.SearchRequestDto;
+import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,15 +32,16 @@ public class BoardController {
         CreateBoardDto response = boardService.save(newBoard);
         return ResponseEntity.ok(response);
     }
-
+    
+    /*Default : Recently*/
     /**
-     * get board list (recently)
+     * get board list
      * @return
      */
-    @GetMapping("/list/recent")
+    @GetMapping("/list")
     public ResponseEntity<?> listRecent(){
-
-        return ResponseEntity.ok(null);
+        SearchResponseDto response = boardService.listAll();
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -69,8 +67,9 @@ public class BoardController {
      * @return
      */
     @GetMapping("/search/title")
-    public ResponseEntity<?> searchTitle(@RequestBody SearchRequestDto request){
-        return ResponseEntity.ok(null);
+    public ResponseEntity<?> search(@RequestBody SearchRequestDto request){
+        SearchResponseDto response = boardService.searchList(request.getSearch(), "title");
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -80,7 +79,8 @@ public class BoardController {
      */
     @GetMapping("/search/content")
     public ResponseEntity<?> searchContent(@RequestBody SearchRequestDto request){
-        return ResponseEntity.ok(null);
+        SearchResponseDto response = boardService.searchList(request.getSearch(), "content");
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -88,9 +88,10 @@ public class BoardController {
      * @param request
      * @return
      */
-    @GetMapping("search/writer")
-    public ResponseEntity<?> searchWriter(@RequestBody SearchRequestDto request){
-        return ResponseEntity.ok(null);
+    @GetMapping("search/nickname")
+    public ResponseEntity<?> searchNickname(@RequestBody SearchRequestDto request){
+        SearchResponseDto response = boardService.searchList(request.getSearch(), "nickname");
+        return ResponseEntity.ok(response);
     }
 
     /**
