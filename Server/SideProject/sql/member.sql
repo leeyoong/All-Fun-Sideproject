@@ -7,7 +7,7 @@ birth varchar(11),
 name varchar(255),
 phone varchar(14),
 nickname varchar(255),
-createDate varchar(20),
+createDate datetime,
 gender varchar(2),
 primary key (id)
 );

@@ -53,15 +53,12 @@ public class BoardController {
      */
     @GetMapping("/{id}/detail")
     public ResponseEntity<?> readDetail(@PathVariable("id") Long id){
-        Board find = boardService.findById(id);
-        if (find==null){
+        ReadDetailDto response = boardService.readDetail(id);
+        if (response==null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Wrong Board Id");
             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         } else{
-            System.out.println("기존 조회수 : "+find.getHit());
-            ReadDetailDto response = boardService.readDetail(id);
-            System.out.println("올라간 조회수 : "+response.getHit());
             return ResponseEntity.ok(response);
         }
     }
@@ -101,9 +98,21 @@ public class BoardController {
      * @param request
      * @return
      */
-    @PostMapping("/edit")
-    public ResponseEntity<?> edit(@RequestBody EditBoardDto request){
-
-        return ResponseEntity.ok(null);
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> edit(@RequestBody EditBoardDto request, @PathVariable("id") Long id){
+        EditBoardDto response = boardService.editBoard(id, request);
+        if (response==null){
+            HashMap<String, String> result = new HashMap<String,String>();
+            result.put("Error","Wrong Board Id");
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        } else{
+            return ResponseEntity.ok(response);
+        }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+        return null;
+    }
+
 }
