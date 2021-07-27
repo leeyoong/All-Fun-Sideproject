@@ -20,7 +20,7 @@ public class Member{
 
     @Id
     @GeneratedValue
-    private Long memberId; // member id (pk)
+    private Long id; // member id (pk)
 
     private String email; // Log-In Id
     private String passwd; // password
@@ -30,9 +30,8 @@ public class Member{
     private String nickname; // nickname
     //private String profileImg; // profile image location
     private String createDate; // create member time (yyyy-mm-dd hh:mm:ss)
-    private String gender; // gender
+    private String gender; // gender(M / F)
 
-    //private String type; // naver, google, kakao
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String createDate, String gender){
