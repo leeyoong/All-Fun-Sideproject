@@ -56,5 +56,15 @@ public class loginpage extends AppCompatActivity {
                 loginpage.this.startActivity(passfoundIntent);
             }
         });
+
+
+        //로그인 성공시 이동
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(loginpage.this, tab.class);
+                loginpage.this.startActivity(loginIntent);
+            }
+        });
     }
 }
