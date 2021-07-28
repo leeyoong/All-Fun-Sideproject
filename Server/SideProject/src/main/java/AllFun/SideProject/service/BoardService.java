@@ -42,7 +42,7 @@ public class BoardService {
      */
     public SearchResponseDto listAll(){
         SearchResponseDto response = null;
-        response.setResponse(boardRepository.findAllOrderByCreateDesc().orElse(null));
+        response.setResponse(boardRepository.findAll());
         return response;
     }
 
@@ -76,11 +76,11 @@ public class BoardService {
     public SearchResponseDto searchList(String keyword, String searchType){
         SearchResponseDto response = null;
         if (searchType.equals("title")){
-            response.setResponse(boardRepository.findByTitleContainingOrderByCreateDesc(keyword).orElse(null));
+            response.setResponse(boardRepository.findByTitleContaining(keyword).orElse(null));
         }else if(searchType.equals("nickname")){
-            response.setResponse(boardRepository.findByNicknameContainingOrderByCreateDesc(keyword).orElse(null));
+            response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
         }else if(searchType.equals("content")){
-            response.setResponse(boardRepository.findByContentContainingOrderByCreateDesc(keyword).orElse(null));
+            response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
         }
         return response;
     }

@@ -24,13 +24,12 @@ public class Board extends BaseEntity {
 
     @ColumnDefault("0")
     private int hit; // 조회수
-
+/*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "edu")
-
+ */
     public static Board createBoard(String nickname, String title, String content, int hope){
         Board board = new Board();
         board.setNickname(nickname);

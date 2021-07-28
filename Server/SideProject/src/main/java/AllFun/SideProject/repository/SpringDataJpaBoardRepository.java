@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SpringDataJpaBoardRepository extends JpaRepository<Board, Long> {
-    Optional<List<Board>> findByTitleContainingOrderByCreateDesc(String title);
-    Optional<List<Board>> findByNicknameContainingOrderByCreateDesc(String nickname);
-    Optional<List<Board>> findByContentContainingOrderByCreateDesc(String content);
-    Optional<List<Board>> findAllOrderByCreateDesc();
+    Optional<List<Board>> findByTitleContaining(String title);
+    Optional<List<Board>> findByNicknameContaining(String nickname);
+    Optional<List<Board>> findByContentContaining(String content);
 }

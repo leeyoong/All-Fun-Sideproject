@@ -20,11 +20,12 @@ public class MemberController {
     private final MemberService memberService;
     /**
      * Check Duplicated Email
-     * @param request
+     * @param
      * @return
      */
     @PostMapping("/emailChk")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
+        System.out.println(request);
         Member find = memberService.findByEmail(request.getItem());
         if (find != null){
             HashMap<String, String> result = new HashMap<String,String>();
@@ -48,7 +49,7 @@ public class MemberController {
             result.put("Error","Duplicated Nickname");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }else{
-            return ResponseEntity.ok(request);
+            return ResponseEntity.ok("성공했습니당 ㅎㅎㅎㅎㅎ");
         }
     }
 
@@ -84,6 +85,7 @@ public class MemberController {
      * @param request
      * @return
      */
+    //memebers/create = value=signup
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateMemberDto request){
         CreateMemberDto response = null;
@@ -98,6 +100,7 @@ public class MemberController {
         response = memberService.save(newMember);
         return ResponseEntity.ok(response);
     }
+
 
     /**
      * Log-In(Sign in) / application login version (Not social)
@@ -180,7 +183,4 @@ public class MemberController {
             }
         }
     }
-
-
-
 }
