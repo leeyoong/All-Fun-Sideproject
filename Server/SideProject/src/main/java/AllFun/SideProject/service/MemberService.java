@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class MemberService {
     private final SpringDataJpaMemberRepository memberRepository;
     private final JavaMailSender javaMailSender;
@@ -60,6 +60,7 @@ public class MemberService {
      * @param member
      * @return
      */
+    @Transactional
     public CreateMemberDto save(Member member){
         memberRepository.save(member);
         return new CreateMemberDto(member.getEmail(), member.getPasswd(),member.getBirth(),member.getName(),
@@ -113,6 +114,7 @@ public class MemberService {
      * @param email
      * @return
      */
+    @Transactional
     public String sendMailPw(String email){
         Random random = new Random();
         String key = "";

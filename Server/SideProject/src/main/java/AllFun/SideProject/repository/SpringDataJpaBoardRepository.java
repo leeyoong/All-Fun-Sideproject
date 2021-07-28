@@ -1,6 +1,6 @@
 package AllFun.SideProject.repository;
 
-import AllFun.SideProject.domain.Board;
+import AllFun.SideProject.domain.matching.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

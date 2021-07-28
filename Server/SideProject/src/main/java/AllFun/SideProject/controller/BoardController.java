@@ -1,6 +1,6 @@
 package AllFun.SideProject.controller;
 
-import AllFun.SideProject.domain.Board;
+import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.service.BoardService;
@@ -37,7 +37,7 @@ public class BoardController {
                 request.getContent(),
                 request.getProjectMembers()
                 );
-        CreateBoardRequestDto response = boardService.save(newBoard);
+        CreateBoardResponseDto response = boardService.save(newBoard);
         return ResponseEntity.ok(response);
     }
 

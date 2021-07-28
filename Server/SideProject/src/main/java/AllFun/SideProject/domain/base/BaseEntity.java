@@ -1,4 +1,4 @@
-package AllFun.SideProject.domain;
+package AllFun.SideProject.domain.base;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;

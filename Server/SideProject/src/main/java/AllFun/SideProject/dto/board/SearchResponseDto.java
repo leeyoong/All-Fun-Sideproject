@@ -1,6 +1,6 @@
 package AllFun.SideProject.dto.board;
 
-import AllFun.SideProject.domain.Board;
+import AllFun.SideProject.domain.matching.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

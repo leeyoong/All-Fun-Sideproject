@@ -1,5 +1,4 @@
-package AllFun.SideProject.domain;
-
+package AllFun.SideProject.domain.matching;
 
 import lombok.*;
 
@@ -10,5 +9,5 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MatchingCategory {
+public class BoardCategoryRole {
 }

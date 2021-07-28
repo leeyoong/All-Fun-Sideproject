@@ -1,10 +1,7 @@
 package AllFun.SideProject.service;
 
-import AllFun.SideProject.domain.Board;
-import AllFun.SideProject.dto.board.CreateBoardRequestDto;
-import AllFun.SideProject.dto.board.EditBoardDto;
-import AllFun.SideProject.dto.board.ReadDetailDto;
-import AllFun.SideProject.dto.board.SearchResponseDto;
+import AllFun.SideProject.domain.matching.Board;
+import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.repository.SpringDataJpaBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class BoardService {
     private final SpringDataJpaBoardRepository boardRepository;
     /**
@@ -22,9 +19,10 @@ public class BoardService {
      * @param board
      * @return
      */
-    public CreateBoardRequestDto save(Board board){
+    @Transactional
+    public CreateBoardResponseDto save(Board board){
         boardRepository.save(board);
-        return new CreateBoardRequestDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
+        return new CreateBoardResponseDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
                                     board.getProjectMembers(),board.getHit());
     }
 
@@ -38,6 +36,10 @@ public class BoardService {
                 .orElse(null);
     }
 
+    /**
+     * get all board list
+     * @return
+     */
     public SearchResponseDto listAll(){
         SearchResponseDto response = null;
         response.setResponse(boardRepository.findAllOrderByCreateDesc().orElse(null));
@@ -89,6 +91,7 @@ public class BoardService {
      * @param request
      * @return
      */
+    @Transactional
     public EditBoardDto editBoard(Long boardId, EditBoardDto request){
         Optional<Board> editData = Optional.ofNullable(boardRepository.findById(boardId).orElse(null));
         if (editData.isEmpty()){
@@ -107,6 +110,7 @@ public class BoardService {
      * @param board
      * @return
      */
+    @Transactional
     public String deleteBoard(Board board){
         boardRepository.delete(board);
         return null;

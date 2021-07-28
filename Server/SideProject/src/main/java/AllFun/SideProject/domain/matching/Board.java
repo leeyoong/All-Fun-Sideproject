@@ -1,17 +1,18 @@
-package AllFun.SideProject.domain;
+package AllFun.SideProject.domain.matching;
 
+import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.base.BaseEntity;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MatchingBoard extends BaseEntity {
+public class Board extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id; // board id (pk)
@@ -20,10 +21,18 @@ public class MatchingBoard extends BaseEntity {
     private String content; // 글의 내용
     private int projectMembers; // 프로젝트 구성 인원
     private int entryMembers; // 참여 인원
+
+    @ColumnDefault("0")
     private int hit; // 조회수
 
-    public static MatchingBoard createBoard(String nickname, String title, String content, int hope){
-        MatchingBoard board = new MatchingBoard();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member_id")
+    private Member member;
+
+    @OneToMany(mappedBy = "edu")
+
+    public static Board createBoard(String nickname, String title, String content, int hope){
+        Board board = new Board();
         board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
