@@ -128,7 +128,7 @@ public class MemberController {
                 find.getName(),
                 find.getPhone(),
                 find.getNickname(),
-                find.getCreateDate(),
+                find.getCreatedDate(),
                 find.getGender()
         );
         return ResponseEntity.ok(response);

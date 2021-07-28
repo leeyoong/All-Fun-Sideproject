@@ -5,15 +5,13 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board extends BaseEntity {
+public class MatchingBoard extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id; // board id (pk)
@@ -24,8 +22,8 @@ public class Board extends BaseEntity {
     private int entryMembers; // 참여 인원
     private int hit; // 조회수
 
-    public static Board createBoard(String nickname, String title, String content,  int hope){
-        Board board = new Board();
+    public static MatchingBoard createBoard(String nickname, String title, String content, int hope){
+        MatchingBoard board = new MatchingBoard();
         board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
