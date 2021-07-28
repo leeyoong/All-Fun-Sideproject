@@ -1,8 +1,10 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Board;
+import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.service.BoardService;
+import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,25 +17,30 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-
+    private final MemberService memberService;
     /**
-     * Write Side-Project board
+     * Write Side-Project board (Use Member Id)
      * @param request
      * @return
      */
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateBoardDto request){
+    @PostMapping("/create/{id}")
+    public ResponseEntity<?> create(@RequestBody CreateBoardRequestDto request, @PathVariable("id") Long memberId){
+        Member find = memberService.findById(memberId);
+        if (find == null){
+            HashMap<String, String> result = new HashMap<String, String>();
+            result.put("Error","Wrong Member Id");
+            return new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
+        }
         Board newBoard = Board.createBoard(
-                request.getNickname(),
+                find.getNickname(),
                 request.getTitle(),
                 request.getContent(),
                 request.getProjectMembers()
                 );
-        CreateBoardDto response = boardService.save(newBoard);
+        CreateBoardRequestDto response = boardService.save(newBoard);
         return ResponseEntity.ok(response);
     }
 
-    /*Default : Recently*/
     /**
      * get board list
      * @return

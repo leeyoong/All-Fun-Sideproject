@@ -1,7 +1,7 @@
 package AllFun.SideProject.service;
 
 import AllFun.SideProject.domain.Board;
-import AllFun.SideProject.dto.board.CreateBoardDto;
+import AllFun.SideProject.dto.board.CreateBoardRequestDto;
 import AllFun.SideProject.dto.board.EditBoardDto;
 import AllFun.SideProject.dto.board.ReadDetailDto;
 import AllFun.SideProject.dto.board.SearchResponseDto;
@@ -22,9 +22,9 @@ public class BoardService {
      * @param board
      * @return
      */
-    public CreateBoardDto save(Board board){
+    public CreateBoardRequestDto save(Board board){
         boardRepository.save(board);
-        return new CreateBoardDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreate(),
+        return new CreateBoardRequestDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
                                     board.getProjectMembers(),board.getHit());
     }
 
@@ -60,7 +60,7 @@ public class BoardService {
         });
         Board board = hitUp.get();
 
-        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getCreate()
+        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getNickname(), board.getModifiedDate()
                 ,board.getProjectMembers(),board.getEntryMembers(),board.getHit());
 
     }

@@ -27,6 +27,16 @@ public class MemberService {
     private final JavaMailSender javaMailSender;
 
     /**
+     * Find By Id
+     * @param id
+     * @return
+     */
+    public Member findById(Long id){
+        return memberRepository.findById(id)
+                .orElse(null);
+    }
+
+    /**
      * check duplicated email
      * @param email
      * @return

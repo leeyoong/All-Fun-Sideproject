@@ -13,14 +13,13 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board {
+public class Board extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id; // board id (pk)
     private String nickname; // member - nickname
     private String title; // 제목
     private String content; // 글의 내용
-    private LocalDateTime create; //작성날짜
     private int projectMembers; // 프로젝트 구성 인원
     private int entryMembers; // 참여 인원
     private int hit; // 조회수
@@ -36,8 +35,4 @@ public class Board {
         return board;
     }
 
-    @PrePersist
-    public void createdAt(){
-        this.create = LocalDateTime.now();
-    }
 }

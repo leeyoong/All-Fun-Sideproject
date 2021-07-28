@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member{
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue
@@ -24,8 +24,6 @@ public class Member{
     private String name; // user korean name
     private String phone; //phone number
     private String nickname; // nickname
-    //private String profileImg; // profile image location
-    private LocalDateTime createDate; // create member time (yyyy-mm-dd hh:mm:ss)
     private String gender; // gender(M / F)
 
 
@@ -38,13 +36,8 @@ public class Member{
         member.setName(name);
         member.setPhone(phone);
         member.setNickname(nickname);
-        //member.setProfileImg(profileImg);
         member.setGender(gender);
         return member;
     }
 
-    @PrePersist
-    public void createdAt(){
-        this.createDate = LocalDateTime.now();
-    }
 }
