@@ -1,10 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.Member;
-import AllFun.SideProject.dto.member.CreateMemberDto;
-import AllFun.SideProject.dto.member.FindMemberDto;
-import AllFun.SideProject.dto.member.OneItemDto;
-import AllFun.SideProject.dto.member.LoginDto;
+import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -123,8 +120,18 @@ public class MemberController {
             result.put("PW_Error","유효하지 않은 비밀번호 입니다.");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
-
-        return ResponseEntity.ok(request);
+        MemberDataDto response = new MemberDataDto(
+                find.getId(),
+                find.getEmail(),
+                find.getPasswd(),
+                find.getBirth(),
+                find.getName(),
+                find.getPhone(),
+                find.getNickname(),
+                find.getCreateDate(),
+                find.getGender()
+        );
+        return ResponseEntity.ok(response);
     }
 
     /**

@@ -32,7 +32,7 @@ public class BoardController {
         CreateBoardDto response = boardService.save(newBoard);
         return ResponseEntity.ok(response);
     }
-    
+
     /*Default : Recently*/
     /**
      * get board list
