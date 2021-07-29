@@ -26,4 +26,12 @@ public class DashBoardController {
         return null;
     }
 
+    /**
+     * 깃허브 이력 변경사항 저장
+     * @return
+     */
+    @PostMapping("/{dashId}/github")
+    public ResponseEntity<?> dashGithub(){
+        return null;
+    }
 }

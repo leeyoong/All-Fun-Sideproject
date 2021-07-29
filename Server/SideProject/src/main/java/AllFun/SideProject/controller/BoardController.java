@@ -136,6 +136,15 @@ public class BoardController {
     }
 
     /**
+     * Done Matching 'waiting' -> 'done'
+     * @return
+     */
+    @PostMapping("/edit/{boardId}/status")
+    public ResponseEntity<?> changeStatus(){
+        return null;
+    }
+
+    /**
      * delete board
      * @param boardId
      * @return
@@ -152,12 +161,5 @@ public class BoardController {
         }
     }
 
-    /**
-     * Done Matching
-     * @return
-     */
-    @PostMapping("/status/change/{boardId}")
-    public ResponseEntity<?> changeStatus(){
-        return null;
-    }
+
 }
