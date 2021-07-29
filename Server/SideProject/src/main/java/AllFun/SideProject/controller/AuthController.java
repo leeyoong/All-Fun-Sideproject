@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
-public class MemberController {
+public class AuthController {
 
     private final MemberService memberService;
     /**
@@ -69,6 +69,7 @@ public class MemberController {
         String profileImg = memberService.profileEnroll(request);
         return ResponseEntity.ok(profileImg);
     }
+
 
     /**
      * Email Authentication

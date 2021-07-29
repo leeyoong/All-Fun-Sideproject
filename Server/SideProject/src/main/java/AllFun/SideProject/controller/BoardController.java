@@ -27,8 +27,8 @@ public class BoardController {
      * @param request
      * @return
      */
-    @PostMapping("/create/{id}")
-    public ResponseEntity<?> create(@RequestBody CreateBoardRequestDto request, @PathVariable("id") Long memberId){
+    @PostMapping("/create/{memberId}")
+    public ResponseEntity<?> create(@RequestBody CreateBoardRequestDto request, @PathVariable("memberId") Long memberId){
         Member find = memberService.findById(memberId);
         if (find == null){
             HashMap<String, String> result = new HashMap<String, String>();
@@ -70,12 +70,12 @@ public class BoardController {
 
     /**
      * Read Detail Board and Increase hit.
-     * @param id
+     * @param boardId
      * @return
      */
-    @GetMapping("/{id}/detail")
-    public ResponseEntity<?> readDetail(@PathVariable("id") Long id){
-        ReadDetailDto response = boardService.readDetail(id);
+    @GetMapping("/{boardId}/detail")
+    public ResponseEntity<?> readDetail(@PathVariable("boardId") Long boardId){
+        ReadDetailDto response = boardService.readDetail(boardId);
         if (response==null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Wrong Board Id");
@@ -123,9 +123,9 @@ public class BoardController {
      * @param request
      * @return
      */
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<?> edit(@RequestBody EditBoardDto request, @PathVariable("id") Long id){
-        EditBoardDto response = boardService.editBoard(id, request);
+    @PostMapping("/edit/{boardId}")
+    public ResponseEntity<?> edit(@RequestBody EditBoardDto request, @PathVariable("boardId") Long boardId){
+        EditBoardDto response = boardService.editBoard(boardId, request);
         if (response==null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Wrong Board Id");
@@ -135,9 +135,14 @@ public class BoardController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        Board board = boardService.findById(id);
+    /**
+     * delete board
+     * @param boardId
+     * @return
+     */
+    @PostMapping("/delete/{boardId}")
+    public ResponseEntity<?> delete(@PathVariable("boardId") Long boardId){
+        Board board = boardService.findById(boardId);
         if (board == null){
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Error","Wrong Board Id");
@@ -147,4 +152,12 @@ public class BoardController {
         }
     }
 
+    /**
+     * Done Matching
+     * @return
+     */
+    @PostMapping("/status/change/{boardId}")
+    public ResponseEntity<?> changeStatus(){
+        return null;
+    }
 }
