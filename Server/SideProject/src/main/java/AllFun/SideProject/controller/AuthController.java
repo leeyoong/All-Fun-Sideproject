@@ -18,12 +18,13 @@ import java.util.HashMap;
 public class AuthController {
 
     private final MemberService memberService;
+
     /**
      * Check Duplicated Email
      * @param
      * @return
      */
-    @PostMapping("/emailChk")
+    @PostMapping("/check/email")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
         System.out.println(request);
         Member find = memberService.findByEmail(request.getItem());
@@ -40,7 +41,7 @@ public class AuthController {
      * @param request
      * @return
      */
-    @PostMapping("/nicknameChk")
+    @PostMapping("/check/email")
     public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
         Member find = memberService.findByNickname(request.getItem());
 

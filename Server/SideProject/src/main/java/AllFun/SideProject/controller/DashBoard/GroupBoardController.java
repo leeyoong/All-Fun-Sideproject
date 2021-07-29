@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/dashboard/{dashId}/calendar")
 @RequiredArgsConstructor
-public class CalendarController {
+public class GroupBoardController {
 
     /**
      * get calendar data

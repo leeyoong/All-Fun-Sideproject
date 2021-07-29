@@ -40,15 +40,6 @@ public class ToDoController {
     }
 
     /**
-     * change status 'Ing' -> 'Done
-     * @return
-     */
-    @PostMapping("/edit/{todoId}/status")
-    public ResponseEntity<?> changeStatus(){
-        return null;
-    }
-
-    /**
      * delete [todoId]
      * @return
      */

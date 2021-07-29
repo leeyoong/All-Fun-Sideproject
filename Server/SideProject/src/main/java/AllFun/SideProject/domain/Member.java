@@ -3,6 +3,7 @@ package AllFun.SideProject.domain;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.base.BaseEntity;
 import lombok.*;
+import org.springframework.data.annotation.Persistent;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,12 +22,12 @@ public class Member extends BaseEntity {
     @Column(name="member_id")
     private Long id; // member id (pk)
 
-    private String email; // Log-In Id
+    private String email; // Log-In Id (이메일 변동 불가)
     private String passwd; // password
     private String birth; // yyyy-mm-dd
     private String name; // user korean name
     private String phone; //phone number
-    private String nickname; // nickname
+    private String nickname; // nickname (변동 가능)
     private String gender; // gender(MALE / FEMALE)
 
     @OneToMany(mappedBy = "member")
