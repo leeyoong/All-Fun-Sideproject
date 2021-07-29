@@ -1,5 +1,6 @@
 package AllFun.SideProject.service;
 
+import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.repository.SpringDataJpaBoardRepository;
@@ -20,7 +21,8 @@ public class BoardService {
      * @return
      */
     @Transactional
-    public CreateBoardResponseDto save(Board board){
+    public CreateBoardResponseDto save(Board board, Member member){
+        member.addBoard(board);
         boardRepository.save(board);
         return new CreateBoardResponseDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
                                     board.getProjectMembers(),board.getHit());

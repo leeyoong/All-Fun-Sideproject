@@ -2,9 +2,12 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.matching.BoardRole;
+import AllFun.SideProject.domain.matching.Role;
 import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.service.BoardService;
 import AllFun.SideProject.service.MemberService;
+import AllFun.SideProject.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import java.util.HashMap;
 public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
+    private final RoleService roleService;
     /**
      * Write Side-Project board (Use Member Id)
      * @param request
@@ -31,13 +35,26 @@ public class BoardController {
             result.put("Error","Wrong Member Id");
             return new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
         }
+        int projMembers = request.getHope().stream().mapToInt(Integer::intValue).sum();
+
         Board newBoard = Board.createBoard(
                 find.getNickname(),
                 request.getTitle(),
                 request.getContent(),
-                request.getProjectMembers()
+                projMembers
                 );
-        CreateBoardResponseDto response = boardService.save(newBoard);
+
+        CreateBoardResponseDto response = boardService.save(newBoard, find);
+
+        for (int i = 0;i<request.getHope().size();i++){
+            if (request.getHope().get(i) != 0){
+                Long roleId = Long.valueOf(i + 1);
+                Role role = roleService.findById(roleId);
+                BoardRole boardRole = BoardRole.createBoardRole(role.getName(), request.getHope().get(i));
+                newBoard.addBoardRole(boardRole);
+            }
+        }
+
         return ResponseEntity.ok(response);
     }
 

@@ -18,6 +18,7 @@ public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
+    @Column(name="member_id")
     private Long id; // member id (pk)
 
     private String email; // Log-In Id
@@ -26,12 +27,11 @@ public class Member extends BaseEntity {
     private String name; // user korean name
     private String phone; //phone number
     private String nickname; // nickname
-    private String gender; // gender(M / F)
-/*
+    private String gender; // gender(MALE / FEMALE)
+
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();
 
- */
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String gender){
         Member member = new Member();
@@ -44,11 +44,10 @@ public class Member extends BaseEntity {
         member.setGender(gender);
         return member;
     }
-/*
+
     public void addBoard(Board board){
         boards.add(board);
         board.setMember(this);
     }
 
- */
 }

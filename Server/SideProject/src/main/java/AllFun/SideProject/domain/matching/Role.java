@@ -1,8 +1,8 @@
 package AllFun.SideProject.domain.matching;
 
-
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,10 +12,10 @@ import javax.persistence.Id;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BoardCategoryEdu {
+public class Role {
     @Id
     @GeneratedValue
+    @Column(name="role_id")
     private Long id;
-    private String tag; // 대학교재학, 대학졸업, 직장인
-
+    private String name;
 }

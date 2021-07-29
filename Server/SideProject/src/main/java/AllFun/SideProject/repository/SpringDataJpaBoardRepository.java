@@ -7,7 +7,25 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SpringDataJpaBoardRepository extends JpaRepository<Board, Long> {
+
+    /**
+     * 제목으로 검색
+     * @param title
+     * @return
+     */
     Optional<List<Board>> findByTitleContaining(String title);
+
+    /**
+     * 작성자로 검색
+     * @param nickname
+     * @return
+     */
     Optional<List<Board>> findByNicknameContaining(String nickname);
+
+    /**
+     * 내용으로 검색
+     * @param content
+     * @return
+     */
     Optional<List<Board>> findByContentContaining(String content);
 }

@@ -2,10 +2,13 @@ package AllFun.SideProject.domain.matching;
 
 import AllFun.SideProject.domain.Member;
 import AllFun.SideProject.domain.base.BaseEntity;
+import AllFun.SideProject.domain.base.BoardStatus;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,6 +18,7 @@ import javax.persistence.*;
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue
+    @Column(name="board_id")
     private Long id; // board id (pk)
     private String nickname; // member - nickname
     private String title; // 제목
@@ -22,23 +26,33 @@ public class Board extends BaseEntity {
     private int projectMembers; // 프로젝트 구성 인원
     private int entryMembers; // 참여 인원
 
+    @Enumerated(EnumType.STRING)
+    private BoardStatus status; //구인중, 구인마감
+
     @ColumnDefault("0")
     private int hit; // 조회수
-/*
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
- */
-    public static Board createBoard(String nickname, String title, String content, int hope){
+    @OneToMany(mappedBy="board")
+    private List<BoardRole> boardRoles = new ArrayList<>();
+
+    public static Board createBoard(String nickname, String title, String content, int projMem){
         Board board = new Board();
         board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
-        board.setProjectMembers(hope);
+        board.setProjectMembers(projMem);
         board.setEntryMembers(0);
         board.setHit(0);
+        board.setStatus(BoardStatus.WAITING);
+
         return board;
     }
-
+    public void addBoardRole(BoardRole BoardRole){
+        boardRoles.add(BoardRole);
+        BoardRole.setBoard(this);
+    }
 }
