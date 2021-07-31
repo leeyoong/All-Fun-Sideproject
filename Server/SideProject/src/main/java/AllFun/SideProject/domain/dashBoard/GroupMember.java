@@ -1,6 +1,6 @@
 package AllFun.SideProject.domain.dashBoard;
 
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;

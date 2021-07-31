@@ -1,7 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.matching.Board;
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.BoardRole;
 import AllFun.SideProject.domain.matching.Role;
 import AllFun.SideProject.dto.board.*;

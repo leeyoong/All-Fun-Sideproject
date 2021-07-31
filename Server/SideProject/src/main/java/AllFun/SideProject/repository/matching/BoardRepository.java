@@ -1,4 +1,4 @@
-package AllFun.SideProject.repository;
+package AllFun.SideProject.repository.matching;
 
 import AllFun.SideProject.domain.matching.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SpringDataJpaBoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Long> {
 
     /**
      * 제목으로 검색

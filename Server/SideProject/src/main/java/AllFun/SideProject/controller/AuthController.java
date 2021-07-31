@@ -1,6 +1,6 @@
 package AllFun.SideProject.controller;
 
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.dto.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.MemberService;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/auth")

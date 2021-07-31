@@ -1,7 +1,7 @@
 package AllFun.SideProject.domain.matching;
 
 import AllFun.SideProject.domain.dashBoard.DashGroup;
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.base.BoardStatus;
 import lombok.*;

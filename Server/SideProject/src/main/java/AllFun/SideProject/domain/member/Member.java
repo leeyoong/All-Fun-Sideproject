@@ -1,4 +1,4 @@
-package AllFun.SideProject.domain.user;
+package AllFun.SideProject.domain.member;
 
 import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.matching.Board;

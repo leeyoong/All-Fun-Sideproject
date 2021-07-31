@@ -1,9 +1,9 @@
 package AllFun.SideProject.service;
 
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.board.*;
-import AllFun.SideProject.repository.SpringDataJpaBoardRepository;
+import AllFun.SideProject.repository.matching.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class BoardService {
-    private final SpringDataJpaBoardRepository boardRepository;
+    private final BoardRepository boardRepository;
     /**
      * Write Side-Project board
      * @param board

@@ -1,8 +1,7 @@
 package AllFun.SideProject.service;
 
-import AllFun.SideProject.domain.user.Member;
-import AllFun.SideProject.dto.member.CreateMemberDto;
-import AllFun.SideProject.repository.SpringDataJpaMemberRepository;
+import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberService {
-    private final SpringDataJpaMemberRepository memberRepository;
+    private final MemberRepository memberRepository;
     private final JavaMailSender javaMailSender;
 
     /**

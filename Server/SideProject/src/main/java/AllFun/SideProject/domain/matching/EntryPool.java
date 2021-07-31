@@ -3,7 +3,7 @@ package AllFun.SideProject.domain.matching;
 //지원자 리스트
 
 import AllFun.SideProject.domain.base.MatchingStatus;
-import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
