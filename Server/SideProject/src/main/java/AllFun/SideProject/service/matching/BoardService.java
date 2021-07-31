@@ -1,4 +1,4 @@
-package AllFun.SideProject.service;
+package AllFun.SideProject.service.matching;
 
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.Board;

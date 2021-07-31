@@ -1,4 +1,4 @@
-package AllFun.SideProject.service;
+package AllFun.SideProject.service.member;
 
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.repository.member.MemberRepository;

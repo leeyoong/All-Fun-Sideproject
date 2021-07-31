@@ -3,7 +3,7 @@ package AllFun.SideProject.controller;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.dto.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
-import AllFun.SideProject.service.MemberService;
+import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
