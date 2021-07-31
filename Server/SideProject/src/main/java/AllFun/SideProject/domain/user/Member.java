@@ -31,14 +31,15 @@ public class Member extends BaseEntity {
     private String nickname; // nickname (변동 가능)
     private String gender; // gender(MALE / FEMALE)
 
+    private String introduce; //자기소개
+    private String profileImg; // 프로필사진 저장경로
+
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>(); //내가 쓴 매칭 게시판
 
     @OneToMany(mappedBy="member")
     private List<EntryPool> entryPools = new ArrayList<>(); // 내가 지원한 매칭 게시판
 
-    @OneToOne(mappedBy = "member")
-    private MyPage mypage; //user page
 
     @OneToMany(mappedBy = "member")
     private List<GroupMember> groupMembers = new ArrayList<>(); //내가 속한 그룹

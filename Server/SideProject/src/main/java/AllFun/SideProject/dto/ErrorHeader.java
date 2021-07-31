@@ -13,7 +13,7 @@ import java.util.*;
 
 @Data
 @AllArgsConstructor
-public class ApiResult {
+public class ErrorHeader {
     public static ResponseEntity<?> errorMessage(String s, HttpStatus status) {
 
         HttpHeaders httpHeaders = new HttpHeaders();

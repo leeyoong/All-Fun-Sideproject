@@ -61,10 +61,9 @@ public class MemberService {
      * @return
      */
     @Transactional
-    public CreateMemberDto save(Member member){
+    public void save(Member member){
         memberRepository.save(member);
-        return new CreateMemberDto(member.getEmail(), member.getPasswd(),member.getBirth(),member.getName(),
-                member.getPhone(), member.getNickname(),member.getGender());
+
     }
 
     /**

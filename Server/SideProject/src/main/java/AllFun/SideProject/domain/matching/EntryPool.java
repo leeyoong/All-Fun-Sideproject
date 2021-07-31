@@ -26,11 +26,11 @@ public class EntryPool {
     @Enumerated(EnumType.STRING)
     private MatchingStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member; // 지원자 member id
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="board_id")
     private Board board; // 매칭 게시판 id
 

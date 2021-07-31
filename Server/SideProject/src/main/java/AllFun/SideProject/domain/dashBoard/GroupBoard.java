@@ -19,7 +19,7 @@ public class GroupBoard extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id")
-    private Group group; // 그륩 + 작성자(member)
+    private DashGroup group; // 그륩 + 작성자(member)
 
     private String title;
 

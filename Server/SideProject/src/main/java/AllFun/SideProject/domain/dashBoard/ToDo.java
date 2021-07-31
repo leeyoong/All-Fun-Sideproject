@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 public class ToDo extends BaseEntity {
     @Id
     @GeneratedValue
+    @Column(name="todo_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id")
-    private Group group;
+    private DashGroup group;
 
     @Column(name="end_date")
     private LocalDateTime endDate;

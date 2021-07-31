@@ -1,7 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.user.Member;
-import AllFun.SideProject.dto.ApiResult;
+import AllFun.SideProject.dto.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -22,36 +22,32 @@ public class AuthController {
 
     /**
      * Check Duplicated Email
-     * @param {item : value}
-     * @return {null}
+     * @param request
+     * @return
      */
     @PostMapping("/check/email")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
         System.out.println(request);
         Member find = memberService.findByEmail(request.getItem());
         if (find != null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Duplicated Email");
-            return new ResponseEntity<>(result, HttpStatus.CONFLICT);
+            return ErrorHeader.errorMessage("duplicated email",HttpStatus.CONFLICT);
         }else{
-            return ResponseEntity.ok(request);
+            return ResponseEntity.ok(null);
         }
     }
     /**
      * Check Duplicated Nickname
-     * @param request {item : nickname}
-     * @return {성공햇습니다.}
+     * @param request
+     * @return
      */
     @PostMapping("/check/nickname")
     public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
         Member find = memberService.findByNickname(request.getItem());
 
         if (find != null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Duplicated Nickname");
-            return new ResponseEntity<>(result, HttpStatus.CONFLICT);
+            return ErrorHeader.errorMessage("duplicated nickname",HttpStatus.CONFLICT);
         }else{
-            return ResponseEntity.ok("성공했습니당 ㅎㅎㅎㅎㅎ");
+            return ResponseEntity.ok(null);
         }
     }
 
@@ -64,9 +60,7 @@ public class AuthController {
     @PostMapping("/profileEnroll")
     public ResponseEntity<?> profileEnroll(@RequestPart("profileImg")MultipartFile request) throws IOException {
         if (request.isEmpty()){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","No Image File");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ErrorHeader.errorMessage("request error",HttpStatus.BAD_REQUEST);
         }
         String profileImg = memberService.profileEnroll(request);
         return ResponseEntity.ok(profileImg);
@@ -75,8 +69,8 @@ public class AuthController {
 
     /**
      * Email Authentication
-     * @param request {item : email}
-     * @return {인증코드} ->이메일이 전송됬습니다. 코드 확인해서 입력해 시발련아
+     * @param request
+     * @return
      */
     @PostMapping("/sendMail")
     public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
@@ -90,7 +84,6 @@ public class AuthController {
      */
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateMemberDto request){
-        CreateMemberDto response = null;
         Member newMember = Member.createMember(
                 request.getEmail(),
                 request.getPasswd(),
@@ -99,36 +92,29 @@ public class AuthController {
                 request.getPhone(),
                 request.getNickname(),
                 request.getGender());
-        response = memberService.save(newMember);
-        return ResponseEntity.ok(response);
+        memberService.save(newMember);
+        return ResponseEntity.ok(null);
     }
 
 
     /**
      * Log-In(Sign in) / application login version (Not social)
-     * @param request {}
+     * @param request
      * @return
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
-        System.out.println("login status");
-        System.out.println("email : "+request.getEmail());
-        System.out.println("password : "+request.getPasswd());
-
         // Find valid email
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
-            System.out.println("wrong email");
-
-            return ApiResult.errorMessage("wrong email",HttpStatus.CONFLICT);
+            return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
         }
 
         // Check correct password
         if (find.getPasswd() != request.getPasswd()){
-            return ApiResult.errorMessage("wrong password",HttpStatus.CONFLICT);
+            return ErrorHeader.errorMessage("wrong password",HttpStatus.CONFLICT);
         }
 
-        System.out.println("correct");
         MemberDataDto response = new MemberDataDto(
                 find.getId(),
                 find.getEmail(),
@@ -154,7 +140,7 @@ public class AuthController {
                 request.getName(),request.getBirth(),request.getPhone());
 
         if (find == null){
-            return ApiResult.errorMessage("이미존재",HttpStatus.CONFLICT);
+            return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
         }else{
             OneItemDto email = new OneItemDto(find.getEmail());
             return ResponseEntity.ok(email);
@@ -171,16 +157,12 @@ public class AuthController {
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
         if (find == null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Wrong Value");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ErrorHeader.errorMessage("wrong value",HttpStatus.CONFLICT);
         }else{
             // 임시 비밀번호 메일로 전송
             String res = memberService.sendMailPw(find.getEmail());
             if(res == "Fail"){
-                HashMap<String, String> result = new HashMap<String,String>();
-                result.put("Error","Email Send Fail");
-                return new ResponseEntity<>(result,HttpStatus.BAD_REQUEST);
+                return ErrorHeader.errorMessage("email send fail",HttpStatus.CONFLICT);
             }
             else{
                 return ResponseEntity.ok(null);
