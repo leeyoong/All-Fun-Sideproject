@@ -25,8 +25,17 @@ public class ToDoController {
      * get to-do list
      * @return
      */
-    @GetMapping("/getList")
+    @GetMapping("/list")
     public ResponseEntity<?> toDoList(){
+        return null;
+    }
+
+    /**
+     * get to-do list detail
+     * @return
+     */
+    @GetMapping("/list/{toDoId}")
+    public ResponseEntity<?> toDoDetail(){
         return null;
     }
 

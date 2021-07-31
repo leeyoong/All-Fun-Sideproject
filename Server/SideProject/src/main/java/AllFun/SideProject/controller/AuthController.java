@@ -21,8 +21,8 @@ public class AuthController {
 
     /**
      * Check Duplicated Email
-     * @param
-     * @return
+     * @param {item : value}
+     * @return {null}
      */
     @PostMapping("/check/email")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
@@ -38,10 +38,10 @@ public class AuthController {
     }
     /**
      * Check Duplicated Nickname
-     * @param request
-     * @return
+     * @param request {item : nickname}
+     * @return {성공햇습니다.}
      */
-    @PostMapping("/check/email")
+    @PostMapping("/check/nickname")
     public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
         Member find = memberService.findByNickname(request.getItem());
 
@@ -74,8 +74,8 @@ public class AuthController {
 
     /**
      * Email Authentication
-     * @param request
-     * @return
+     * @param request {item : email}
+     * @return {인증코드} ->이메일이 전송됬습니다. 코드 확인해서 입력해 시발련아
      */
     @PostMapping("/sendMail")
     public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
@@ -87,7 +87,6 @@ public class AuthController {
      * @param request
      * @return
      */
-    //memebers/create = value=signup
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateMemberDto request){
         CreateMemberDto response = null;
@@ -106,7 +105,7 @@ public class AuthController {
 
     /**
      * Log-In(Sign in) / application login version (Not social)
-     * @param request
+     * @param request {}
      * @return
      */
     @PostMapping("/login")
@@ -142,7 +141,7 @@ public class AuthController {
     /**
      * find user email
      * @param request
-     * @return
+     * @return {email}
      */
     @GetMapping("/findId")
     public ResponseEntity<?> findId(@RequestBody FindMemberDto request){
@@ -184,5 +183,14 @@ public class AuthController {
                 return ResponseEntity.ok(null);
             }
         }
+    }
+
+    /**
+     * 회원 탈퇴
+     * @return
+     */
+    @PostMapping("/secession")
+    public ResponseEntity<?> secession(){
+        return null;
     }
 }

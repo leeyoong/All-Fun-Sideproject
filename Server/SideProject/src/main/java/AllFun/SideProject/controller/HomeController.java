@@ -22,11 +22,21 @@ public class HomeController {
     }
 
     /**
-     *
+     * 소속된 일정 전체보기 (월 별)
      * @return
      */
-    @GetMapping("/calendar")
+    @GetMapping("/calendar/{month}")
     public ResponseEntity<?> totalCalendar(){
         return null;
     }
+
+    /**
+     * 내가 신청한 매칭 게시판 현황 (진행중, 실패, 성공)
+     * @return
+     */
+    @GetMapping("/matching")
+    public ResponseEntity<?> matchingBoard(){
+        return null;
+    }
+
 }

@@ -7,46 +7,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+// 쪽지 API
 @RestController
-@RequestMapping("/myPage")
+@RequestMapping("/note")
 @RequiredArgsConstructor
-public class MyPageController {
+public class NoteController {
 
     /**
-     * modify password
+     * 내가 쪽지보낸 사용자 리스트
      * @return
      */
-    @PostMapping("/change/password")
-    public ResponseEntity<?> modifyPassword(){
+    @GetMapping("/list/{myId}")
+    public ResponseEntity<?> myNoteList(){
         return null;
     }
 
     /**
-     * 프로필 사진 등록(변경)
+     * [userId] 에 해당하는 사람과 나눈 쪽지 리스트
      * @return
      */
-    @PostMapping("/enroll/profile")
-    public ResponseEntity<?> enrollProfile(){
+    @GetMapping("/list/{myId}/{userId}")
+    public ResponseEntity<?> getUserIdList(){
         return null;
     }
 
     /**
-     * my page 정보 불러오기
+     * 쪽지 보내기
      * @return
      */
-    @GetMapping("/list/profile")
-    public ResponseEntity<?> listProfile(){
+    @PostMapping("/from/{myId}/to/{userId}")
+    public ResponseEntity<?> sendNote(){
         return null;
     }
-
-    /**
-     * my page 정보 수정
-     * @return
-     */
-    @PostMapping("/edit")
-    public ResponseEntity<?> editMyPage(){
-        return null;
-    }
-
 }

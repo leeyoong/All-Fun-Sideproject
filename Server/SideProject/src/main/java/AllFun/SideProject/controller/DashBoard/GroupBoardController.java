@@ -4,43 +4,56 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 그룹 게시판
+ */
+
 @RestController
-@RequestMapping("/dashboard/{dashId}/calendar")
+@RequestMapping("/dashboard/{dashId}/board")
 @RequiredArgsConstructor
 public class GroupBoardController {
 
     /**
-     * get calendar data
+     * get board list
      * @return
      */
-    @GetMapping("/get")
-    public ResponseEntity<?> groupCalendar(){
+    @GetMapping("/list")
+    public ResponseEntity<?> groupBoardList(){
         return null;
     }
 
     /**
-     * post calendar data
+     * groupBoardId detail = 게시판 클릭
      * @return
      */
-    @PostMapping("/post")
-    public ResponseEntity<?> postCalendar(){
+    @GetMapping("/list/{groupBoardId}")
+    public ResponseEntity<?> groupBoardDetail(){
         return null;
     }
 
     /**
-     * edit calendar data
+     * create group board
      * @return
      */
-    @PostMapping("/edit/{calendarId}")
-    public ResponseEntity<?> editCalendar(){
+    @PostMapping("/create")
+    public ResponseEntity<?> createBoard(){
         return null;
     }
 
     /**
-     * delete calendar data
+     * edit group board
      * @return
      */
-    @PostMapping("/delete/{calendarId}")
+    @PostMapping("/edit/{groupBoardId}")
+    public ResponseEntity<?> editBoard(){
+        return null;
+    }
+
+    /**
+     * delete group board
+     * @return
+     */
+    @PostMapping("/delete/{groupBoardId}")
     public ResponseEntity<?> deleteCalendar(){
         return null;
     }

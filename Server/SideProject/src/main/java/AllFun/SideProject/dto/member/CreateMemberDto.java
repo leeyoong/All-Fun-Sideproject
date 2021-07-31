@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateMemberDto {
-    private String email;
+    private String email; //중복체크 & 이메일 인증 완료된 이메일
     private String passwd;
-    private String birth;
+    private String birth; //yyyy-mm-dd
     private String name;
     private String phone;
-    private String nickname;
-    private String gender;
+    private String nickname; //중복없는 닉네임
+    private String gender; // Male Female
 }
