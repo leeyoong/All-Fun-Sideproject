@@ -110,9 +110,12 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
+        System.out.println("login status");
         // Find valid email
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
+            System.out.println("wrong email");
+
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("Email_Error","존재하지 않는 아이디 입니다.");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
@@ -120,10 +123,13 @@ public class AuthController {
 
         // Check correct password
         if (find.getPasswd() != request.getPasswd()){
+            System.out.println("wrong password");
+
             HashMap<String, String> result = new HashMap<String,String>();
             result.put("PW_Error","유효하지 않은 비밀번호 입니다.");
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
+        System.out.println("correct");
         MemberDataDto response = new MemberDataDto(
                 find.getId(),
                 find.getEmail(),
@@ -144,7 +150,7 @@ public class AuthController {
      * @return {email}
      */
     @GetMapping("/findId")
-    public ResponseEntity<?> findId(@RequestBody FindMemberDto request){
+    public ResponseEntity<?> findId(@RequestBody FindEmailDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGender(
                 request.getName(),request.getBirth(),request.getPhone());
 
@@ -164,7 +170,7 @@ public class AuthController {
      * @return
      */
     @GetMapping("/findPw")
-    public ResponseEntity<?> findPw(@RequestBody FindMemberDto request){
+    public ResponseEntity<?> findPw(@RequestBody FindPasswordDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
         if (find == null){

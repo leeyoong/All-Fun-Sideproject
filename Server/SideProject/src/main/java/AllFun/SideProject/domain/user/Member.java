@@ -2,6 +2,7 @@ package AllFun.SideProject.domain.user;
 
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.base.BaseEntity;
+import AllFun.SideProject.domain.matching.EntryPool;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,9 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();
 
+    @OneToMany(mappedBy="member")
+    private List<EntryPool> entryPools = new ArrayList<>();
+
     @OneToOne(mappedBy = "member")
     private MyPage mypage;
 
@@ -51,6 +55,11 @@ public class Member extends BaseEntity {
     public void addBoard(Board board){
         boards.add(board);
         board.setMember(this);
+    }
+
+    public void addEntryPool(EntryPool entryPool){
+        entryPools.add(entryPool);
+        entryPool.setMember(this);
     }
 
 }

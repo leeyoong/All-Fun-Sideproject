@@ -13,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class EntryPool {
+
     @Id
     @GeneratedValue
     @Column(name="entry_id")
@@ -20,9 +21,12 @@ public class EntryPool {
 
     private String role; //지원 역할군
 
-    @OneToOne(mappedBy = "member")
+    @ManyToOne
+    @JoinColumn(name="member_id")
     private Member member; // 지원자 member id
 
     @ManyToOne
+    @JoinColumn(name="board_id")
     private Board board; // 매칭 게시판 id
+
 }

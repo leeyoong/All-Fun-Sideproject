@@ -8,9 +8,8 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class FindMemberDto {
-    @NonNull private String name;
-    @NonNull private String birth;
-    @NonNull private String phone;
-    private String email;
+public class FindEmailDto {
+    private String name;
+    private String birth;
+    private String phone;
 }

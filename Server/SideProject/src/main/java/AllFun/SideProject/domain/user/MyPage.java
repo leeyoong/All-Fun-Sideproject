@@ -20,6 +20,8 @@ public class MyPage {
 
     private String profileImg; // 프로필사진 저장경로
 
-    @OneToOne(mappedBy="mypage")
+    @OneToOne
+    @JoinColumn(name="member_id")
     private Member member;
+
 }
