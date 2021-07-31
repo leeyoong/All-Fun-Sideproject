@@ -1,6 +1,6 @@
 package AllFun.SideProject.repository;
 
-import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.user.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

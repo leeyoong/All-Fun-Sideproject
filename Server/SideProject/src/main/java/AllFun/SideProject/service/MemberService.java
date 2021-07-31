@@ -1,6 +1,6 @@
 package AllFun.SideProject.service;
 
-import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.user.Member;
 import AllFun.SideProject.dto.member.CreateMemberDto;
 import AllFun.SideProject.repository.SpringDataJpaMemberRepository;
 import lombok.RequiredArgsConstructor;

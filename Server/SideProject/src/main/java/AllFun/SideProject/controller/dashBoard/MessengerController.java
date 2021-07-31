@@ -1,4 +1,4 @@
-package AllFun.SideProject.controller.DashBoard;
+package AllFun.SideProject.controller.dashBoard;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

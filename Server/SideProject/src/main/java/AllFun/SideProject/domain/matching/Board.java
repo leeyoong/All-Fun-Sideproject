@@ -1,6 +1,6 @@
 package AllFun.SideProject.domain.matching;
 
-import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.user.Member;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.base.BoardStatus;
 import lombok.*;
@@ -34,10 +34,13 @@ public class Board extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    private Member member;
+    private Member member; //작성자 id
 
     @OneToMany(mappedBy="board")
     private List<BoardRole> boardRoles = new ArrayList<>();
+
+    @OneToMany(mappedBy="board")
+    private List<EntryPool> entryPools = new ArrayList<>();
 
     public static Board createBoard(String nickname, String title, String content, int projMem){
         Board board = new Board();

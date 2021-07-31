@@ -1,6 +1,6 @@
 package AllFun.SideProject.service;
 
-import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.user.Member;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.board.*;
 import AllFun.SideProject.repository.SpringDataJpaBoardRepository;

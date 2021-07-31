@@ -1,6 +1,6 @@
 package AllFun.SideProject.controller;
 
-import AllFun.SideProject.domain.Member;
+import AllFun.SideProject.domain.user.Member;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,8 @@
-package AllFun.SideProject.domain;
+package AllFun.SideProject.domain.user;
 
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.base.BaseEntity;
 import lombok.*;
-import org.springframework.data.annotation.Persistent;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,6 +31,9 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();
+
+    @OneToOne(mappedBy = "member")
+    private MyPage mypage;
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String gender){
