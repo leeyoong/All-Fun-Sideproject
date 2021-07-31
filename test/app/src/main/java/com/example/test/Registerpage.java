@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class Registerpage extends AppCompatActivity {
 
@@ -30,8 +31,8 @@ public class Registerpage extends AppCompatActivity {
         Button regmailbutton2 = (Button) findViewById(R.id.regmailbutton2);
         Button regfinish = (Button) findViewById(R.id.regfinish);
 
-        CheckBox malebox = (CheckBox) findViewById(R.id.malebox);
-        CheckBox femalebox = (CheckBox) findViewById(R.id.femalebox);
+        RadioButton malebox = (RadioButton) findViewById(R.id.malebox);
+        RadioButton femalebox = (RadioButton) findViewById(R.id.femalebox);
 
 
         //회원가입 완료

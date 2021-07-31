@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.ListView;
 
 import com.example.test.ui.main.SectionsPagerAdapter;
 import com.example.test.databinding.ActivityTabBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class tab extends AppCompatActivity {
 
@@ -26,6 +31,7 @@ public class tab extends AppCompatActivity {
 
         binding = ActivityTabBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/matchlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".matchdetail">
+
+    <TextView
+        android:id="@+id/matchtitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#9C27B0"
+        android:text="매칭 글 제목"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_gravity="center"
+/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/matchdate"
+            android:layout_width="198dp"
+            android:layout_height="50dp"
+            android:background="#673AB7"
+            android:text="날짜"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_gravity="center"
+     />
+
+        <TextView
+            android:id="@+id/matchname"
+            android:layout_width="211dp"
+            android:layout_height="50dp"
+            android:background="#3F51B5"
+            android:text="글싼이"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_gravity="center"
+     />
+    </LinearLayout>
+</LinearLayout>
