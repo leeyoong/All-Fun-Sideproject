@@ -165,18 +165,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/regpwt" />
 
-        <CheckBox
-            android:id="@+id/malebox"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
+        <RadioGroup
+            android:id="@+id/gendergroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="5dp"
-            android:text="Male"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toStartOf="@+id/femalebox"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/regfinish"
             app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/regnick" />
+            app:layout_constraintTop_toBottomOf="@+id/regnick">
+
+            <RadioButton
+                android:id="@+id/malebox"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:text="Male"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toStartOf="@+id/femalebox"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/regnick" />
+
+            <RadioButton
+                android:id="@+id/femalebox"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:text="Female"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/malebox"
+                app:layout_constraintTop_toBottomOf="@+id/regnickbutton" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView9"
@@ -187,7 +213,6 @@
             android:layout_marginEnd="10dp"
             android:text="Gender"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toStartOf="@+id/malebox"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -202,7 +227,6 @@
             android:ems="10"
             android:hint="Nickname"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/malebox"
             app:layout_constraintEnd_toStartOf="@+id/regnickbutton"
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/regphone" />
@@ -233,7 +257,7 @@
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="yyyy-mm-dd"
-            android:inputType="textPersonName"
+            android:inputType="datetime"
             app:layout_constraintBottom_toTopOf="@+id/regphone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/regbirtht"
@@ -249,7 +273,7 @@
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/regname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -257,30 +281,17 @@
             app:layout_constraintTop_toBottomOf="@+id/regmailbutton2"
             tools:visibility="visible" />
 
-        <CheckBox
-            android:id="@+id/femalebox"
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="Female"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/malebox"
-            app:layout_constraintTop_toBottomOf="@+id/regnickbutton" />
 
         <Button
             android:id="@+id/regnickbutton"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:text="CHECK"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintBottom_toTopOf="@+id/femalebox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/regnick"
             app:layout_constraintTop_toBottomOf="@+id/regphone" />
@@ -321,13 +332,13 @@
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
             android:text="Complete!"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/malebox"
+            app:layout_constraintTop_toBottomOf="@+id/gendergroup"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
