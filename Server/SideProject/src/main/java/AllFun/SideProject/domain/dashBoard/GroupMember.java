@@ -1,4 +1,4 @@
-package AllFun.SideProject.domain.user;
+package AllFun.SideProject.domain.dashBoard;
 
 import AllFun.SideProject.domain.user.Member;
 import lombok.*;
@@ -12,21 +12,20 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
  */
-public class MyPage {
+public class GroupMember {
     /*
     @Id
     @GeneratedValue
-    @Column(name="mypage_id")
+    @Column(name="group_member_id")
     private Long id;
 
-    private String introduce; //자기소개
+    @ManyToOne
+    @JoinColumn(name="group_id")
+    private Group group;
 
-    private String profileImg; // 프로필사진 저장경로
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="member_id")
     private Member member;
 
      */
-
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/dashboard/{dashId}/board")
+@RequestMapping("/dashboard/{groupId}/board")
 @RequiredArgsConstructor
 public class GroupBoardController {
 

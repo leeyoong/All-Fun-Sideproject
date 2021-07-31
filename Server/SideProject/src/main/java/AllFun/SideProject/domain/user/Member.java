@@ -1,5 +1,6 @@
 package AllFun.SideProject.domain.user;
 
+import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.matching.EntryPool;
@@ -31,13 +32,18 @@ public class Member extends BaseEntity {
     private String gender; // gender(MALE / FEMALE)
 
     @OneToMany(mappedBy = "member")
-    private List<Board> boards = new ArrayList<>();
-
+    private List<Board> boards = new ArrayList<>(); //내가 쓴 매칭 게시판
+/*
     @OneToMany(mappedBy="member")
-    private List<EntryPool> entryPools = new ArrayList<>();
+    private List<EntryPool> entryPools = new ArrayList<>(); // 내가 지원한 매칭 게시판
 
     @OneToOne(mappedBy = "member")
-    private MyPage mypage;
+    private MyPage mypage; //user page
+
+    @OneToMany(mappedBy = "member")
+    private List<GroupMember> groupMembers = new ArrayList<>(); //내가 속한 그룹
+
+ */
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String gender){
@@ -56,10 +62,16 @@ public class Member extends BaseEntity {
         boards.add(board);
         board.setMember(this);
     }
-
+/*
     public void addEntryPool(EntryPool entryPool){
         entryPools.add(entryPool);
         entryPool.setMember(this);
     }
 
+    public void addGroupMember(GroupMember groupMember){
+        groupMembers.add(groupMember);
+        groupMember.setMember(this);
+    }
+
+ */
 }

@@ -1,5 +1,6 @@
 package AllFun.SideProject.domain.matching;
 
+import AllFun.SideProject.domain.dashBoard.Group;
 import AllFun.SideProject.domain.user.Member;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.base.BoardStatus;
@@ -38,10 +39,18 @@ public class Board extends BaseEntity {
 
     @OneToMany(mappedBy="board")
     private List<BoardRole> boardRoles = new ArrayList<>();
-
+/*
     @OneToMany(mappedBy="board")
     private List<EntryPool> entryPools = new ArrayList<>();
 
+ */
+/*
+    @OneToOne
+    @JoinColumn(name="group_id")
+    private Group group;
+
+
+ */
     public static Board createBoard(String nickname, String title, String content, int projMem){
         Board board = new Board();
         board.setNickname(nickname);

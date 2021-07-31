@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.user.Member;
+import AllFun.SideProject.dto.ApiResult;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -111,24 +112,22 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
         System.out.println("login status");
+        System.out.println("email : "+request.getEmail());
+        System.out.println("password : "+request.getPasswd());
+
         // Find valid email
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
             System.out.println("wrong email");
 
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Email_Error","존재하지 않는 아이디 입니다.");
-            return new ResponseEntity<>(result, HttpStatus.CONFLICT);
+            return ApiResult.errorMessage("wrong email",HttpStatus.CONFLICT);
         }
 
         // Check correct password
         if (find.getPasswd() != request.getPasswd()){
-            System.out.println("wrong password");
-
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("PW_Error","유효하지 않은 비밀번호 입니다.");
-            return new ResponseEntity<>(result, HttpStatus.CONFLICT);
+            return ApiResult.errorMessage("wrong password",HttpStatus.CONFLICT);
         }
+
         System.out.println("correct");
         MemberDataDto response = new MemberDataDto(
                 find.getId(),
@@ -155,9 +154,7 @@ public class AuthController {
                 request.getName(),request.getBirth(),request.getPhone());
 
         if (find == null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Wrong Value");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ApiResult.errorMessage("이미존재",HttpStatus.CONFLICT);
         }else{
             OneItemDto email = new OneItemDto(find.getEmail());
             return ResponseEntity.ok(email);
