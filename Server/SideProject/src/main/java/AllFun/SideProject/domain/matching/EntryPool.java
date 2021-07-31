@@ -7,16 +7,15 @@ import AllFun.SideProject.domain.user.Member;
 import lombok.*;
 
 import javax.persistence.*;
-/*
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
- */
 public class EntryPool {
-/*
+
     @Id
     @GeneratedValue
     @Column(name="entry_id")
@@ -34,7 +33,5 @@ public class EntryPool {
     @ManyToOne
     @JoinColumn(name="board_id")
     private Board board; // 매칭 게시판 id
-
- */
 
 }

@@ -4,16 +4,16 @@ import AllFun.SideProject.domain.user.Member;
 import lombok.*;
 
 import javax.persistence.*;
-/*
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
- */
+
 public class MyPage {
-    /*
+
     @Id
     @GeneratedValue
     @Column(name="mypage_id")
@@ -27,6 +27,5 @@ public class MyPage {
     @JoinColumn(name="member_id")
     private Member member;
 
-     */
 
 }
