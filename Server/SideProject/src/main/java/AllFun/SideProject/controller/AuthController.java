@@ -5,6 +5,8 @@ import AllFun.SideProject.dto.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +44,6 @@ public class AuthController {
     @PostMapping("/check/nickname")
     public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
         Member find = memberService.findByNickname(request.getItem());
-
         if (find != null){
             return ErrorHeader.errorMessage("duplicated nickname",HttpStatus.CONFLICT);
         }else{

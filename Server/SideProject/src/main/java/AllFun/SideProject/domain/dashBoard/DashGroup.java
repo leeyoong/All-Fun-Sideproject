@@ -32,7 +32,7 @@ public class DashGroup extends BaseEntity {
     private List<GroupBoard> groupBoards; // 그룹 게시판
     
     @OneToMany(mappedBy = "group")
-    private List<Messenger> messengers; // 메신저 게시판
+    private List<Messenger> messengers; // 메신저
 
     @OneToMany(mappedBy= "group")
     private List<ToDo> toDos; // to-do list

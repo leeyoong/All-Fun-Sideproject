@@ -40,10 +40,11 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy="member")
     private List<EntryPool> entryPools = new ArrayList<>(); // 내가 지원한 매칭 게시판
 
-
     @OneToMany(mappedBy = "member")
     private List<GroupMember> groupMembers = new ArrayList<>(); //내가 속한 그룹
 
+    @OneToMany(mappedBy = "member")
+    private List<MemberRoom> memberRooms = new ArrayList<>(); // 쪽지방
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String gender){
@@ -73,4 +74,8 @@ public class Member extends BaseEntity {
         groupMember.setMember(this);
     }
 
+    public void addMemberRoom(MemberRoom memberRoom){
+        memberRooms.add(memberRoom);
+        memberRoom.setMember(this);
+    }
 }
