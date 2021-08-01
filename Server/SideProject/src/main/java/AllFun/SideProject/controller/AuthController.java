@@ -5,8 +5,6 @@ import AllFun.SideProject.dto.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,22 +24,26 @@ public class AuthController {
      * @param request
      * @return
      */
-    @PostMapping("/check/email")
+    @GetMapping("/check/email")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
+
         System.out.println(request);
         Member find = memberService.findByEmail(request.getItem());
         if (find != null){
+
             return ErrorHeader.errorMessage("duplicated email",HttpStatus.CONFLICT);
         }else{
+            System.out.println("HI");
             return ResponseEntity.ok(null);
         }
     }
+
     /**
      * Check Duplicated Nickname
      * @param request
      * @return
      */
-    @PostMapping("/check/nickname")
+    @GetMapping("/check/nickname")
     public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
         Member find = memberService.findByNickname(request.getItem());
         if (find != null){
@@ -57,7 +59,7 @@ public class AuthController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/profileEnroll")
+    @PostMapping("/profile")
     public ResponseEntity<?> profileEnroll(@RequestPart("profileImg")MultipartFile request) throws IOException {
         if (request.isEmpty()){
             return ErrorHeader.errorMessage("request error",HttpStatus.BAD_REQUEST);
@@ -66,13 +68,12 @@ public class AuthController {
         return ResponseEntity.ok(profileImg);
     }
 
-
     /**
      * Email Authentication
      * @param request
      * @return
      */
-    @PostMapping("/sendMail")
+    @GetMapping("/sendMail")
     public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
         return ResponseEntity.ok(memberService.sendMail(request.getItem()));
     }
@@ -104,9 +105,11 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
+        System.out.println("HI");
         // Find valid email
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
+            System.out.println("Bye");
             return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
         }
 
@@ -134,8 +137,8 @@ public class AuthController {
      * @param request
      * @return {email}
      */
-    @GetMapping("/findId")
-    public ResponseEntity<?> findId(@RequestBody FindEmailDto request){
+    @GetMapping("/find/email")
+    public ResponseEntity<?> findEmail(@RequestBody FindEmailDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGender(
                 request.getName(),request.getBirth(),request.getPhone());
 
@@ -152,8 +155,8 @@ public class AuthController {
      * @param request
      * @return
      */
-    @GetMapping("/findPw")
-    public ResponseEntity<?> findPw(@RequestBody FindPasswordDto request){
+    @PostMapping("/find/password")
+    public ResponseEntity<?> findPassword(@RequestBody FindPasswordDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
         if (find == null){
@@ -174,8 +177,12 @@ public class AuthController {
      * 회원 탈퇴
      * @return
      */
-    @PostMapping("/secession")
-    public ResponseEntity<?> secession(){
-        return null;
+    @PostMapping("/secession/{member_id}")
+    public ResponseEntity<?> secession(@PathVariable("member_id")Long member_id){
+        Member find = memberService.findById(member_id);
+        if (find == null){
+            return ErrorHeader.errorMessage("wrong_member",HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(memberService.deleteMember(find));
     }
 }

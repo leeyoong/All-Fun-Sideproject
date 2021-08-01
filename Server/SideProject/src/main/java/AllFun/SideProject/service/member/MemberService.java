@@ -164,5 +164,10 @@ public class MemberService {
         return memberRepository.findByNameAndBirthAndPhoneAndEmail(name, birth, phone,email)
                 .orElse(null);
     }
+
+    public String deleteMember(Member member){
+        memberRepository.delete(member);
+        return null;
+    }
 }
 
