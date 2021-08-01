@@ -4,6 +4,7 @@ import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.repository.dashBoard.GroupMemberRepository;
+import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +17,14 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class GroupMemberService {
     private final GroupMemberRepository groupMemberRepository;
-
+    private final MemberRepository memberRepository;
     /**
      * get dash group id
-     * @param member
+     * @param memberId
      * @return
      */
-    public List<DashGroup> getDashGroup(Member member){
+    public List<DashGroup> getDashGroup(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
         List<GroupMember> groupMembers = groupMemberRepository.findAllByMember(member).orElse(null);
         List<DashGroup> dashGroups = new ArrayList<>();
         for(GroupMember groupMember:groupMembers){

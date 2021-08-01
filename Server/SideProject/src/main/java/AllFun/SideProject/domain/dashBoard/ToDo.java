@@ -26,5 +26,6 @@ public class ToDo extends BaseEntity {
 
     private String title;
 
+    @Lob
     private String content;
 }
