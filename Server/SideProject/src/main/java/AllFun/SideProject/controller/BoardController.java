@@ -4,7 +4,7 @@ import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.BoardRole;
 import AllFun.SideProject.domain.matching.Role;
-import AllFun.SideProject.dto.board.*;
+import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.service.matching.BoardService;
 import AllFun.SideProject.service.member.MemberService;
 import AllFun.SideProject.service.matching.RoleService;

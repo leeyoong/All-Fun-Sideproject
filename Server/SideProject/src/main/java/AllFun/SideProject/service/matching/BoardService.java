@@ -2,7 +2,7 @@ package AllFun.SideProject.service.matching;
 
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.Board;
-import AllFun.SideProject.dto.board.*;
+import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.repository.matching.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

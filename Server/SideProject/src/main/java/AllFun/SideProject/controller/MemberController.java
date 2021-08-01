@@ -1,6 +1,6 @@
 package AllFun.SideProject.controller;
 
-import AllFun.SideProject.dto.ErrorHeader;
+import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
 import AllFun.SideProject.dto.member.OneItemDto;
@@ -25,8 +25,8 @@ public class MemberController {
      * @param request
      * @return
      */
-    @PostMapping("/{member_id}/password")
-    public ResponseEntity<?> modifyPassword(@PathVariable("member_id")Long memberId, @RequestBody OneItemDto request){
+    @PostMapping("/{memberId}/password")
+    public ResponseEntity<?> modifyPassword(@PathVariable("memberId")Long memberId, @RequestBody OneItemDto request){
         return ResponseEntity.ok(memberService.modifyPassword(memberId,request));
     }
 
@@ -37,8 +37,8 @@ public class MemberController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/{member_id}/profile")
-    public ResponseEntity<?> profileEnroll(@PathVariable("member_id") Long memberId,@RequestPart("profileImg") MultipartFile request) throws IOException {
+    @PostMapping("/{memberId}/profile")
+    public ResponseEntity<?> profileEnroll(@PathVariable("memberId") Long memberId,@RequestPart("profileImg") MultipartFile request) throws IOException {
         if (request.isEmpty()){
             return ErrorHeader.errorMessage("request error", HttpStatus.BAD_REQUEST);
         }
@@ -51,8 +51,8 @@ public class MemberController {
      *
      * @return
      */
-    @GetMapping("/{member_id}")
-    public ResponseEntity<?> memberInfo(@PathVariable("member_id")Long memberId){
+    @GetMapping("/{memberId}")
+    public ResponseEntity<?> memberInfo(@PathVariable("memberId")Long memberId){
         MemberInfoDto response = memberService.getMemberInfo(memberId);
         if (response==null){
             return ErrorHeader.errorMessage("error",HttpStatus.BAD_REQUEST);
@@ -65,19 +65,19 @@ public class MemberController {
      * @param memberId
      * @return
      */
-    @GetMapping("/{member_id}/edit")
-    public ResponseEntity<?> editMyPageGet(@PathVariable("member_id")Long memberId){
+    @GetMapping("/{memberId}/edit")
+    public ResponseEntity<?> editMyPageGet(@PathVariable("memberId")Long memberId){
         return ResponseEntity.ok(memberService.getMemberInfo(memberId));
     }
 
     /**
-     * my page edit 
+     * my page edit
      * @param memberId
      * @param request
      * @return
      */
-    @PutMapping("/{member_id}/edit")
-    public ResponseEntity<?> editMyPage(@PathVariable("member_id")Long memberId, @RequestBody EditMemberInfoDto request){
+    @PutMapping("/{memberId}/edit")
+    public ResponseEntity<?> editMyPage(@PathVariable("memberId")Long memberId, @RequestBody EditMemberInfoDto request){
         String response = memberService.putMemberInfo(memberId,request);
         if (response == null){
             return ErrorHeader.errorMessage("error",HttpStatus.BAD_REQUEST);

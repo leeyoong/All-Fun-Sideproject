@@ -1,7 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.member.Member;
-import AllFun.SideProject.dto.ErrorHeader;
+import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.dto.member.*;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +67,7 @@ public class AuthController {
      */
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateMemberDto request){
+
         Member newMember = Member.createMember(
                 request.getEmail(),
                 request.getPasswd(),
@@ -87,16 +88,13 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
-        System.out.println("HI");
         // Find valid email
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
-            System.out.println("Bye");
             return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
         }
-
         // Check correct password
-        if (find.getPasswd() != request.getPasswd()){
+        if (!find.getPasswd().equals(request.getPasswd())){
             return ErrorHeader.errorMessage("wrong password",HttpStatus.CONFLICT);
         }
 
@@ -160,8 +158,8 @@ public class AuthController {
      * @param member_id
      * @return
      */
-    @DeleteMapping("/{member_id}")
-    public ResponseEntity<?> secession(@PathVariable("member_id")Long member_id){
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<?> secession(@PathVariable("memberId")Long member_id){
         Member find = memberService.findById(member_id);
         if (find == null){
             return ErrorHeader.errorMessage("wrong_member",HttpStatus.BAD_REQUEST);

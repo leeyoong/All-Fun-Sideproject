@@ -1,4 +1,4 @@
-package AllFun.SideProject.dto;
+package AllFun.SideProject.Exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

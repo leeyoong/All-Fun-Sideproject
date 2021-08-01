@@ -1,12 +1,14 @@
-package AllFun.SideProject.dto.board;
+package AllFun.SideProject.dto.matching;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 
 import java.time.LocalDateTime;
 
 @Data
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class ReadDetailDto {
     private String title;
