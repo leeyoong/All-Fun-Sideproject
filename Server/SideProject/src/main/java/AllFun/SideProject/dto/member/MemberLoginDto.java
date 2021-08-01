@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class MemberDataDto {
+public class MemberLoginDto {
     private Long id; // member id (pk)
     private String email; // Log-In Id
     private String passwd; // password

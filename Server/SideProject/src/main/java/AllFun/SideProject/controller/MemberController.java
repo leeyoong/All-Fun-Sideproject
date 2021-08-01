@@ -1,52 +1,88 @@
 package AllFun.SideProject.controller;
 
+import AllFun.SideProject.dto.ErrorHeader;
+import AllFun.SideProject.dto.member.EditMemberInfoDto;
+import AllFun.SideProject.dto.member.MemberInfoDto;
+import AllFun.SideProject.dto.member.OneItemDto;
+import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 
 @RestController
 @RequestMapping("/myPage")
 @RequiredArgsConstructor
 public class MemberController {
-
+    private final MemberService memberService;
     /**
      * modify password
+     * @param memberId
+     * @param request
      * @return
      */
-    @PostMapping("/change/password")
-    public ResponseEntity<?> modifyPassword(){
-        return null;
+    @PostMapping("/{member_id}/password")
+    public ResponseEntity<?> modifyPassword(@PathVariable("member_id")Long memberId, @RequestBody OneItemDto request){
+        return ResponseEntity.ok(memberService.modifyPassword(memberId,request));
     }
 
     /**
-     * 프로필 사진 등록(변경)
+     * profile image enroll
+     * @param memberId
+     * @param request
      * @return
+     * @throws IOException
      */
-    @PostMapping("/enroll/profile")
-    public ResponseEntity<?> enrollProfile(){
-        return null;
+    @PostMapping("/{member_id}/profile")
+    public ResponseEntity<?> profileEnroll(@PathVariable("member_id") Long memberId,@RequestPart("profileImg") MultipartFile request) throws IOException {
+        if (request.isEmpty()){
+            return ErrorHeader.errorMessage("request error", HttpStatus.BAD_REQUEST);
+        }
+        //String profileImg = memberService.profileEnroll(request);
+        return ResponseEntity.ok(null);
     }
 
     /**
-     * my page 정보 불러오기
+     * get member info
+     *
      * @return
      */
-    @GetMapping("/list/profile")
-    public ResponseEntity<?> listProfile(){
-        return null;
+    @GetMapping("/{member_id}")
+    public ResponseEntity<?> memberInfo(@PathVariable("member_id")Long memberId){
+        MemberInfoDto response = memberService.getMemberInfo(memberId);
+        if (response==null){
+            return ErrorHeader.errorMessage("error",HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(response);
     }
 
     /**
-     * my page 정보 수정
+     * my page get edit data
+     * @param memberId
      * @return
      */
-    @PostMapping("/edit")
-    public ResponseEntity<?> editMyPage(){
-        return null;
+    @GetMapping("/{member_id}/edit")
+    public ResponseEntity<?> editMyPageGet(@PathVariable("member_id")Long memberId){
+        return ResponseEntity.ok(memberService.getMemberInfo(memberId));
+    }
+
+    /**
+     * my page edit 
+     * @param memberId
+     * @param request
+     * @return
+     */
+    @PutMapping("/{member_id}/edit")
+    public ResponseEntity<?> editMyPage(@PathVariable("member_id")Long memberId, @RequestBody EditMemberInfoDto request){
+        String response = memberService.putMemberInfo(memberId,request);
+        if (response == null){
+            return ErrorHeader.errorMessage("error",HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(null);
     }
 
 }

@@ -1,6 +1,9 @@
 package AllFun.SideProject.service.member;
 
 import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.dto.member.EditMemberInfoDto;
+import AllFun.SideProject.dto.member.MemberInfoDto;
+import AllFun.SideProject.dto.member.OneItemDto;
 import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
@@ -165,9 +168,64 @@ public class MemberService {
                 .orElse(null);
     }
 
+    /**
+     * 회원 탈퇴
+     * @param member
+     * @return
+     */
+    @Transactional
     public String deleteMember(Member member){
         memberRepository.delete(member);
         return null;
+    }
+
+    /**
+     * modify password
+     * @param memberId
+     * @param request
+     * @return
+     */
+    @Transactional
+    public String modifyPassword(Long memberId, OneItemDto request){
+        Optional<Member> editData = Optional.ofNullable(memberRepository.findById(memberId).orElse(null));
+        editData.ifPresent(selectMember->{
+            selectMember.setPasswd(request.getItem());
+            memberRepository.save(selectMember);
+        });
+        return null;
+    }
+
+    /**
+     * get member information
+     * @param memberId
+     * @return
+     */
+    public MemberInfoDto getMemberInfo(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        MemberInfoDto response = new MemberInfoDto(
+                                member.getEmail(),
+                                member.getBirth(),
+                                member.getName(),
+                                member.getPhone(),
+                                member.getNickname(),
+                                member.getGender(),
+                                member.getIntroduce()
+                                );
+        return response;
+    }
+
+    @Transactional
+    public String putMemberInfo(Long memberId, EditMemberInfoDto request){
+        Optional<Member> editData = Optional.ofNullable(memberRepository.findById(memberId).orElse(null));
+        final String[] res = {null};
+        editData.ifPresent(selectMember->{
+            selectMember.setPhone(request.getPhone());
+            selectMember.setNickname(request.getNickname());
+            selectMember.setIntroduce(request.getIntroduce());
+            memberRepository.save(selectMember);
+            res[0] = "ok";
+        });
+        return res[0];
     }
 }
 

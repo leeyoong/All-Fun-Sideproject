@@ -19,6 +19,7 @@ import java.util.HashMap;
 @RequestMapping("/boards")
 @RequiredArgsConstructor
 public class BoardController {
+
     private final BoardService boardService;
     private final MemberService memberService;
     private final RoleService roleService;

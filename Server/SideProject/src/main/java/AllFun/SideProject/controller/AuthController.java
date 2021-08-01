@@ -8,9 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/auth")
@@ -51,21 +48,6 @@ public class AuthController {
         }else{
             return ResponseEntity.ok(null);
         }
-    }
-
-    /**
-     * profile image enroll
-     * @param request
-     * @return
-     * @throws IOException
-     */
-    @PostMapping("/profile")
-    public ResponseEntity<?> profileEnroll(@RequestPart("profileImg")MultipartFile request) throws IOException {
-        if (request.isEmpty()){
-            return ErrorHeader.errorMessage("request error",HttpStatus.BAD_REQUEST);
-        }
-        String profileImg = memberService.profileEnroll(request);
-        return ResponseEntity.ok(profileImg);
     }
 
     /**
@@ -118,7 +100,7 @@ public class AuthController {
             return ErrorHeader.errorMessage("wrong password",HttpStatus.CONFLICT);
         }
 
-        MemberDataDto response = new MemberDataDto(
+        MemberLoginDto response = new MemberLoginDto(
                 find.getId(),
                 find.getEmail(),
                 find.getPasswd(),
@@ -175,9 +157,10 @@ public class AuthController {
 
     /**
      * 회원 탈퇴
+     * @param member_id
      * @return
      */
-    @PostMapping("/secession/{member_id}")
+    @DeleteMapping("/{member_id}")
     public ResponseEntity<?> secession(@PathVariable("member_id")Long member_id){
         Member find = memberService.findById(member_id);
         if (find == null){
