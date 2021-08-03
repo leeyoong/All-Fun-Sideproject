@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    android:background="#1C2323"
+    tools:context=".IdFound">
+
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="ID Forgot?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#00FFCC" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="#B3D3CC"
+        android:text="Here's your ID."
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="가입일자"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"></TextView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="0dp"
+            android:text="E-mail"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"></TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="21/08/02"
+            android:textStyle="italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#00FFCC"></TextView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="0dp"
+            android:textStyle="italic"
+            android:text="alstn0723@naver.com"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#00FFCC"></TextView>
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/custom_button"
+        android:text="Forgot password?" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/custom_button"
+        android:text="Go to login" />
+
+
+</LinearLayout>

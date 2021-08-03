@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1C2323"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".Loginpage">
+
+
+    <TextView
+        android:id="@+id/logtitle"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#00FFCC" />
+
+    <EditText
+        android:id="@+id/idname"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="ID"
+        android:inputType="textPersonName"
+        android:textColorHighlight="#00FFCC"
+        android:textColorHint="#B3D3CC"
+        android:textColorLink="#00FFCC" />
+
+    <EditText
+        android:id="@+id/passname"
+        android:layout_width="370dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHighlight="#00FFCC"
+        android:textColorHint="#B3D3CC"
+        android:textColorLink="#00FFCC" />
+
+    <CheckBox
+        android:id="@+id/autolog"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="자동으로 로그인"
+        android:textColor="#00FFCC" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="Log in"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@null" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/regin"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@color/white"
+        android:text="Register"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@null"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/idfound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:text="아이디 찾기"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#B3D3CC" />
+
+        <TextView
+            android:id="@+id/passfound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:text="비밀번호 재설정"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#B3D3CC" />
+    </LinearLayout>
+
+
+</LinearLayout>

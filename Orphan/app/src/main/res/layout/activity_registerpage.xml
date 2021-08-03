@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1C2323"
+    tools:context=".Registerpage">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/regtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Register"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="#00FFCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="E-mail"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/editTextTextEmailAddress"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="ex) abc@google.com"
+                    android:textColorHint="#B3D3CC"
+                    android:inputType="textEmailAddress" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button3"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="CHECK"
+                    android:background="@drawable/custom_button"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/certmail"
+                    android:layout_width="278dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Please enter the code."
+                    android:textColorHint="#B3D3CC"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button4"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="CHECK"
+                    android:background="@drawable/custom_button"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Password"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/passmade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="enter your password"
+                    android:inputType="textPassword"
+                    android:textColorHint="#B3D3CC" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="107dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Password Check"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/passmade2"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:textColorHint="#B3D3CC"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="enter your password twice"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button6"
+                    android:layout_width="111dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/regname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:textColorHint="#B3D3CC" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="77dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Birth"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="116dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Phone Number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/regphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="000-0000-0000"
+                    android:inputType="phone"
+                    android:textColorHint="#B3D3CC" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Nickname"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+                <EditText
+                    android:id="@+id/regnick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Please set your Nickname."
+                    android:inputType="phone"
+                    android:textColorHint="#B3D3CC" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/teal_200"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Gender"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#00FFCC"></TextView>
+
+
+                <RadioGroup
+                    android:id="@+id/gendergroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/malebox"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp"
+                        android:text="Male"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <View
+                        android:id="@+id/divider7"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/teal_200"/>
+
+                    <RadioButton
+                        android:id="@+id/femalebox"
+                        android:layout_width="120dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="5dp"
+                        android:text="Female"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button7"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button"
+                android:text="Complete!" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
