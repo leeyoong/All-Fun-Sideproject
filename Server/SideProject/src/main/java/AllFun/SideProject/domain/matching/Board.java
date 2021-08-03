@@ -23,7 +23,6 @@ public class Board extends BaseEntity {
     @GeneratedValue
     @Column(name="board_id")
     private Long id; // board id (pk)
-    private String nickname; // member - nickname
     private String title; // 제목
     private String content; // 글의 내용
     private int projectMembers; // 프로젝트 구성 인원
@@ -54,9 +53,8 @@ public class Board extends BaseEntity {
     @OneToMany(mappedBy = "board")
     private List<Scrap> scraps = new ArrayList<>();
 
-    public static Board createBoard(String nickname, String title, String content, int projMem, LocalDateTime endDate){
+    public static Board createBoard(String title, String content, int projMem, LocalDateTime endDate){
         Board board = new Board();
-        board.setNickname(nickname);
         board.setTitle(title);
         board.setContent(content);
         board.setProjectMembers(projMem);

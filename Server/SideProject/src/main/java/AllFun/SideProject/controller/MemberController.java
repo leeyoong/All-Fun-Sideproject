@@ -43,8 +43,8 @@ public class MemberController {
         if (request.isEmpty()){
             return ErrorHeader.errorMessage("request error", HttpStatus.BAD_REQUEST);
         }
-        //String profileImg = memberService.profileEnroll(request);
-        return ResponseEntity.ok(null);
+        String profileImg = memberService.profileEnroll(request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**

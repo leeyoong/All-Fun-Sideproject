@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -14,8 +16,15 @@ public class ReadDetailDto {
     private String title;
     private String content;
     private String writer;
+
     private LocalDateTime date; //작성(수정) 날짜
-    private int hope; // 프로젝트 구성 인원
-    private int entry; // 참여 인원
+
+    private LocalDateTime endDate;
+
+    private List<BoardRoleDto> roles;
+
     private int hit; // 조회수
+
+    private Long memberId; // 사용자 id
 }
+

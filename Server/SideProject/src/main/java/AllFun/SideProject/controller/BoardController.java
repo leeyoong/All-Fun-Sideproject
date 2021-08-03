@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.Exception.ErrorHeader;
+import AllFun.SideProject.domain.base.RoleType;
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.member.Member;
@@ -27,6 +28,7 @@ import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/board")
@@ -78,43 +80,55 @@ public class BoardController {
         if (dashGroup == null || find == null) {
             return ErrorHeader.errorMessage("wrong id", HttpStatus.BAD_REQUEST);
         }
-        int projMembers = request.getHope().stream().mapToInt(Integer::intValue).sum();
+        int projMembers = request.getBackend() + request.getFrontend() + request.getPm()
+                + request.getAndroid() + request.getIOS() + request.getAi()
+                + request.getBigData() + request.getBlockChain();
 
         Board newBoard = Board.createBoard(
-                find.getNickname(),
                 request.getTitle(),
                 request.getContent(),
                 projMembers,
                 request.getEndDate()
         );
 
-        boardService.save(newBoard, find);
+        List<BoardRole> boardRoles = new ArrayList<>();
 
-        for (int i = 0; i < request.getHope().size(); i++) {
-            if (request.getHope().get(i) != 0) {
-                Long roleId = Long.valueOf(i + 1);
-                Role role = roleService.findById(roleId);
-                BoardRole boardRole = BoardRole.createBoardRole(role.getName(), request.getHope().get(i));
-                newBoard.addBoardRole(boardRole);
-                boardRoleService.save(boardRole);
-            }
+        boardRoles.add(BoardRole.createBoardRole(RoleType.BACKEND, request.getBackend()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.FRONTEND, request.getFrontend()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.PM, request.getPm()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.ANDROID, request.getAndroid()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.IOS, request.getIOS()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.AI, request.getAi()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.BIGDATA, request.getBigData()));
+        boardRoles.add(BoardRole.createBoardRole(RoleType.BLOCKCHAIN, request.getBlockChain()));
+
+        for (BoardRole boardRole : boardRoles) {
+            newBoard.addBoardRole(boardRole);
+            boardRoleService.save(boardRole);
         }
+
+        boardService.save(newBoard, find);
 
         return ResponseEntity.ok(null);
     }
 
     /**
      * get board list recently
+     * @param pageable
      * @return
      */
+
     @GetMapping("/list/recently")
     public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable){
         Page<Board> boards = boardService.boardList(pageable);
+
+
         Page<SearchResponseDto> response = boards.map(
                 board -> new SearchResponseDto(
-                        board.getId(),board.getTitle(),board.getMember().getNickname(),
-                        board.getCreatedDate(),board.getEndDate(),board.getProjectMembers(),
-                        board.getEntryMembers()
+                        board.getId(), board.getTitle(), board.getMember().getNickname(),
+                        board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                        board.getEntryMembers(),
+                        boardRoleService.getRoleType(board)
                 ));
         return ResponseEntity.ok(response);
     }
@@ -128,9 +142,10 @@ public class BoardController {
         Page<Board> boards = boardService.boardList(pageable);
         Page<SearchResponseDto> response = boards.map(
                 board -> new SearchResponseDto(
-                        board.getId(),board.getTitle(),board.getMember().getNickname(),
-                        board.getCreatedDate(),board.getEndDate(),board.getProjectMembers(),
-                        board.getEntryMembers()
+                        board.getId(), board.getTitle(), board.getMember().getNickname(),
+                        board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                        board.getEntryMembers(),
+                        boardRoleService.getRoleType(board)
                 ));
         return ResponseEntity.ok(response);
     }
@@ -144,25 +159,33 @@ public class BoardController {
     public ResponseEntity<?> readDetail(@PathVariable("boardId") Long boardId){
         ReadDetailDto response = boardService.readDetail(boardId);
         if (response==null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Wrong Board Id");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
         } else{
             return ResponseEntity.ok(response);
         }
     }
 
     /**
-     * Search by Title
+     * Search by Title (recently)
      * @param request
      * @return
      */
-    @GetMapping("/search/title")
-    public ResponseEntity<?> search(@RequestBody SearchRequestDto request){
+    @GetMapping("/search/title/recently")
+    public ResponseEntity<?> searchRecently(@RequestBody SearchRequestDto request){
         SearchResponseDto response = boardService.searchList(request.getSearch(), "title");
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Search by Title (deadline)
+     * @param request
+     * @return
+     */
+    @GetMapping("/search/title/deadline")
+    public ResponseEntity<?> searchDeadline(@RequestBody SearchRequestDto request){
+        SearchResponseDto response = boardService.searchList(request.getSearch(), "title");
+        return ResponseEntity.ok(response);
+    }
     /**
      * Search By Content
      * @param request

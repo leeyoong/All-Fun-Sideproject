@@ -1,5 +1,6 @@
 package AllFun.SideProject.dto.matching;
 
+import AllFun.SideProject.domain.base.RoleType;
 import AllFun.SideProject.domain.matching.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class SearchResponseDto {
     private LocalDateTime endDate;
     private int projMember;
     private int entryMember;
+    private List<RoleType> roles;
 }
