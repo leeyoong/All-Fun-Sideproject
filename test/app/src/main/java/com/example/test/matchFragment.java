@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -78,6 +79,10 @@ public class matchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        Button button1 = (Button) getView().findViewById(R.id.button5);
+
+
         /*
         matchdetailListView = (ListView) v.findViewById(R.id.matchdetailListView);
 
@@ -142,3 +147,4 @@ public class matchFragment extends Fragment {
 
 
 }
+

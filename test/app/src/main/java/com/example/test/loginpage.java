@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.test.WEB.web;
 
 public class loginpage extends AppCompatActivity {
 
@@ -62,8 +65,20 @@ public class loginpage extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = new Intent(loginpage.this, tab.class);
-                loginpage.this.startActivity(loginIntent);
+                web client = new web();
+                String output =
+                        client.Post_Login(idname.getText().toString(),passname.getText().toString());
+                if(output.equals("ok")){
+                    Intent loginIntent = new Intent(loginpage.this, tab.class);
+                    loginpage.this.startActivity(loginIntent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "연결실패", Toast.LENGTH_LONG).show();
+
+
+                }
+
+
             }
         });
     }
