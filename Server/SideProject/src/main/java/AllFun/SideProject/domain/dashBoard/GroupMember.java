@@ -1,5 +1,6 @@
 package AllFun.SideProject.domain.dashBoard;
 
+import AllFun.SideProject.domain.base.GroupMemberStatus;
 import AllFun.SideProject.domain.member.Member;
 import lombok.*;
 
@@ -26,4 +27,6 @@ public class GroupMember {
     @JoinColumn(name="member_id")
     private Member member;
 
+    @Enumerated(EnumType.STRING)
+    private GroupMemberStatus status;
 }

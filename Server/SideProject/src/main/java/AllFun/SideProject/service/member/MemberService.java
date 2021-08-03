@@ -9,6 +9,7 @@ import AllFun.SideProject.dto.mainPage.MyMatchingBoardDto;
 import AllFun.SideProject.dto.mainPage.MyMatchingStatusDto;
 import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
+import AllFun.SideProject.dto.member.MyInfoDto;
 import AllFun.SideProject.dto.member.OneItemDto;
 import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -69,7 +70,6 @@ public class MemberService {
     @Transactional
     public void save(Member member){
         memberRepository.save(member);
-
     }
 
     /**
@@ -199,6 +199,21 @@ public class MemberService {
         return null;
     }
 
+    public MyInfoDto getMyInfo(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        MyInfoDto response = new MyInfoDto(
+                member.getEmail(),
+                member.getBirth(),
+                member.getName(),
+                member.getPhone(),
+                member.getNickname(),
+                member.getGender(),
+                member.getIntroduce()
+        );
+        return response;
+    }
+
+
     /**
      * get member information
      * @param memberId
@@ -209,8 +224,6 @@ public class MemberService {
         MemberInfoDto response = new MemberInfoDto(
                                 member.getEmail(),
                                 member.getBirth(),
-                                member.getName(),
-                                member.getPhone(),
                                 member.getNickname(),
                                 member.getGender(),
                                 member.getIntroduce()

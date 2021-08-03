@@ -21,11 +21,12 @@ public class BoardService {
      * @return
      */
     @Transactional
-    public CreateBoardResponseDto save(Board board, Member member){
+    public void save(Board board, Member member){
         member.addBoard(board);
         boardRepository.save(board);
-        return new CreateBoardResponseDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
-                                    board.getProjectMembers(),board.getHit());
+
+        //return new CreateBoardResponseDto(board.getNickname(), board.getTitle(), board.getContent(), board.getCreatedDate(),
+        //                           board.getProjectMembers(),board.getHit());
     }
 
     /**

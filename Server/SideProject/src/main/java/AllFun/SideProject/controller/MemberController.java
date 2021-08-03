@@ -3,6 +3,7 @@ package AllFun.SideProject.controller;
 import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
+import AllFun.SideProject.dto.member.MyInfoDto;
 import AllFun.SideProject.dto.member.OneItemDto;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -47,11 +48,25 @@ public class MemberController {
     }
 
     /**
-     * get member info
+     * get my info
      *
      * @return
      */
-    @GetMapping("/{memberId}")
+    @GetMapping("/my/{memberId}")
+    public ResponseEntity<?> myInfo(@PathVariable("memberId")Long memberId){
+        MyInfoDto response = memberService.getMyInfo(memberId);
+        if (response==null){
+            return ErrorHeader.errorMessage("error",HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * get my info
+     *
+     * @return
+     */
+    @GetMapping("/member/{memberId}")
     public ResponseEntity<?> memberInfo(@PathVariable("memberId")Long memberId){
         MemberInfoDto response = memberService.getMemberInfo(memberId);
         if (response==null){

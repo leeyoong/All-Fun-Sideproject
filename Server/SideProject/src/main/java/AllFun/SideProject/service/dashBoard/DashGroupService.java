@@ -15,5 +15,9 @@ import java.util.List;
 public class DashGroupService {
     private final DashGroupRepository dashGroupRepository;
 
+    public DashGroup findById(Long groupId){
+        return dashGroupRepository.findById(groupId)
+                .orElse(null);
+    }
 
 }
