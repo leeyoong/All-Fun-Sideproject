@@ -5,9 +5,13 @@ import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.repository.matching.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +19,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
+
     /**
      * Write Side-Project board
      * @param board
@@ -43,9 +48,11 @@ public class BoardService {
      * get all board list
      * @return
      */
-    public SearchResponseDto listAll(){
-        SearchResponseDto response = null;
-        response.setResponse(boardRepository.findAll());
+    public List<SearchResponseDto> findAll(Pageable pageable){
+        List<SearchResponseDto> response = new ArrayList<>();
+        Page<Board> boards = boardRepository.findAll(pageable);
+
+
         return response;
     }
 
@@ -79,11 +86,11 @@ public class BoardService {
     public SearchResponseDto searchList(String keyword, String searchType){
         SearchResponseDto response = null;
         if (searchType.equals("title")){
-            response.setResponse(boardRepository.findByTitleContaining(keyword).orElse(null));
+            //response.setResponse(boardRepository.findByTitleContaining(keyword).orElse(null));
         }else if(searchType.equals("nickname")){
-            response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
+            //response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
         }else if(searchType.equals("content")){
-            response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
+            //response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
         }
         return response;
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public class CreateBoardRequestDto {
     private String title; // 제목
     private String content; // 글의 내용
-    private LocalDateTime date; // 작성 날짜
     private List<Integer> hope;
+    private  LocalDateTime endDate;
 
 }

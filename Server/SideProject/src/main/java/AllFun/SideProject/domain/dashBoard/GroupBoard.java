@@ -6,6 +6,8 @@ import AllFun.SideProject.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,4 +35,6 @@ public class GroupBoard extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private BoardKinds kinds;
 
+    @OneToMany(mappedBy = "groupBoard")
+    private List<BoardHit> groupBoardHits = new ArrayList<>();
 }

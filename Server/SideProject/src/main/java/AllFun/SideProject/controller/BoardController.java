@@ -16,10 +16,13 @@ import AllFun.SideProject.service.member.MemberService;
 import AllFun.SideProject.service.matching.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +83,8 @@ public class BoardController {
                 find.getNickname(),
                 request.getTitle(),
                 request.getContent(),
-                projMembers
+                projMembers,
+                request.getEndDate()
         );
 
         boardService.save(newBoard, find);
@@ -91,7 +95,6 @@ public class BoardController {
                 Role role = roleService.findById(roleId);
                 BoardRole boardRole = BoardRole.createBoardRole(role.getName(), request.getHope().get(i));
                 newBoard.addBoardRole(boardRole);
-
                 boardRoleService.save(boardRole);
             }
         }
@@ -100,12 +103,12 @@ public class BoardController {
     }
 
     /**
-     * get board list
+     * get board list recently
      * @return
      */
     @GetMapping("/list")
-    public ResponseEntity<?> listRecent(){
-        SearchResponseDto response = boardService.listAll();
+    public ResponseEntity<?> listRecentModel (@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+        SearchResponseDto response = boardService.findAll(pageable);
         return ResponseEntity.ok(response);
     }
 

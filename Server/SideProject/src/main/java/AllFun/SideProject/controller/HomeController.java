@@ -36,6 +36,7 @@ public class HomeController {
      * @param memberId
      * @return
      */
+    /*
     @GetMapping("/group")
     public ResponseEntity<?> getMyGroup(@PathVariable("memberId")Long memberId){
         List<DashGroup> dashGroups = groupMemberService.getDashGroup(memberId);
@@ -52,6 +53,7 @@ public class HomeController {
         }
         return ResponseEntity.ok(response);
     }
+    */
 
     /**
      * 월별 그룹 일정 보기
@@ -124,6 +126,15 @@ public class HomeController {
         }
         List<MyGroupBoardDto> response = groupBoardService.getGroupBoardIntegrated(dashGroups);
         return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 내가 읽지 않은 게시판
+     */
+    @GetMapping("/group/board/no/hit")
+    public  ResponseEntity<?> boardNoHit(){
+
+        return null;
     }
 
 }

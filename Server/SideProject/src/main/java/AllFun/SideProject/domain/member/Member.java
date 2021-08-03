@@ -1,9 +1,11 @@
 package AllFun.SideProject.domain.member;
 
+import AllFun.SideProject.domain.dashBoard.BoardHit;
 import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.matching.EntryPool;
+import AllFun.SideProject.domain.matching.Scrap;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,6 +48,12 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<MemberRoom> memberRooms = new ArrayList<>(); // 쪽지방
 
+    @OneToMany(mappedBy="member")
+    private List<Scrap> scraps = new ArrayList<>(); // 즐겨찾기 한 매칭글
+
+    @OneToMany(mappedBy = "member")
+    private List<BoardHit> boardHits = new ArrayList<>();
+
     public static Member createMember(String email, String passwd, String birth, String name, String phone,
                                       String nickname, String gender){
         Member member = new Member();
@@ -77,5 +85,10 @@ public class Member extends BaseEntity {
     public void addMemberRoom(MemberRoom memberRoom){
         memberRooms.add(memberRoom);
         memberRoom.setMember(this);
+    }
+
+    public void addScrap(Scrap scrap){
+        scraps.add(scrap);
+        scrap.setMember(this);
     }
 }

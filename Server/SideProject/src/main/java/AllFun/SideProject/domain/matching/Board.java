@@ -5,9 +5,11 @@ import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.base.BoardStatus;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class Board extends BaseEntity {
     private String content; // 글의 내용
     private int projectMembers; // 프로젝트 구성 인원
     private int entryMembers; // 참여 인원
+
+    private LocalDateTime endDate; // 모집 마감 일자
 
     @Enumerated(EnumType.STRING)
     private BoardStatus status; //구인중, 구인마감
@@ -47,7 +51,10 @@ public class Board extends BaseEntity {
     @JoinColumn(name="group_id")
     private DashGroup group;
 
-    public static Board createBoard(String nickname, String title, String content, int projMem){
+    @OneToMany(mappedBy = "board")
+    private List<Scrap> scraps = new ArrayList<>();
+
+    public static Board createBoard(String nickname, String title, String content, int projMem, LocalDateTime endDate){
         Board board = new Board();
         board.setNickname(nickname);
         board.setTitle(title);
@@ -56,11 +63,16 @@ public class Board extends BaseEntity {
         board.setEntryMembers(0);
         board.setHit(0);
         board.setStatus(BoardStatus.WAITING);
+        board.setEndDate(endDate);
 
         return board;
     }
     public void addBoardRole(BoardRole BoardRole){
         boardRoles.add(BoardRole);
         BoardRole.setBoard(this);
+    }
+    public void addScrap(Scrap scrap){
+        scraps.add(scrap);
+        scrap.setBoard(this);
     }
 }
