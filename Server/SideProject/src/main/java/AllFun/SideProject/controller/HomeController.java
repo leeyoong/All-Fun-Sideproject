@@ -1,8 +1,10 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.dashBoard.DashGroup;
-import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.mainPage.MyGroupDto;
+import AllFun.SideProject.dto.mainPage.MyMatchingBoardDto;
+import AllFun.SideProject.dto.mainPage.MyMatchingStatusDto;
 import AllFun.SideProject.dto.mainPage.MyToDoDto;
 import AllFun.SideProject.service.dashBoard.DashGroupService;
 import AllFun.SideProject.service.dashBoard.GroupMemberService;
@@ -28,7 +30,7 @@ public class HomeController {
     private final DashGroupService dashGroupService;
     private final GroupMemberService groupMemberService;
     private final ToDoService toDoService;
-
+    private final MemberService memberService;
     /**
      * my group
      * @param memberId
@@ -81,15 +83,32 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 
-
-
     /**
-     * 내가 신청한 매칭 게시판 현황 (진행중, 실패, 성공)
+     * 내가 쓴 매칭 글
+     * @param memberId
      * @return
      */
-    @GetMapping("/matching")
-    public ResponseEntity<?> matchingBoard(){
-        return null;
+    @GetMapping("/matching/board")
+    public ResponseEntity<?> getMyMatchingBoard(@PathVariable("memberId")Long memberId){
+        List<MyMatchingBoardDto> response = memberService.getMyMatchingBoard(memberId);
+        if(response == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 내가 신청한 매칭글에 대한 결과
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/matching/status")
+    public ResponseEntity<?> getMyMatchingStatus(@PathVariable("memberId")Long memberId){
+        List<MyMatchingStatusDto> response = memberService.getMyMatchingStatus(memberId);
+        if(response == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(response);
     }
 
 }

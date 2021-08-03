@@ -1,6 +1,10 @@
 package AllFun.SideProject.service.member;
 
+import AllFun.SideProject.domain.matching.Board;
+import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.dto.mainPage.MyMatchingBoardDto;
+import AllFun.SideProject.dto.mainPage.MyMatchingStatusDto;
 import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
 import AllFun.SideProject.dto.member.OneItemDto;
@@ -17,9 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -214,6 +216,12 @@ public class MemberService {
         return response;
     }
 
+    /**
+     * edit my info
+     * @param memberId
+     * @param request
+     * @return
+     */
     @Transactional
     public String putMemberInfo(Long memberId, EditMemberInfoDto request){
         Optional<Member> editData = Optional.ofNullable(memberRepository.findById(memberId).orElse(null));
@@ -226,6 +234,47 @@ public class MemberService {
             res[0] = "ok";
         });
         return res[0];
+    }
+
+    /**
+     * get my matching board
+     * @param memberId
+     * @return
+     */
+    public List<MyMatchingBoardDto> getMyMatchingBoard(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        List<Board> boards = member.getBoards();
+        List<MyMatchingBoardDto> response = new ArrayList<>();
+        for (Board board : boards) {
+            MyMatchingBoardDto myMatchingBoardDto = new MyMatchingBoardDto(
+                    board.getId(),
+                    board.getTitle(),
+                    board.getProjectMembers(),
+                    board.getEntryMembers()
+            );
+            response.add(myMatchingBoardDto);
+        }
+        return response;
+    }
+
+    /**
+     * get my matching status
+     * @param memberId
+     * @return
+     */
+    public List<MyMatchingStatusDto> getMyMatchingStatus(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        List<EntryPool> entryPools = member.getEntryPools();
+        List<MyMatchingStatusDto> response = new ArrayList<>();
+        for (EntryPool entryPool : entryPools) {
+            MyMatchingStatusDto myMatchingStatusDto = new MyMatchingStatusDto(
+                    entryPool.getBoard().getId(),
+                    entryPool.getRole(),
+                    entryPool.getStatus()
+            );
+            response.add(myMatchingStatusDto);
+        }
+        return response;
     }
 }
 
