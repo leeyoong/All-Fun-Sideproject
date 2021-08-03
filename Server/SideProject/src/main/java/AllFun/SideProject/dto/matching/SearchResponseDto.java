@@ -16,4 +16,7 @@ public class SearchResponseDto {
     private String title;
     private String writer;
     private LocalDateTime createdDate;
+    private LocalDateTime endDate;
+    private int projMember;
+    private int entryMember;
 }

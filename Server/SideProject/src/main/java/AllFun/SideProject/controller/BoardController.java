@@ -16,6 +16,7 @@ import AllFun.SideProject.service.member.MemberService;
 import AllFun.SideProject.service.matching.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -106,9 +107,31 @@ public class BoardController {
      * get board list recently
      * @return
      */
-    @GetMapping("/list")
-    public ResponseEntity<?> listRecentModel (@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-        SearchResponseDto response = boardService.findAll(pageable);
+    @GetMapping("/list/recently")
+    public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable){
+        Page<Board> boards = boardService.boardList(pageable);
+        Page<SearchResponseDto> response = boards.map(
+                board -> new SearchResponseDto(
+                        board.getId(),board.getTitle(),board.getMember().getNickname(),
+                        board.getCreatedDate(),board.getEndDate(),board.getProjectMembers(),
+                        board.getEntryMembers()
+                ));
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * get board list deadline(마감순)
+     * @return
+     */
+    @GetMapping("/list/deadline")
+    public ResponseEntity<?> listDeadline (@PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
+        Page<Board> boards = boardService.boardList(pageable);
+        Page<SearchResponseDto> response = boards.map(
+                board -> new SearchResponseDto(
+                        board.getId(),board.getTitle(),board.getMember().getNickname(),
+                        board.getCreatedDate(),board.getEndDate(),board.getProjectMembers(),
+                        board.getEntryMembers()
+                ));
         return ResponseEntity.ok(response);
     }
 

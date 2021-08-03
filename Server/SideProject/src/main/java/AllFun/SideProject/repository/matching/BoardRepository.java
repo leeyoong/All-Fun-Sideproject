@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-
+    /**
+     * pageable 로 최신순 나열
+     * @param pageable
+     * @return
+     */
     Page<Board> findAll(Pageable pageable);
 
     /**

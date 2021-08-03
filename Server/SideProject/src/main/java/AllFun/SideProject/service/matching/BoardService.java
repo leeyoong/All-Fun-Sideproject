@@ -45,16 +45,14 @@ public class BoardService {
     }
 
     /**
-     * get all board list
+     * get all board list (recently)
      * @return
      */
-    public List<SearchResponseDto> findAll(Pageable pageable){
-        List<SearchResponseDto> response = new ArrayList<>();
+    public Page<Board> boardList(Pageable pageable){
         Page<Board> boards = boardRepository.findAll(pageable);
-
-
-        return response;
+        return boards;
     }
+
 
     /**
      * read detail board page and increase hit
