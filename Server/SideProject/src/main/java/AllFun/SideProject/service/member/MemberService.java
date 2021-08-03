@@ -1,5 +1,7 @@
 package AllFun.SideProject.service.member;
 
+import AllFun.SideProject.domain.dashBoard.DashGroup;
+import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
@@ -269,6 +271,7 @@ public class MemberService {
         for (EntryPool entryPool : entryPools) {
             MyMatchingStatusDto myMatchingStatusDto = new MyMatchingStatusDto(
                     entryPool.getBoard().getId(),
+                    entryPool.getBoard().getTitle(),
                     entryPool.getRole(),
                     entryPool.getStatus()
             );
@@ -276,5 +279,7 @@ public class MemberService {
         }
         return response;
     }
+
+
 }
 

@@ -2,11 +2,9 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.matching.Board;
-import AllFun.SideProject.dto.mainPage.MyGroupDto;
-import AllFun.SideProject.dto.mainPage.MyMatchingBoardDto;
-import AllFun.SideProject.dto.mainPage.MyMatchingStatusDto;
-import AllFun.SideProject.dto.mainPage.MyToDoDto;
+import AllFun.SideProject.dto.mainPage.*;
 import AllFun.SideProject.service.dashBoard.DashGroupService;
+import AllFun.SideProject.service.dashBoard.GroupBoardService;
 import AllFun.SideProject.service.dashBoard.GroupMemberService;
 import AllFun.SideProject.service.dashBoard.ToDoService;
 import AllFun.SideProject.service.member.MemberService;
@@ -31,6 +29,8 @@ public class HomeController {
     private final GroupMemberService groupMemberService;
     private final ToDoService toDoService;
     private final MemberService memberService;
+    private final GroupBoardService groupBoardService;
+
     /**
      * my group
      * @param memberId
@@ -108,6 +108,21 @@ public class HomeController {
         if(response == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 그룹게시판 5개(통합 최신순 5개)
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/group/board")
+    public ResponseEntity<?> getGroupBoardIntegrated(@PathVariable("memberId")Long memberId){
+        List<DashGroup> dashGroups = groupMemberService.getDashGroup(memberId);
+        if(dashGroups == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        List<MyGroupBoardDto> response = groupBoardService.getGroupBoardIntegrated(dashGroups);
         return ResponseEntity.ok(response);
     }
 

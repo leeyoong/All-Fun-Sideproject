@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class MyMatchingStatusDto {
     private Long boardId;
+    private String boardTitle;
     private String role;
     private MatchingStatus status;
 }
