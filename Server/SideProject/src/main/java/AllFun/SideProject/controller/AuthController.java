@@ -135,7 +135,7 @@ public class AuthController {
      * @param request
      * @return
      */
-    @PostMapping("/find/password")
+    @PatchMapping("/find/password")
     public ResponseEntity<?> findPassword(@RequestBody FindPasswordDto request){
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());

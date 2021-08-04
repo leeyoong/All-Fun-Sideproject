@@ -31,29 +31,6 @@ public class HomeController {
     private final MemberService memberService;
     private final GroupBoardService groupBoardService;
 
-    /**
-     * my group
-     * @param memberId
-     * @return
-     */
-    /*
-    @GetMapping("/group")
-    public ResponseEntity<?> getMyGroup(@PathVariable("memberId")Long memberId){
-        List<DashGroup> dashGroups = groupMemberService.getDashGroup(memberId);
-        // 아직 그룹이 없는 경우
-        if (dashGroups==null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        // 그룹이 있는 경우
-        List<MyGroupDto> response = new ArrayList<>();
-        for(DashGroup dashGroup : dashGroups){
-            MyGroupDto myGroupDto = new MyGroupDto(dashGroup.getId(),dashGroup.getGroupName());
-            response.add(myGroupDto);
-        }
-        return ResponseEntity.ok(response);
-    }
-    */
 
     /**
      * 월별 그룹 일정 보기

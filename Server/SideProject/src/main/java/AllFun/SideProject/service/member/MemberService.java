@@ -9,7 +9,9 @@ import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
 import AllFun.SideProject.dto.member.MyInfoDto;
 import AllFun.SideProject.dto.member.OneItemDto;
+import AllFun.SideProject.repository.matching.BoardRepository;
 import AllFun.SideProject.repository.member.MemberRepository;
+import AllFun.SideProject.service.matching.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -30,6 +32,7 @@ import java.util.*;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final JavaMailSender javaMailSender;
+    private final BoardService boardService;
 
     /**
      * Find By Id
@@ -262,8 +265,11 @@ public class MemberService {
             MyMatchingBoardDto myMatchingBoardDto = new MyMatchingBoardDto(
                     board.getId(),
                     board.getTitle(),
-                    board.getProjectMembers(),
-                    board.getEntryMembers()
+                    member.getNickname(),
+                    board.getCreatedDate(),
+                    board.getEndDate(),
+                    boardService.getBoardRoleDto(board),
+                    board.getStatus()
             );
             response.add(myMatchingBoardDto);
         }
