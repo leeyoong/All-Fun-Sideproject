@@ -1,12 +1,15 @@
 package com.example.orphan;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,6 +61,16 @@ public class MatchListAdapter extends BaseAdapter {
         matchtagTextView.setText(matchListItem.getMatchtagStr());
         wrterTextView.setText(matchListItem.getWriterStr());
         writedateTextView.setText(matchListItem.getWritedateStr());
+
+        LinearLayout matchtouch =  (LinearLayout) convertView.findViewById(R.id.matchtouch);
+
+        matchtouch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PostDetail.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return convertView;
 

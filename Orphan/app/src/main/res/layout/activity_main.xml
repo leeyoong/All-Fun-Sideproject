@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/teal_200"
-        app:itemIconTint="@color/purple_700"
+        app:itemIconTint="@color/cardview_dark_background"
         app:itemRippleColor="#FA8080"
-        app:itemTextColor="#512DA8"
+        app:itemTextColor="@color/cardview_dark_background"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_bottom" />
 

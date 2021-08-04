@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="#1C2323"
+    android:orientation="vertical"
     tools:context=".MatchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,7 +26,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:background="@drawable/custom_layout"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="?attr/actionBarTheme">
@@ -43,7 +44,7 @@
                             android:layout_marginEnd="147dp"
                             android:text="매칭"
                             android:textColor="#1C2323"
-                            android:textSize="24dp"
+                            android:textSize="20dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -202,25 +203,25 @@
             <Spinner
                 android:id="@+id/spinner4"
                 android:layout_width="wrap_content"
-                android:layout_height="53dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:entries="@array/sort" />
 
             <View
                 android:id="@+id/divider10"
-                android:layout_width="226dp"
-                android:layout_height="6dp"
+                android:layout_width="200dp"
+                android:layout_height="3dp"
                 android:layout_gravity="left"
                 android:background="?android:attr/listDivider" />
 
             <ListView
+                android:id="@+id/listview"
                 android:layout_width="match_parent"
-                android:layout_margin="16dp"
-                android:dividerHeight="10dp"
-                android:divider="#1C2323"
                 android:layout_height="600dp"
-                android:id="@+id/listview">
+                android:layout_margin="16dp"
+                android:divider="#1C2323"
+                android:dividerHeight="16dp">
 
             </ListView>
         </LinearLayout>

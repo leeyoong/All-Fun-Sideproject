@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1C2323"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                         android:text="김민수"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         android:textColor="#FFFFFF"
-                        android:textSize="45dp"
+                        android:textSize="40dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -48,16 +47,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:text="님"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textColor="#1C2323" />
+                        android:textColor="#1C2323"
+                        android:textSize="32dp" />
 
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="안녕하세요!"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textColor="#1C2323" />
+                        android:textColor="#1C2323"
+                        android:textSize="32dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -113,10 +112,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button2"
                         android:drawableTop="@drawable/ic_baseline_account_box_24"
-                        android:text="내 정보"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="My page"
                         android:textColor="@color/teal_200"
-                        android:textStyle="bold" />
+                        android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/imageButton2"
@@ -127,10 +125,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button2"
                         android:drawableTop="@drawable/ic_baseline_campaign_24"
-                        android:text="공지"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="Notice"
                         android:textColor="@color/teal_200"
-                        android:textStyle="bold" />
+                        android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/imageButton3"
@@ -141,10 +138,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/custom_button2"
                         android:drawableTop="@drawable/ic_baseline_family_restroom_24"
-                        android:text="크레딧"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="Credit"
                         android:textColor="@color/teal_200"
-                        android:textStyle="bold" />
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
@@ -155,7 +151,9 @@
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_layout2" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,16 +167,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/custom_button2"
-                    android:textColor="@color/teal_200"
                     android:drawableLeft="@drawable/ic_baseline_assignment_24"
-                    android:textSize="16dp"
                     android:text="     내가 작성한 글"
-                    android:textStyle="bold"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <View
                     android:id="@+id/divider8"
@@ -195,13 +193,13 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16dp"
                     android:background="@drawable/custom_button2"
-                    android:textColor="@color/teal_200"
-                    android:textStyle="bold"
                     android:drawableLeft="@drawable/ic_baseline_assignment_late_24"
                     android:text="     내가 지원한 글"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <View
                     android:id="@+id/divider9"
@@ -218,13 +216,13 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16dp"
                     android:background="@drawable/custom_button2"
-                    android:textColor="@color/teal_200"
-                    android:textStyle="bold"
-                    android:text="     즐겨찾기 한 글"
                     android:drawableLeft="@drawable/ic_baseline_star_outline_24"
-                    android:textAlignment="textStart" />
+                    android:text="     즐겨찾기 한 글"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -234,25 +232,28 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/custom_layout2"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:textSize="16dp"
-                        android:background="@drawable/custom_button2"
-                        android:textColor="@color/teal_200"
-                        android:textStyle="bold"
-                        android:text="     내가 속한 그룹의 최근 소식"
-                        android:drawableLeft="@drawable/ic_baseline_quickreply_24"
-                        android:textAlignment="textStart" />
+                    android:orientation="horizontal" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_button2"
+                    android:drawableLeft="@drawable/ic_baseline_quickreply_24"
+                    android:text="     내가 속한 그룹의 최근 소식"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -263,14 +264,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="예시"
-                    android:textSize="16dp"
-                    android:textColor="@color/teal_200">
-                </TextView>
-
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"></TextView>
 
 
             </LinearLayout>
