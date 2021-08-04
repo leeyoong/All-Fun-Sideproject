@@ -1,6 +1,11 @@
-package com.example.test.DTO;
+package com.example.test.DTO.Member;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateMemberDto {
+
+
 
     public CreateMemberDto(String email, String passwd, String birth, String name, String phone, String nickname, String gender) {
         this.email = email;

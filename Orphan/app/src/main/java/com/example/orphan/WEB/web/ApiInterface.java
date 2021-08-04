@@ -1,13 +1,15 @@
-package com.example.test.WEB;
+package com.example.orphan.WEB.web;
 
-import com.example.test.DTO.Member.CreateMemberDto;
-import com.example.test.DTO.Member.FindEmailDto;
-import com.example.test.DTO.Member.FindPasswordDto;
-import com.example.test.DTO.Member.ImageDto;
-import com.example.test.DTO.Member.LoginDto;
-import com.example.test.DTO.Member.MemberDataDto;
-import com.example.test.DTO.Member.OneItemDto;
-import com.example.test.Response.ResponseJson;
+
+
+import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
+import com.example.orphan.WEB.DTO.Member.FindEmailDto;
+import com.example.orphan.WEB.DTO.Member.FindPasswordDto;
+import com.example.orphan.WEB.DTO.Member.ImageDto;
+import com.example.orphan.WEB.DTO.Member.LoginDto;
+import com.example.orphan.WEB.DTO.Member.MemberDataDto;
+import com.example.orphan.WEB.DTO.Member.OneItemDto;
+import com.example.orphan.WEB.Response.ResponseJson;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -33,6 +35,9 @@ public interface ApiInterface {
 
     @POST("/auth/login")
     Call<MemberDataDto> login(@Body LoginDto Object);
+
+    @POST("/auth/login")
+    MemberDataDto login_sync(@Body LoginDto Object);
 
     //sign up
     @POST("/auth/create")

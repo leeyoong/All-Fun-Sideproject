@@ -1,14 +1,18 @@
-package com.example.test.WEB;
+package com.example.orphan.WEB.web;
 
 import android.util.Log;
 
-import com.example.test.DTO.Member.CreateMemberDto;
-import com.example.test.DTO.Member.FindEmailDto;
-import com.example.test.DTO.Member.FindPasswordDto;
-import com.example.test.DTO.Member.LoginDto;
-import com.example.test.DTO.Member.MemberDataDto;
-import com.example.test.DTO.Member.OneItemDto;
-import com.example.test.Response.ResponseJson;
+import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
+import com.example.orphan.WEB.DTO.Member.FindEmailDto;
+import com.example.orphan.WEB.Response.ResponseJson;
+import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
+import com.example.orphan.WEB.DTO.Member.FindEmailDto;
+import com.example.orphan.WEB.DTO.Member.FindPasswordDto;
+import com.example.orphan.WEB.DTO.Member.LoginDto;
+import com.example.orphan.WEB.DTO.Member.MemberDataDto;
+import com.example.orphan.WEB.DTO.Member.OneItemDto;
+
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -146,12 +150,14 @@ public class web {
         });
         return null;
     }
-    public MemberDataDto Post_Login(String Email, String password){
+    public String Post_Login(String Email, String password){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
         //보낼 오브젝트 생성
         LoginDto object = new LoginDto(Email,password);
         // 요청 시작
+
+        ResponseJson ok = new ResponseJson();
         Call<MemberDataDto> call = apiService.login(object);
         call.enqueue(new Callback<MemberDataDto>() {
             @Override
@@ -161,12 +167,31 @@ public class web {
                     MemberDataDto data = response.body();
                     if(response.code() == 200){
 
+                        ok.setResponse_massage("ok");
+
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+
 
                     }
 
 
                     else{
-
+                        ok.setResponse_massage("no");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
+                        System.out.println("2분기");
                         // 실패할 경우 40
 
                     }
@@ -186,38 +211,34 @@ public class web {
                 //idfound.setText(t.toString());
             }
         });
-        return null;
+        return ok.getResponse_massage();
     }
 
-    public MemberDataDto Post_Login_Sync(String Email, String password){
+    public String Post_Login_Sync(String Email, String password){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
         //보낼 오브젝트 생성
         LoginDto object = new LoginDto(Email,password);
         // 요청 시작
         Call<MemberDataDto> call = apiService.login(object);
-        MemberDataDto returnDto = new MemberDataDto();
-                try {
+        Response<MemberDataDto> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("연결실패");
+        }
+        System.out.println("web완료");
+        if(response != null){
+            return "ok";
+        }
+        else{
+            return "no";
 
-                    Response<MemberDataDto> response = call.execute();
-                    MemberDataDto data = response.body();
-                    System.out.println(data.toString());
-                    returnDto.setDTO(data);
-
-
-                    }
-
-
-                    //idfound.setText(responseJson.toString());
-                 catch (Exception e) {
-
-                    e.printStackTrace();
+        }
 
 
 
-                }
-                return returnDto;
-            }
+    }
 
 
 

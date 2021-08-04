@@ -1,4 +1,4 @@
-package com.example.test.DTO;
+package com.example.test.DTO.Member;
 
 public class OneItemDto {
     public OneItemDto(String item) {

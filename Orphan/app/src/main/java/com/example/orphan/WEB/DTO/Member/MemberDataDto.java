@@ -1,12 +1,39 @@
-package com.example.test.DTO;
+package com.example.orphan.WEB.DTO.Member;
 
 import java.time.LocalDateTime;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
 
 public class MemberDataDto {
 
+
+    public  MemberDataDto(){
+        this.id = null;
+    }
+
+    public MemberDataDto(MemberDataDto dto){
+        this.id = dto.getId();
+        this.email = dto.getEmail();
+        this.passwd = dto.getPasswd();
+        this.birth = dto.getBirth();
+        this.name = dto.getName();
+        this.phone = dto.getPhone();
+        this.nickname = dto.getNickname();
+        this.createDate = dto.getCreateDate();
+        this.gender = dto.getGender();
+
+    }
+
+    public void setDTO(MemberDataDto dto){
+        this.id = dto.getId();
+        this.email = dto.getEmail();
+        this.passwd = dto.getPasswd();
+        this.birth = dto.getBirth();
+        this.name = dto.getName();
+        this.phone = dto.getPhone();
+        this.nickname = dto.getNickname();
+        this.createDate = dto.getCreateDate();
+        this.gender = dto.getGender();
+
+    }
 
     public MemberDataDto(Long id, String email, String passwd, String birth, String name, String phone, String nickname, LocalDateTime createDate, String gender) {
         this.id = id;
