@@ -1,22 +1,15 @@
 package AllFun.SideProject.controller;
 
 import AllFun.SideProject.Exception.ErrorHeader;
-import AllFun.SideProject.domain.base.RoleType;
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.member.Member;
-import AllFun.SideProject.domain.matching.BoardRole;
-import AllFun.SideProject.domain.matching.Role;
-import AllFun.SideProject.dto.mainPage.MyGroupDto;
 import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.service.dashBoard.DashGroupService;
 import AllFun.SideProject.service.dashBoard.GroupMemberService;
-import AllFun.SideProject.service.matching.BoardRoleService;
 import AllFun.SideProject.service.matching.BoardService;
 import AllFun.SideProject.service.member.MemberService;
-import AllFun.SideProject.service.matching.RoleService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/board")
@@ -37,9 +29,7 @@ import java.util.stream.Collectors;
 public class BoardOnlyController {
     private final BoardService boardService;
     private final MemberService memberService;
-    private final RoleService roleService;
     private final DashGroupService dashGroupService;
-    private final BoardRoleService boardRoleService;
     private final GroupMemberService groupMemberService;
 
     /**
@@ -81,32 +71,21 @@ public class BoardOnlyController {
         if (dashGroup == null || find == null) {
             return ErrorHeader.errorMessage("wrong id", HttpStatus.BAD_REQUEST);
         }
-        int projMembers = request.getBackend() + request.getFrontend() + request.getPm()
-                + request.getAndroid() + request.getIOS() + request.getAi()
-                + request.getBigData() + request.getBlockChain();
 
         Board newBoard = Board.createBoard(
                 request.getTitle(),
                 request.getContent(),
-                projMembers,
-                request.getEndDate()
+                request.getEndDate(),
+
+                request.getBackend(),
+                request.getFrontend(),
+                request.getPm(),
+                request.getAndroid(),
+                request.getIOS(),
+                request.getAi(),
+                request.getBigData(),
+                request.getBlockChain()
         );
-
-        List<BoardRole> boardRoles = new ArrayList<>();
-
-        boardRoles.add(BoardRole.createBoardRole(RoleType.BACKEND, request.getBackend()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.FRONTEND, request.getFrontend()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.PM, request.getPm()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.ANDROID, request.getAndroid()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.IOS, request.getIOS()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.AI, request.getAi()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.BIGDATA, request.getBigData()));
-        boardRoles.add(BoardRole.createBoardRole(RoleType.BLOCKCHAIN, request.getBlockChain()));
-
-        for (BoardRole boardRole : boardRoles) {
-            newBoard.addBoardRole(boardRole);
-            boardRoleService.save(boardRole);
-        }
 
         boardService.save(newBoard, find);
 
@@ -122,37 +101,18 @@ public class BoardOnlyController {
     @GetMapping("/list/recently/filter/{filter}")
     public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable,
                                            @PathVariable("filter") String filter){
-
-        if(!filter.equals("none")){
-            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
-            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
-            Page<SearchResponseDto> response = boardRoles.map(
-                    boardRole -> new SearchResponseDto(
-                            boardRole.getBoard().getId(),
-                            boardRole.getBoard().getTitle(),
-                            boardRole.getBoard().getMember().getNickname(),
-                            boardRole.getBoard().getCreatedDate(),
-                            boardRole.getBoard().getEndDate(),
-                            boardRole.getBoard().getProjectMembers(),
-                            boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard()),
-                            boardRole.getBoard().getStatus()
-                    )
-            );
-            return ResponseEntity.ok(response);
-        }
-        else{
-            Page<Board> boards = boardService.boardList(pageable);
-            Page<SearchResponseDto> response = boards.map(
-                    board -> new SearchResponseDto(
-                            board.getId(), board.getTitle(), board.getMember().getNickname(),
-                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                            board.getEntryMembers(),
-                            boardRoleService.getRoleType(board),
-                            board.getStatus()
-                    ));
-            return ResponseEntity.ok(response);
-        }
+        Page<Board> boards = boardService.boardList(pageable, filter);
+        Page<SearchResponseDto> response = boards.map(
+                board->new SearchResponseDto(
+                        board.getId(),
+                        board.getTitle(),
+                        board.getMember().getNickname(),
+                        board.getCreatedDate(),
+                        board.getEndDate(),
+                        boardService.getBoardRoleDto(board)
+                )
+        );
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -163,44 +123,19 @@ public class BoardOnlyController {
     @GetMapping("/list/deadline/filter/{filter}")
     public ResponseEntity<?> listDeadline(@PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable,
                                           @PathVariable("filter") String filter) {
-        if (!filter.equals("none")) {
-            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
-            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
-            Page<SearchResponseDto> response = boardRoles.map(
-                    boardRole -> new SearchResponseDto(
-                            boardRole.getBoard().getId(),
-                            boardRole.getBoard().getTitle(),
-                            boardRole.getBoard().getMember().getNickname(),
-                            boardRole.getBoard().getCreatedDate(),
-                            boardRole.getBoard().getEndDate(),
-                            boardRole.getBoard().getProjectMembers(),
-                            boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard()),
-                            boardRole.getBoard().getStatus()
-                    )
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            Page<Board> boards = boardService.boardList(pageable);
-            Page<SearchResponseDto> response = boards.map(
-                    board -> new SearchResponseDto(
-                            board.getId(), board.getTitle(), board.getMember().getNickname(),
-                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                            board.getEntryMembers(),
-                            boardRoleService.getRoleType(board),
-                            board.getStatus()
-                    ));
-            return ResponseEntity.ok(response);
-        }
+        Page<Board> boards = boardService.boardList(pageable, filter);
+        Page<SearchResponseDto> response = boards.map(
+                board->new SearchResponseDto(
+                        board.getId(),
+                        board.getTitle(),
+                        board.getMember().getNickname(),
+                        board.getCreatedDate(),
+                        board.getEndDate(),
+                        boardService.getBoardRoleDto(board)
+                )
+        );
+        return ResponseEntity.ok(response);
     }
-
-    /*
-    1. keyword ->pageable -> filter
-    2. filter -> pageable -> keyword
-    3. list<> -> android pageable
-
-    4. List<> -> pageable
-     */
 
     /**
      * Search by Title (recently & filter)
@@ -209,38 +144,18 @@ public class BoardOnlyController {
     @GetMapping("/search/title/{keyword}/recently/filter/{filter}")
     public ResponseEntity<?> searchRecently(@PathVariable("keyword")String keyword, @PathVariable("filter")String filter,
                                             @PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
-        if(filter.equals("none")){
-            Page<Board> boards = boardService.searchList(keyword, "title", pageable);
-            Page<SearchResponseDto> response = boards.map(
-                    board -> new SearchResponseDto(
-                            board.getId(), board.getTitle(), board.getMember().getNickname(),
-                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                            board.getEntryMembers(),
-                            boardRoleService.getRoleType(board),
-                            board.getStatus()
-                    ));
-            return ResponseEntity.ok(response);
-        }else{
-            /*
-                filter & keyword pageable 미완성
-             */
-            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
-            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
-            Page<SearchResponseDto> response = boardRoles.map(
-                    boardRole -> new SearchResponseDto(
-                            boardRole.getBoard().getId(),
-                            boardRole.getBoard().getTitle(),
-                            boardRole.getBoard().getMember().getNickname(),
-                            boardRole.getBoard().getCreatedDate(),
-                            boardRole.getBoard().getEndDate(),
-                            boardRole.getBoard().getProjectMembers(),
-                            boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard()),
-                            boardRole.getBoard().getStatus()
-                    )
-            );
-            return ResponseEntity.ok(response);
-        }
+        Page<Board> boards = boardService.searchList(keyword, pageable, filter);
+        Page<SearchResponseDto> response = boards.map(
+                board->new SearchResponseDto(
+                        board.getId(),
+                        board.getTitle(),
+                        board.getMember().getNickname(),
+                        board.getCreatedDate(),
+                        board.getEndDate(),
+                        boardService.getBoardRoleDto(board)
+                )
+        );
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -250,40 +165,20 @@ public class BoardOnlyController {
     @GetMapping("/search/title/{keyword}/deadline/filter/{filter}")
     public ResponseEntity<?> searchDeadline(@PathVariable("keyword")String keyword, @PathVariable("filter")String filter,
                                             @PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
-        if(filter.equals("none")){
-            Page<Board> boards = boardService.searchList(keyword, "title", pageable);
-            Page<SearchResponseDto> response = boards.map(
-                    board -> new SearchResponseDto(
-                            board.getId(), board.getTitle(), board.getMember().getNickname(),
-                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                            board.getEntryMembers(),
-                            boardRoleService.getRoleType(board),
-                            board.getStatus()
-                    ));
-            return ResponseEntity.ok(response);
-        }else{
-            /*
-                filter & keyword pageable 미완성
-             */
-            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
-            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
-            Page<SearchResponseDto> response = boardRoles.map(
-                    boardRole -> new SearchResponseDto(
-                            boardRole.getBoard().getId(),
-                            boardRole.getBoard().getTitle(),
-                            boardRole.getBoard().getMember().getNickname(),
-                            boardRole.getBoard().getCreatedDate(),
-                            boardRole.getBoard().getEndDate(),
-                            boardRole.getBoard().getProjectMembers(),
-                            boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard()),
-                            boardRole.getBoard().getStatus()
-                    )
-            );
-            return ResponseEntity.ok(response);
-        }
+        Page<Board> boards = boardService.searchList(keyword, pageable, filter);
+        Page<SearchResponseDto> response = boards.map(
+                board->new SearchResponseDto(
+                        board.getId(),
+                        board.getTitle(),
+                        board.getMember().getNickname(),
+                        board.getCreatedDate(),
+                        board.getEndDate(),
+                        boardService.getBoardRoleDto(board)
+                )
+        );
+        return ResponseEntity.ok(response);
     }
-
+    
     /**
      * Read Detail Board and Increase hit.
      * @param boardId

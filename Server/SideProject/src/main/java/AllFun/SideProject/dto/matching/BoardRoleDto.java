@@ -1,6 +1,5 @@
 package AllFun.SideProject.dto.matching;
 
-import AllFun.SideProject.domain.base.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class BoardRoleDto {
-    private RoleType role;
-    private int hope;
+    private String role;
+    private int expect;
     private int entry;
 }

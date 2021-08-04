@@ -25,8 +25,38 @@ public class Board extends BaseEntity {
     private Long id; // board id (pk)
     private String title; // 제목
     private String content; // 글의 내용
-    private int projectMembers; // 프로젝트 구성 인원
-    private int entryMembers; // 참여 인원
+
+    private int backendExpect;
+    @ColumnDefault("0")
+    private int backendEntry;
+
+    private int frontendExpect;
+    @ColumnDefault("0")
+    private int frontendEntry;
+
+    private int pmExpect;
+    @ColumnDefault("0")
+    private int pmEntry;
+
+    private int androidExpect;
+    @ColumnDefault("0")
+    private int androidEntry;
+
+    private int iosExpect;
+    @ColumnDefault("0")
+    private int iosEntry;
+
+    private int aiExpect;
+    @ColumnDefault("0")
+    private int aiEntry;
+
+    private int bigdataExpect;
+    @ColumnDefault("0")
+    private int bigdataEntry;
+
+    private int blockchainExpect;
+    @ColumnDefault("0")
+    private int blockchainEntry;
 
     private LocalDateTime endDate; // 모집 마감 일자
 
@@ -41,9 +71,6 @@ public class Board extends BaseEntity {
     private Member member; //작성자 id
 
     @OneToMany(mappedBy="board")
-    private List<BoardRole> boardRoles = new ArrayList<>();
-
-    @OneToMany(mappedBy="board")
     private List<EntryPool> entryPools = new ArrayList<>();
 
     @OneToOne
@@ -53,22 +80,28 @@ public class Board extends BaseEntity {
     @OneToMany(mappedBy = "board")
     private List<Scrap> scraps = new ArrayList<>();
 
-    public static Board createBoard(String title, String content, int projMem, LocalDateTime endDate){
+    public static Board createBoard(String title, String content, LocalDateTime endDate,
+                                    int backendEntry, int frontendEntry, int pmEntry, int androidEntry,
+                                    int iosEntry, int aiEntry, int bigdataEntry, int blockchainEntry){
         Board board = new Board();
         board.setTitle(title);
         board.setContent(content);
-        board.setProjectMembers(projMem);
-        board.setEntryMembers(0);
         board.setHit(0);
         board.setStatus(BoardStatus.WAITING);
         board.setEndDate(endDate);
 
+        board.setBackendEntry(backendEntry);
+        board.setFrontendEntry(frontendEntry);
+        board.setPmEntry(pmEntry);
+        board.setAndroidEntry(androidEntry);
+        board.setIosEntry(iosEntry);
+        board.setAiEntry(aiEntry);
+        board.setBigdataEntry(bigdataEntry);
+        board.setBlockchainEntry(blockchainEntry);
+
         return board;
     }
-    public void addBoardRole(BoardRole BoardRole){
-        boardRoles.add(BoardRole);
-        BoardRole.setBoard(this);
-    }
+
     public void addScrap(Scrap scrap){
         scraps.add(scrap);
         scrap.setBoard(this);

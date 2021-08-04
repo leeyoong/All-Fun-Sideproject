@@ -16,7 +16,7 @@ public interface ToDoRepository extends JpaRepository<ToDo,Long> {
      * @param endDateTime
      * @return
      */
-    Optional<List<ToDo>> findAllByDashGroupAndEndDateBetween(DashGroup dashGroup,
+    Optional<List<ToDo>> findAllByGroupAndEndDateBetween(DashGroup dashGroup,
                                                              LocalDateTime startDateTime,
                                                              LocalDateTime endDateTime);
 }

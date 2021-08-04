@@ -23,7 +23,7 @@ public class ToDoService {
                                         LocalDateTime endDateTime){
         List<MyToDoDto> response = new ArrayList<>();
         for(DashGroup dashGroup:dashGroups){
-            List<ToDo> toDos = toDoRepository.findAllByDashGroupAndEndDateBetween(dashGroup,
+            List<ToDo> toDos = toDoRepository.findAllByGroupAndEndDateBetween(dashGroup,
                                                                                 startDateTime,
                                                                                 endDateTime)
                                                                                 .orElse(null);

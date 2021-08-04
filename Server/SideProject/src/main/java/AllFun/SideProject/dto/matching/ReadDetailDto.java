@@ -22,7 +22,7 @@ public class ReadDetailDto {
 
     private LocalDateTime endDate;
 
-    private List<BoardRoleDto> roles;
+
 
     private int hit; // 조회수
 

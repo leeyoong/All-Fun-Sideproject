@@ -1,13 +1,10 @@
 package AllFun.SideProject.service.matching;
 
 import AllFun.SideProject.domain.base.BoardStatus;
-import AllFun.SideProject.domain.base.RoleType;
-import AllFun.SideProject.domain.matching.BoardRole;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.repository.matching.BoardRepository;
-import AllFun.SideProject.repository.matching.BoardRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +20,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
-    private final BoardRoleRepository boardRoleRepository;
 
     /**
      * Write Side-Project board
@@ -54,8 +49,45 @@ public class BoardService {
      * get all board list (recently)
      * @return
      */
-    public Page<Board> boardList(Pageable pageable){
-        Page<Board> boards = boardRepository.findAllByStatus(BoardStatus.WAITING, pageable);
+    public Page<Board> boardList(Pageable pageable, String filter){
+        Page<Board> boards = null;
+        switch (filter){
+            case "none":
+                boards = boardRepository.findAllByStatus(BoardStatus.WAITING, pageable);
+                break;
+            case "backend":
+                boards = boardRepository.findAllByStatusAndBackendExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "frontend":
+                boards = boardRepository.findAllByStatusAndFrontendExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "pm":
+                boards = boardRepository.findAllByStatusAndPmExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "android":
+                boards = boardRepository.findAllByStatusAndAndroidExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "ios":
+                boards = boardRepository.findAllByStatusAndIosExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "ai":
+                boards = boardRepository.findAllByStatusAndAiExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "bigdata":
+                boards = boardRepository.findAllByStatusAndBigdataExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+            case "blockchain":
+                boards = boardRepository.findAllByStatusAndBlockchainExpectGreaterThanEqual(BoardStatus.WAITING,
+                        1, pageable);
+                break;
+        }
         return boards;
     }
 
@@ -74,13 +106,9 @@ public class BoardService {
             boardRepository.save(selectBoard);
         });
         Board board = hitUp.get();
-        List<BoardRole> boardRoles = boardRoleRepository.findAllByBoard(board).orElse(null);
-        List<BoardRoleDto> roles = new ArrayList<>();
-        for (BoardRole boardRole : boardRoles) {
-            roles.add(new BoardRoleDto(boardRole.getRole(), boardRole.getHope(), boardRole.getEntry()));
-        }
+
         return new ReadDetailDto(board.getTitle(), board.getContent(), board.getMember().getNickname(),
-                board.getModifiedDate(), board.getEndDate(), roles,board.getHit(), board.getMember().getId(),
+                board.getModifiedDate(), board.getEndDate(),board.getHit(), board.getMember().getId(),
                 board.getStatus());
 
     }
@@ -88,20 +116,48 @@ public class BoardService {
     /**
      * Search List
      * @param keyword
-     * @param searchType
      * @return
      */
-    public Page<Board> searchList(String keyword, String searchType, Pageable pageable){
-        if (searchType.equals("title")){
-            Page<Board> boards = boardRepository.findAllByTitleContainingAndStatus(keyword, BoardStatus.WAITING, pageable);
-            return boards;
-        }else if(searchType.equals("nickname")){
-            //response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
-        }else if(searchType.equals("content")){
-            //response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
+    public Page<Board> searchList(String keyword, Pageable pageable, String filter){
+        Page<Board> boards = null;
+        switch (filter){
+            case "none":
+                boards = boardRepository.findAllByStatusAndTitleContaining(BoardStatus.WAITING,keyword, pageable);
+                break;
+            case "backend":
+                boards = boardRepository.findAllByStatusAndBackendExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "frontend":
+                boards = boardRepository.findAllByStatusAndFrontendExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "pm":
+                boards = boardRepository.findAllByStatusAndPmExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "android":
+                boards = boardRepository.findAllByStatusAndAndroidExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "ios":
+                boards = boardRepository.findAllByStatusAndIosExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "ai":
+                boards = boardRepository.findAllByStatusAndAiExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "bigdata":
+                boards = boardRepository.findAllByStatusAndBigdataExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
+            case "blockchain":
+                boards = boardRepository.findAllByStatusAndBlockchainExpectGreaterThanEqualAndTitleContaining(BoardStatus.WAITING,
+                        1,keyword, pageable);
+                break;
         }
-
-        return null;
+        return boards;
     }
 
     /**
@@ -134,5 +190,40 @@ public class BoardService {
         boardRepository.delete(board);
         return null;
     }
+
+    /**
+     * get boardRoleDto
+     * @param board
+     * @return
+     */
+    public List<BoardRoleDto> getBoardRoleDto(Board board){
+        List<BoardRoleDto> response = new ArrayList<>();
+        if(board.getBackendExpect()>0){
+            response.add(new BoardRoleDto("#backend", board.getBackendExpect(), board.getBackendEntry()));
+        }
+        if(board.getFrontendExpect()>0){
+            response.add(new BoardRoleDto("#frontend", board.getFrontendExpect(), board.getFrontendEntry()));
+        }
+        if(board.getPmExpect()>0){
+            response.add(new BoardRoleDto("#pm", board.getPmExpect(), board.getPmEntry()));
+        }
+        if(board.getAndroidExpect()>0){
+            response.add(new BoardRoleDto("#android", board.getAndroidExpect(), board.getAndroidEntry()));
+        }
+        if(board.getIosExpect()>0){
+            response.add(new BoardRoleDto("#ios", board.getIosExpect(), board.getIosEntry()));
+        }
+        if(board.getAiExpect()>0){
+            response.add(new BoardRoleDto("#ai", board.getAiExpect(), board.getAiEntry()));
+        }
+        if(board.getBigdataExpect()>0){
+            response.add(new BoardRoleDto("#bigdata", board.getBigdataExpect(), board.getBigdataEntry()));
+        }
+        if(board.getBlockchainExpect()>0){
+            response.add(new BoardRoleDto("#blockchain", board.getBlockchainExpect(), board.getBlockchainEntry()));
+        }
+        return response;
+    }
+
 
 }
