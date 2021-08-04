@@ -1,5 +1,6 @@
 package AllFun.SideProject.dto.matching;
 
+import AllFun.SideProject.domain.base.BoardStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,7 @@ public class ReadDetailDto {
     private int hit; // 조회수
 
     private Long memberId; // 사용자 id
+
+    private BoardStatus status;
 }
 

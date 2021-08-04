@@ -135,7 +135,8 @@ public class BoardOnlyController {
                             boardRole.getBoard().getEndDate(),
                             boardRole.getBoard().getProjectMembers(),
                             boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard())
+                            boardRoleService.getRoleType(boardRole.getBoard()),
+                            boardRole.getBoard().getStatus()
                     )
             );
             return ResponseEntity.ok(response);
@@ -147,7 +148,8 @@ public class BoardOnlyController {
                             board.getId(), board.getTitle(), board.getMember().getNickname(),
                             board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
                             board.getEntryMembers(),
-                            boardRoleService.getRoleType(board)
+                            boardRoleService.getRoleType(board),
+                            board.getStatus()
                     ));
             return ResponseEntity.ok(response);
         }
@@ -173,7 +175,8 @@ public class BoardOnlyController {
                             boardRole.getBoard().getEndDate(),
                             boardRole.getBoard().getProjectMembers(),
                             boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard())
+                            boardRoleService.getRoleType(boardRole.getBoard()),
+                            boardRole.getBoard().getStatus()
                     )
             );
             return ResponseEntity.ok(response);
@@ -184,11 +187,20 @@ public class BoardOnlyController {
                             board.getId(), board.getTitle(), board.getMember().getNickname(),
                             board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
                             board.getEntryMembers(),
-                            boardRoleService.getRoleType(board)
+                            boardRoleService.getRoleType(board),
+                            board.getStatus()
                     ));
             return ResponseEntity.ok(response);
         }
     }
+
+    /*
+    1. keyword ->pageable -> filter
+    2. filter -> pageable -> keyword
+    3. list<> -> android pageable
+
+    4. List<> -> pageable
+     */
 
     /**
      * Search by Title (recently & filter)
@@ -204,10 +216,14 @@ public class BoardOnlyController {
                             board.getId(), board.getTitle(), board.getMember().getNickname(),
                             board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
                             board.getEntryMembers(),
-                            boardRoleService.getRoleType(board)
+                            boardRoleService.getRoleType(board),
+                            board.getStatus()
                     ));
             return ResponseEntity.ok(response);
         }else{
+            /*
+                filter & keyword pageable 미완성
+             */
             RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
             Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
             Page<SearchResponseDto> response = boardRoles.map(
@@ -219,12 +235,12 @@ public class BoardOnlyController {
                             boardRole.getBoard().getEndDate(),
                             boardRole.getBoard().getProjectMembers(),
                             boardRole.getBoard().getEntryMembers(),
-                            boardRoleService.getRoleType(boardRole.getBoard())
+                            boardRoleService.getRoleType(boardRole.getBoard()),
+                            boardRole.getBoard().getStatus()
                     )
             );
             return ResponseEntity.ok(response);
         }
-        return ResponseEntity.ok(null);
     }
 
     /**
@@ -234,8 +250,38 @@ public class BoardOnlyController {
     @GetMapping("/search/title/{keyword}/deadline/filter/{filter}")
     public ResponseEntity<?> searchDeadline(@PathVariable("keyword")String keyword, @PathVariable("filter")String filter,
                                             @PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
-        Page<Board> boards = boardService.searchList(keyword, filter, pageable);
-        return ResponseEntity.ok(boards);
+        if(filter.equals("none")){
+            Page<Board> boards = boardService.searchList(keyword, "title", pageable);
+            Page<SearchResponseDto> response = boards.map(
+                    board -> new SearchResponseDto(
+                            board.getId(), board.getTitle(), board.getMember().getNickname(),
+                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                            board.getEntryMembers(),
+                            boardRoleService.getRoleType(board),
+                            board.getStatus()
+                    ));
+            return ResponseEntity.ok(response);
+        }else{
+            /*
+                filter & keyword pageable 미완성
+             */
+            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
+            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
+            Page<SearchResponseDto> response = boardRoles.map(
+                    boardRole -> new SearchResponseDto(
+                            boardRole.getBoard().getId(),
+                            boardRole.getBoard().getTitle(),
+                            boardRole.getBoard().getMember().getNickname(),
+                            boardRole.getBoard().getCreatedDate(),
+                            boardRole.getBoard().getEndDate(),
+                            boardRole.getBoard().getProjectMembers(),
+                            boardRole.getBoard().getEntryMembers(),
+                            boardRoleService.getRoleType(boardRole.getBoard()),
+                            boardRole.getBoard().getStatus()
+                    )
+            );
+            return ResponseEntity.ok(response);
+        }
     }
 
     /**

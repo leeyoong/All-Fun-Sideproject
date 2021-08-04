@@ -1,5 +1,6 @@
 package AllFun.SideProject.dto.matching;
 
+import AllFun.SideProject.domain.base.BoardStatus;
 import AllFun.SideProject.domain.base.RoleType;
 import AllFun.SideProject.domain.matching.Board;
 import lombok.AllArgsConstructor;
@@ -21,4 +22,5 @@ public class SearchResponseDto {
     private int projMember;
     private int entryMember;
     private List<RoleType> roles;
+    private BoardStatus status;
 }

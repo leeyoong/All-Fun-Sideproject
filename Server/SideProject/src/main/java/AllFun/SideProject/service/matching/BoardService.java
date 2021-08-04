@@ -1,5 +1,6 @@
 package AllFun.SideProject.service.matching;
 
+import AllFun.SideProject.domain.base.BoardStatus;
 import AllFun.SideProject.domain.base.RoleType;
 import AllFun.SideProject.domain.matching.BoardRole;
 import AllFun.SideProject.domain.member.Member;
@@ -54,7 +55,7 @@ public class BoardService {
      * @return
      */
     public Page<Board> boardList(Pageable pageable){
-        Page<Board> boards = boardRepository.findAll(pageable);
+        Page<Board> boards = boardRepository.findAllByStatus(BoardStatus.WAITING, pageable);
         return boards;
     }
 
@@ -79,7 +80,8 @@ public class BoardService {
             roles.add(new BoardRoleDto(boardRole.getRole(), boardRole.getHope(), boardRole.getEntry()));
         }
         return new ReadDetailDto(board.getTitle(), board.getContent(), board.getMember().getNickname(),
-                board.getModifiedDate(), board.getEndDate(), roles,board.getHit(), board.getMember().getId());
+                board.getModifiedDate(), board.getEndDate(), roles,board.getHit(), board.getMember().getId(),
+                board.getStatus());
 
     }
 
@@ -91,13 +93,14 @@ public class BoardService {
      */
     public Page<Board> searchList(String keyword, String searchType, Pageable pageable){
         if (searchType.equals("title")){
-            Page<Board> boards = boardRepository.findAllByTitleContaining(keyword, pageable);
+            Page<Board> boards = boardRepository.findAllByTitleContainingAndStatus(keyword, BoardStatus.WAITING, pageable);
             return boards;
         }else if(searchType.equals("nickname")){
             //response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
         }else if(searchType.equals("content")){
             //response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
         }
+
         return null;
     }
 
