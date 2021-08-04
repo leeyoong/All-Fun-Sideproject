@@ -8,9 +8,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 
 public class MatchFragment extends Fragment {
+
+    private Spinner spinner;
+
+    private MatchListAdapter adapter;
+    private ListView listView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +56,9 @@ public class MatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*Spinner spinner = (Spinner) getView().findViewById(R.id.spinner4);*/
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -56,6 +69,31 @@ public class MatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match, container, false);
+        View view = inflater.inflate(R.layout.fragment_match, container, false);
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner4);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        adapter = new MatchListAdapter();
+
+        listView = (ListView) view.findViewById(R.id.listview);
+        listView.setAdapter(adapter);
+
+        adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
+        adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
+        adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
+        adapter.notifyDataSetChanged();
+
+        return view;
     }
 }

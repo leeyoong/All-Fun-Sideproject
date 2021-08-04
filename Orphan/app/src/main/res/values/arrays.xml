@@ -9,4 +9,9 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="sort">
+        <item>최신 순으로 정렬</item>
+        <item>마감 임박 순으로 정렬</item>
+    </string-array>
 </resources>
