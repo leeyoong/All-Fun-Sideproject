@@ -89,7 +89,7 @@ public class BoardController {
 
         boardService.save(newBoard, find);
 
-        return ResponseEntity.ok(null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -195,45 +195,31 @@ public class BoardController {
     }
 
     /**
-     * Search By Content
-     * @param request
+     * Edit Board(get)
      * @return
      */
-    /*
-    @GetMapping("/search/content")
-    public ResponseEntity<?> searchContent(@RequestBody SearchRequestDto request){
-        SearchResponseDto response = boardService.searchList(request.getSearch(), "content");
-        return ResponseEntity.ok(response);
+    @GetMapping("/edit/{boardId}")
+    public ResponseEntity<?> getEdit(@PathVariable("boardId") Long boardId){
+        ReadDetailDto response = boardService.readDetail(boardId);
+        if (response==null){
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
+        } else{
+            return ResponseEntity.ok(response);
+        }
     }
-     */
-
-    /**
-     * Search By Writer
-     * @param request
-     * @return
-     */
-    /*
-    @GetMapping("search/nickname")
-    public ResponseEntity<?> searchNickname(@RequestBody SearchRequestDto request){
-        SearchResponseDto response = boardService.searchList(request.getSearch(), "nickname");
-        return ResponseEntity.ok(response);
-    }
-     */
 
     /**
      * Edit Board
      * @param request
      * @return
      */
-    @PostMapping("/edit/{boardId}")
+    @PatchMapping("/edit/{boardId}")
     public ResponseEntity<?> edit(@RequestBody EditBoardDto request, @PathVariable("boardId") Long boardId){
         EditBoardDto response = boardService.editBoard(boardId, request);
         if (response==null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Wrong Board Id");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
         } else{
-            return ResponseEntity.ok(response);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -241,9 +227,13 @@ public class BoardController {
      * Done Matching 'waiting' -> 'done'
      * @return
      */
-    @PostMapping("/edit/{boardId}/status")
-    public ResponseEntity<?> changeStatus(){
-        return null;
+    @PatchMapping("/edit/{boardId}/status")
+    public ResponseEntity<?> changeStatus(@PathVariable("boardId")Long boardId){
+        String out = boardService.changeStatus(boardId);
+        if(out==null){
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -251,15 +241,14 @@ public class BoardController {
      * @param boardId
      * @return
      */
-    @PostMapping("/delete/{boardId}")
+    @DeleteMapping("/delete/{boardId}")
     public ResponseEntity<?> delete(@PathVariable("boardId") Long boardId){
         Board board = boardService.findById(boardId);
         if (board == null){
-            HashMap<String, String> result = new HashMap<String,String>();
-            result.put("Error","Wrong Board Id");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
         } else{
-            return ResponseEntity.ok(boardService.deleteBoard(board));
+            boardService.deleteBoard(board);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 

@@ -26,7 +26,7 @@ public class MemberController {
      * @param request
      * @return
      */
-    @PostMapping("/{memberId}/password")
+    @PatchMapping("/{memberId}/password")
     public ResponseEntity<?> modifyPassword(@PathVariable("memberId")Long memberId, @RequestBody OneItemDto request){
         return ResponseEntity.ok(memberService.modifyPassword(memberId,request));
     }
@@ -38,7 +38,7 @@ public class MemberController {
      * @return
      * @throws IOException
      */
-    @PostMapping("/{memberId}/profile")
+    @PatchMapping("/{memberId}/profile")
     public ResponseEntity<?> profileEnroll(@PathVariable("memberId") Long memberId,@RequestPart("profileImg") MultipartFile request) throws IOException {
         if (request.isEmpty()){
             return ErrorHeader.errorMessage("request error", HttpStatus.BAD_REQUEST);
@@ -91,7 +91,7 @@ public class MemberController {
      * @param request
      * @return
      */
-    @PutMapping("/{memberId}/edit")
+    @PatchMapping("/{memberId}/edit")
     public ResponseEntity<?> editMyPage(@PathVariable("memberId")Long memberId, @RequestBody EditMemberInfoDto request){
         String response = memberService.putMemberInfo(memberId,request);
         if (response == null){

@@ -184,9 +184,38 @@ public class BoardService {
         editData.ifPresent(selectBoard->{
             selectBoard.setTitle(request.getTitle());
             selectBoard.setContent(request.getContent());
+
+            selectBoard.setAiExpect(request.getAi());
+            selectBoard.setBigdataExpect(request.getBigData());
+            selectBoard.setBlockchainExpect(request.getBlockChain());
+            selectBoard.setIosExpect(request.getIOS());
+            selectBoard.setAndroidExpect(request.getAndroid());
+            selectBoard.setPmExpect(request.getPm());
+            selectBoard.setFrontendExpect(request.getFrontend());
+            selectBoard.setBackendExpect(request.getBackend());
+
             boardRepository.save(selectBoard);
         });
         return request;
+    }
+
+    /**
+     * change board status ACCEPT
+     * @param boardId
+     * @return
+     */
+    @Transactional
+    public String changeStatus(Long boardId){
+        Optional<Board> board = boardRepository.findById(boardId);
+
+        if(board.isEmpty()){
+            return null;
+        }
+        board.ifPresent(selectBoard->{
+            selectBoard.setStatus(BoardStatus.ACCEPT);
+            boardRepository.save(selectBoard);
+        });
+        return "ok";
     }
 
     /**
@@ -195,9 +224,8 @@ public class BoardService {
      * @return
      */
     @Transactional
-    public String deleteBoard(Board board){
+    public void deleteBoard(Board board){
         boardRepository.delete(board);
-        return null;
     }
 
     /**
