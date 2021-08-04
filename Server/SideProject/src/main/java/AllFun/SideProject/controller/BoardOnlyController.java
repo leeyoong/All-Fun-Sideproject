@@ -18,22 +18,23 @@ import AllFun.SideProject.service.matching.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
-public class BoardController {
+public class BoardOnlyController {
     private final BoardService boardService;
     private final MemberService memberService;
     private final RoleService roleService;
@@ -118,36 +119,123 @@ public class BoardController {
      * @return
      */
 
-    @GetMapping("/list/recently")
-    public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<Board> boards = boardService.boardList(pageable);
+    @GetMapping("/list/recently/filter/{filter}")
+    public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable,
+                                           @PathVariable("filter") String filter){
 
-
-        Page<SearchResponseDto> response = boards.map(
-                board -> new SearchResponseDto(
-                        board.getId(), board.getTitle(), board.getMember().getNickname(),
-                        board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                        board.getEntryMembers(),
-                        boardRoleService.getRoleType(board)
-                ));
-        return ResponseEntity.ok(response);
+        if(!filter.equals("none")){
+            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
+            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
+            Page<SearchResponseDto> response = boardRoles.map(
+                    boardRole -> new SearchResponseDto(
+                            boardRole.getBoard().getId(),
+                            boardRole.getBoard().getTitle(),
+                            boardRole.getBoard().getMember().getNickname(),
+                            boardRole.getBoard().getCreatedDate(),
+                            boardRole.getBoard().getEndDate(),
+                            boardRole.getBoard().getProjectMembers(),
+                            boardRole.getBoard().getEntryMembers(),
+                            boardRoleService.getRoleType(boardRole.getBoard())
+                    )
+            );
+            return ResponseEntity.ok(response);
+        }
+        else{
+            Page<Board> boards = boardService.boardList(pageable);
+            Page<SearchResponseDto> response = boards.map(
+                    board -> new SearchResponseDto(
+                            board.getId(), board.getTitle(), board.getMember().getNickname(),
+                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                            board.getEntryMembers(),
+                            boardRoleService.getRoleType(board)
+                    ));
+            return ResponseEntity.ok(response);
+        }
     }
 
     /**
      * get board list deadline(마감순)
+     *
      * @return
      */
-    @GetMapping("/list/deadline")
-    public ResponseEntity<?> listDeadline (@PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
-        Page<Board> boards = boardService.boardList(pageable);
-        Page<SearchResponseDto> response = boards.map(
-                board -> new SearchResponseDto(
-                        board.getId(), board.getTitle(), board.getMember().getNickname(),
-                        board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
-                        board.getEntryMembers(),
-                        boardRoleService.getRoleType(board)
-                ));
-        return ResponseEntity.ok(response);
+    @GetMapping("/list/deadline/filter/{filter}")
+    public ResponseEntity<?> listDeadline(@PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable,
+                                          @PathVariable("filter") String filter) {
+        if (!filter.equals("none")) {
+            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
+            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
+            Page<SearchResponseDto> response = boardRoles.map(
+                    boardRole -> new SearchResponseDto(
+                            boardRole.getBoard().getId(),
+                            boardRole.getBoard().getTitle(),
+                            boardRole.getBoard().getMember().getNickname(),
+                            boardRole.getBoard().getCreatedDate(),
+                            boardRole.getBoard().getEndDate(),
+                            boardRole.getBoard().getProjectMembers(),
+                            boardRole.getBoard().getEntryMembers(),
+                            boardRoleService.getRoleType(boardRole.getBoard())
+                    )
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            Page<Board> boards = boardService.boardList(pageable);
+            Page<SearchResponseDto> response = boards.map(
+                    board -> new SearchResponseDto(
+                            board.getId(), board.getTitle(), board.getMember().getNickname(),
+                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                            board.getEntryMembers(),
+                            boardRoleService.getRoleType(board)
+                    ));
+            return ResponseEntity.ok(response);
+        }
+    }
+
+    /**
+     * Search by Title (recently & filter)
+     * @return
+     */
+    @GetMapping("/search/title/{keyword}/recently/filter/{filter}")
+    public ResponseEntity<?> searchRecently(@PathVariable("keyword")String keyword, @PathVariable("filter")String filter,
+                                            @PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
+        if(filter.equals("none")){
+            Page<Board> boards = boardService.searchList(keyword, "title", pageable);
+            Page<SearchResponseDto> response = boards.map(
+                    board -> new SearchResponseDto(
+                            board.getId(), board.getTitle(), board.getMember().getNickname(),
+                            board.getCreatedDate(), board.getEndDate(), board.getProjectMembers(),
+                            board.getEntryMembers(),
+                            boardRoleService.getRoleType(board)
+                    ));
+            return ResponseEntity.ok(response);
+        }else{
+            RoleType roleType = RoleType.valueOf(filter.toUpperCase(Locale.ROOT));
+            Page<BoardRole> boardRoles = boardRoleService.boardListFilter(pageable, roleType);
+            Page<SearchResponseDto> response = boardRoles.map(
+                    boardRole -> new SearchResponseDto(
+                            boardRole.getBoard().getId(),
+                            boardRole.getBoard().getTitle(),
+                            boardRole.getBoard().getMember().getNickname(),
+                            boardRole.getBoard().getCreatedDate(),
+                            boardRole.getBoard().getEndDate(),
+                            boardRole.getBoard().getProjectMembers(),
+                            boardRole.getBoard().getEntryMembers(),
+                            boardRoleService.getRoleType(boardRole.getBoard())
+                    )
+            );
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.ok(null);
+    }
+
+    /**
+     * Search by Title (deadline)
+     * @return
+     */
+    @GetMapping("/search/title/{keyword}/deadline/filter/{filter}")
+    public ResponseEntity<?> searchDeadline(@PathVariable("keyword")String keyword, @PathVariable("filter")String filter,
+                                            @PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
+        Page<Board> boards = boardService.searchList(keyword, filter, pageable);
+        return ResponseEntity.ok(boards);
     }
 
     /**
@@ -166,47 +254,30 @@ public class BoardController {
     }
 
     /**
-     * Search by Title (recently)
-     * @param request
-     * @return
-     */
-    @GetMapping("/search/title/recently")
-    public ResponseEntity<?> searchRecently(@RequestBody SearchRequestDto request){
-        SearchResponseDto response = boardService.searchList(request.getSearch(), "title");
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Search by Title (deadline)
-     * @param request
-     * @return
-     */
-    @GetMapping("/search/title/deadline")
-    public ResponseEntity<?> searchDeadline(@RequestBody SearchRequestDto request){
-        SearchResponseDto response = boardService.searchList(request.getSearch(), "title");
-        return ResponseEntity.ok(response);
-    }
-    /**
      * Search By Content
      * @param request
      * @return
      */
+    /*
     @GetMapping("/search/content")
     public ResponseEntity<?> searchContent(@RequestBody SearchRequestDto request){
         SearchResponseDto response = boardService.searchList(request.getSearch(), "content");
         return ResponseEntity.ok(response);
     }
+     */
 
     /**
      * Search By Writer
      * @param request
      * @return
      */
+    /*
     @GetMapping("search/nickname")
     public ResponseEntity<?> searchNickname(@RequestBody SearchRequestDto request){
         SearchResponseDto response = boardService.searchList(request.getSearch(), "nickname");
         return ResponseEntity.ok(response);
     }
+     */
 
     /**
      * Edit Board

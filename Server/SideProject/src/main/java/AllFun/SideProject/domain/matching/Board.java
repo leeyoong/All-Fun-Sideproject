@@ -62,7 +62,6 @@ public class Board extends BaseEntity {
         board.setHit(0);
         board.setStatus(BoardStatus.WAITING);
         board.setEndDate(endDate);
-
         return board;
     }
     public void addBoardRole(BoardRole BoardRole){

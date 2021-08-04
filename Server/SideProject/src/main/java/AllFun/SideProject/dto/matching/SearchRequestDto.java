@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class SearchRequestDto {
-    private String search; //검색명
+    private String search; //제목 검색명
 }

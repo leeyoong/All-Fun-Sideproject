@@ -9,10 +9,10 @@ import AllFun.SideProject.repository.matching.BoardRepository;
 import AllFun.SideProject.repository.matching.BoardRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +58,6 @@ public class BoardService {
         return boards;
     }
 
-
     /**
      * read detail board page and increase hit
      * @param boardId
@@ -90,16 +89,16 @@ public class BoardService {
      * @param searchType
      * @return
      */
-    public SearchResponseDto searchList(String keyword, String searchType){
-        SearchResponseDto response = null;
+    public Page<Board> searchList(String keyword, String searchType, Pageable pageable){
         if (searchType.equals("title")){
-            //response.setResponse(boardRepository.findByTitleContaining(keyword).orElse(null));
+            Page<Board> boards = boardRepository.findAllByTitleContaining(keyword, pageable);
+            return boards;
         }else if(searchType.equals("nickname")){
             //response.setResponse(boardRepository.findByNicknameContaining(keyword).orElse(null));
         }else if(searchType.equals("content")){
             //response.setResponse(boardRepository.findByContentContaining(keyword).orElse(null));
         }
-        return response;
+        return null;
     }
 
     /**

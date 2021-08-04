@@ -5,6 +5,8 @@ import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.BoardRole;
 import AllFun.SideProject.repository.matching.BoardRoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +41,10 @@ public class BoardRoleService {
                 response.add(boardRole.getRole());
         }
         return response;
+    }
+
+    public Page<BoardRole> boardListFilter(Pageable pageable, RoleType role){
+        Page<BoardRole> boardRoles = boardRoleRepository.findAllByRole(role, pageable);
+        return boardRoles;
     }
 }
