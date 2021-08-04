@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#1C2323"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:id="@+id/frame">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom"

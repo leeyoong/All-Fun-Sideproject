@@ -4,23 +4,23 @@
 
     <item
         android:id="@+id/menu_home"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="홈"
         android:enabled="true"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="홈"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_match"
-        android:icon="@android:drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_baseline_group_add_24"
         android:title="매칭"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_dash"
-        android:icon="@android:drawable/ic_menu_today"
+        android:icon="@drawable/ic_baseline_dashboard_24"
         android:title="대시보드"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_setting"
-        android:icon="@android:drawable/ic_dialog_email"
+        android:icon="@drawable/ic_baseline_message_24"
         android:title="쪽지"
         app:showAsAction="ifRoom" />
 </menu>

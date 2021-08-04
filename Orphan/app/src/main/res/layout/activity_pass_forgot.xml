@@ -13,12 +13,6 @@
     tools:context=".PassForgot">
 
 
-
-
-
-
-
-
     <TextView
         android:layout_width="370dp"
         android:layout_height="60dp"
@@ -29,7 +23,7 @@
         android:layout_marginBottom="8dp"
         android:text="Password Forgot?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="#00FFCC" />
+        android:textColor="@color/teal_200" />
 
 
 
@@ -49,7 +43,7 @@
             android:layout_marginEnd="16dp"
             android:text="E-mail"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#00FFCC"></TextView>
+            android:textColor="@color/teal_200"></TextView>
 
         <EditText
             android:id="@+id/passfgtmail"
@@ -89,7 +83,7 @@
             android:layout_marginEnd="16dp"
             android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#00FFCC"></TextView>
+            android:textColor="@color/teal_200"></TextView>
 
         <EditText
             android:id="@+id/idfgtname"
@@ -128,7 +122,7 @@
             android:layout_marginEnd="16dp"
             android:text="Birth"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#00FFCC"></TextView>
+            android:textColor="@color/teal_200"></TextView>
 
         <Spinner
             android:id="@+id/spinner"
@@ -176,7 +170,7 @@
             android:layout_marginEnd="16dp"
             android:text="Phone Number"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#00FFCC"></TextView>
+            android:textColor="@color/teal_200"></TextView>
 
         <EditText
             android:id="@+id/regphone"

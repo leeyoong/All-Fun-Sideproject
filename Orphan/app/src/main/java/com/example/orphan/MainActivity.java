@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         dashFragment = new DashFragment();
         settingFragment = new SettingsFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, homeFragment).commit();
 
         BottomNavigationView bnv = findViewById(R.id.bottom);
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -38,19 +38,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, homeFragment).commit();
                         return true;
 
                     case R.id.menu_match:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, matchFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, matchFragment).commit();
                         return true;
 
                     case R.id.menu_dash:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, dashFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, dashFragment).commit();
                         return true;
 
                     case R.id.menu_setting:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, settingFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, settingFragment).commit();
                         return true;
 
 

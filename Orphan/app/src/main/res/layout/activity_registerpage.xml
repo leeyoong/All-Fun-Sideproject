@@ -27,7 +27,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Register"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#00FFCC" />
+                android:textColor="@color/teal_200" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="E-mail"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/editTextTextEmailAddress"
@@ -122,7 +122,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Password"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/passmade"
@@ -151,7 +151,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Password Check"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/passmade2"
@@ -199,7 +199,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/regname"
@@ -238,7 +238,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Birth"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -286,7 +286,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Phone Number"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/regphone"
@@ -326,7 +326,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Nickname"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
                 <EditText
                     android:id="@+id/regnick"
@@ -366,7 +366,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Gender"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#00FFCC"></TextView>
+                    android:textColor="@color/teal_200"></TextView>
 
 
                 <RadioGroup
