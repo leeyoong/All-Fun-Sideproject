@@ -107,9 +107,18 @@ public class BoardService {
         });
         Board board = hitUp.get();
 
-        return new ReadDetailDto(board.getTitle(), board.getContent(), board.getMember().getNickname(),
-                board.getModifiedDate(), board.getEndDate(),board.getHit(), board.getMember().getId(),
-                board.getStatus());
+        ReadDetailDto response = new ReadDetailDto(
+                board.getTitle(),
+                board.getContent(),
+                board.getMember().getNickname(),
+                board.getCreatedDate(),
+                board.getEndDate(),
+                getBoardRoleDto(board),
+                board.getHit(),
+                board.getMember().getId()
+        );
+
+        return response;
 
     }
 

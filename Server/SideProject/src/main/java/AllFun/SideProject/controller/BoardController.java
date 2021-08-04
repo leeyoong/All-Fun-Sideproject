@@ -26,7 +26,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
-public class BoardOnlyController {
+public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
     private final DashGroupService dashGroupService;
@@ -178,7 +178,7 @@ public class BoardOnlyController {
         );
         return ResponseEntity.ok(response);
     }
-    
+
     /**
      * Read Detail Board and Increase hit.
      * @param boardId

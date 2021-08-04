@@ -18,16 +18,14 @@ public class ReadDetailDto {
     private String content;
     private String writer;
 
-    private LocalDateTime date; //작성(수정) 날짜
+    private LocalDateTime createdDate; //작성(수정) 날짜
 
     private LocalDateTime endDate;
 
-
+    private List<BoardRoleDto> expect; // ex> backend 0(entry) / 1(expect)
 
     private int hit; // 조회수
 
     private Long memberId; // 사용자 id
 
-    private BoardStatus status;
 }
-
