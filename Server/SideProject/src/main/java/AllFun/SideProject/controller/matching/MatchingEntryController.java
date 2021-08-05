@@ -1,5 +1,6 @@
 package AllFun.SideProject.controller.matching;
 
+import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
@@ -54,7 +55,13 @@ public class MatchingEntryController {
     public ResponseEntity<?> cancelEntry(@PathVariable("boardId")Long boardId,
                                          @PathVariable("memberId")Long memberId,
                                          @PathVariable("role")String role){
-        return null;
+        Board board = boardService.findById(boardId);
+        Member member = memberService.findById(memberId);
+        String out = entryPoolService.deleteEntryPool(board, member, role);
+        if (out == null){
+            return ErrorHeader.errorMessage("error", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
