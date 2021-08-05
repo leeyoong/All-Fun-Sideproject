@@ -113,7 +113,7 @@
                         android:background="@drawable/custom_button2"
                         android:drawableTop="@drawable/ic_baseline_account_box_24"
                         android:text="My page"
-                        android:textColor="@color/teal_200"
+                        android:textColor="@color/white"
                         android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton

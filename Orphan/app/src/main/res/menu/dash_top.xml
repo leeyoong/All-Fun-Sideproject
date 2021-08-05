@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_schedule"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_insert_invitation_24"
+        android:title="Schedule"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_board"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Board"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_chat"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:title="Chat"
+        app:showAsAction="ifRoom" />
+</menu>

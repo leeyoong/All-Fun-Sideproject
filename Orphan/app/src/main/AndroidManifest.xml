@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.NoActionBar">
-        <activity android:name=".PostDetail"></activity>
+        <activity android:name=".DashMain"></activity>
+        <activity
+            android:name=".DashNavy"
+            android:label="@string/title_activity_dash_navy"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".DashActivity"
+            android:label="@string/title_activity_dash"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".PostDetail" />
         <activity
             android:name=".Post"
             android:label="@string/title_activity_post"
