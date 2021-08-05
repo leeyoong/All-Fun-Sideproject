@@ -24,5 +24,11 @@ public class Scrap {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="board_id")
     private Board board; // 스크랩한 board id
+
+    public static Scrap createScrap(Board board){
+        Scrap scrap = new Scrap();
+        scrap.setBoard(board);
+        return scrap;
+    }
 }
 

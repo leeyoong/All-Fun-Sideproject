@@ -2,9 +2,11 @@ package AllFun.SideProject.service.member;
 
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
+import AllFun.SideProject.domain.matching.Scrap;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.dto.mainPage.MyMatchingBoardDto;
 import AllFun.SideProject.dto.mainPage.MyMatchingStatusDto;
+import AllFun.SideProject.dto.mainPage.MyScrapDto;
 import AllFun.SideProject.dto.member.EditMemberInfoDto;
 import AllFun.SideProject.dto.member.MemberInfoDto;
 import AllFun.SideProject.dto.member.MyInfoDto;
@@ -296,7 +298,29 @@ public class MemberService {
         }
         return response;
     }
-
+    /**
+     * get my matching board scrap
+     * @param memberId
+     * @return
+     */
+    public List<MyScrapDto> getScrapMatchingBoard(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        List<Scrap> scraps = member.getScraps();
+        List<MyScrapDto> response = new ArrayList<>();
+        for (Scrap scrap : scraps) {
+            MyScrapDto myMatchingBoardDto = new MyScrapDto(
+                    scrap.getBoard().getId(),
+                    scrap.getBoard().getTitle(),
+                    scrap.getBoard().getMember().getNickname(),
+                    scrap.getBoard().getCreatedDate(),
+                    scrap.getBoard().getEndDate(),
+                    boardService.getBoardRoleDto(scrap.getBoard()),
+                    scrap.getBoard().getStatus()
+            );
+            response.add(myMatchingBoardDto);
+        }
+        return response;
+    }
 
 }
 

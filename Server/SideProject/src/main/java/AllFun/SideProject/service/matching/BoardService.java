@@ -1,10 +1,13 @@
 package AllFun.SideProject.service.matching;
 
 import AllFun.SideProject.domain.base.BoardStatus;
+import AllFun.SideProject.domain.matching.Scrap;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.dto.matching.*;
 import AllFun.SideProject.repository.matching.BoardRepository;
+import AllFun.SideProject.repository.matching.ScrapRepository;
+import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +23,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class BoardService {
     private final BoardRepository boardRepository;
-
+    private final MemberRepository memberRepository;
+    private final ScrapRepository scrapRepository;
     /**
      * Write Side-Project board
      * @param board
@@ -289,5 +293,25 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
+    public void scrapBoard(Long boardId, Long memberId){
+        Board board = boardRepository.findById(boardId).orElse(null);
+        Member member = memberRepository.findById(memberId).orElse(null);
+
+        Scrap scrap = Scrap.createScrap(board);
+        member.addScrap(scrap);
+
+        scrapRepository.save(scrap);
+
+    }
+
+    @Transactional
+    public void deleteScrap(Long boardId, Long memberId){
+        Board board = boardRepository.findById(boardId).orElse(null);
+        Member member = memberRepository.findById(memberId).orElse(null);
+
+        Scrap scrap = scrapRepository.findByMemberAndBoard(member, board).orElse(null);
+        scrapRepository.delete(scrap);
+    }
 
 }

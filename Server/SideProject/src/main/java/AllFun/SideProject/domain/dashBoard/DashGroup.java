@@ -25,19 +25,19 @@ public class DashGroup extends BaseEntity {
     @Column(name="group_name")
     private String groupName;
 
-    @OneToOne(mappedBy="group")
+    @OneToOne(mappedBy="group",cascade = CascadeType.REMOVE)
     private Board board; // 매칭 게시판 id
     
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private List<GroupBoard> groupBoards; // 그룹 게시판
     
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private List<Messenger> messengers; // 메신저
 
-    @OneToMany(mappedBy= "group")
+    @OneToMany(mappedBy= "group",cascade = CascadeType.REMOVE)
     private List<ToDo> toDos; // to-do list
 
-    @OneToMany(mappedBy="group")
+    @OneToMany(mappedBy="group",cascade = CascadeType.REMOVE)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
     public void addGroupBoard(GroupBoard groupBoard){

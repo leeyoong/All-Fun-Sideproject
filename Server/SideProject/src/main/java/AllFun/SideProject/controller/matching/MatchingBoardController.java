@@ -252,5 +252,30 @@ public class MatchingBoardController {
         }
     }
 
+    /**
+     * add scrap
+     * @param boardId
+     * @param memberId
+     * @return
+     */
+    @PostMapping("/{boardId}/scrap/{memberId}")
+    public ResponseEntity<?> scrapBoard(@PathVariable("boardId")Long boardId,
+                                        @PathVariable("memberId") Long memberId){
+        boardService.scrapBoard(boardId, memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * delete scrap
+     * @param boardId
+     * @param memberId
+     * @return
+     */
+    @DeleteMapping("/{boardId}/scrap/{memberId}")
+    public ResponseEntity<?> deleteScrapBoard(@PathVariable("boardId") Long boardId,
+                                              @PathVariable("memberId")Long memberId){
+        boardService.deleteScrap(boardId, memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

@@ -70,15 +70,12 @@ public class Board extends BaseEntity {
     @JoinColumn(name="member_id")
     private Member member; //작성자 id
 
-    @OneToMany(mappedBy="board")
+    @OneToMany(mappedBy="board",cascade = CascadeType.REMOVE)
     private List<EntryPool> entryPools = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name="group_id")
     private DashGroup group;
-
-    @OneToMany(mappedBy = "board")
-    private List<Scrap> scraps = new ArrayList<>();
 
     public static Board createBoard(String title, String content, LocalDateTime endDate,
                                     int backendEntry, int frontendEntry, int pmEntry, int androidEntry,
@@ -107,8 +104,4 @@ public class Board extends BaseEntity {
         entryPool.setBoard(this);
     }
 
-    public void addScrap(Scrap scrap){
-        scraps.add(scrap);
-        scrap.setBoard(this);
-    }
 }

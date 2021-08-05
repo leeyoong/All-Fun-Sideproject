@@ -36,22 +36,22 @@ public class Member extends BaseEntity {
     private String introduce; //자기소개
     private String profileImg; // 프로필사진 저장경로
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE)
     private List<Board> boards = new ArrayList<>(); //내가 쓴 매칭 게시판
 
-    @OneToMany(mappedBy="member")
+    @OneToMany(mappedBy="member",cascade = CascadeType.REMOVE)
     private List<EntryPool> entryPools = new ArrayList<>(); // 내가 지원한 매칭 게시판
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE)
     private List<GroupMember> groupMembers = new ArrayList<>(); //내가 속한 그룹
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE)
     private List<MemberRoom> memberRooms = new ArrayList<>(); // 쪽지방
 
-    @OneToMany(mappedBy="member")
+    @OneToMany(mappedBy="member",cascade = CascadeType.REMOVE)
     private List<Scrap> scraps = new ArrayList<>(); // 즐겨찾기 한 매칭글
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE)
     private List<BoardHit> boardHits = new ArrayList<>();
 
     public static Member createMember(String email, String passwd, String birth, String name, String phone,

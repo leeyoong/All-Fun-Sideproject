@@ -91,6 +91,20 @@ public class HomeController {
     }
 
     /**
+     * 스크랩한 게시판
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/matching/scrap")
+    public ResponseEntity<?> getMatchingScrap(@PathVariable("memberId")Long memberId){
+        List<MyScrapDto> response = memberService.getScrapMatchingBoard(memberId);
+        if(response == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    /**
      * 그룹게시판 5개(통합 최신순 5개)
      * @param memberId
      * @return
