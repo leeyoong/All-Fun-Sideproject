@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -23,6 +25,13 @@ public class EntryPoolService {
         entryPoolRepository.save(entryPool);
     }
 
+    /**
+     * delete entry pool
+     * @param board
+     * @param member
+     * @param role
+     * @return
+     */
     @Transactional
     public String deleteEntryPool(Board board, Member member, String role){
         EntryPool entryPool = entryPoolRepository.findByBoardAndMemberAndRole(board, member, role).orElse(null);
@@ -32,4 +41,9 @@ public class EntryPoolService {
         entryPoolRepository.delete(entryPool);
         return "ok";
     }
+
+    public List<EntryPool> findAllByBoardAndRole(Board board, String role){
+        return entryPoolRepository.findAllByBoardAndRole(board, role).orElse(null);
+    }
+
 }

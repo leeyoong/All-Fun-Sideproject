@@ -4,13 +4,18 @@ import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.dto.matching.EntryPoolResponseDto;
 import AllFun.SideProject.service.matching.BoardService;
 import AllFun.SideProject.service.matching.EntryPoolService;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/board")
@@ -73,7 +78,18 @@ public class MatchingEntryController {
     @GetMapping("/{boardId}/role/{role}")
     public ResponseEntity<?> checkEntry(@PathVariable("boardId")Long boardId,
                                         @PathVariable("role")String role){
-        return null;
+        Board board = boardService.findById(boardId);
+        List<EntryPool> entryPools = entryPoolService.findAllByBoardAndRole(board,role);
+        List<EntryPoolResponseDto> response = new ArrayList<>();
+        for (EntryPool entryPool : entryPools) {
+            response.add(new EntryPoolResponseDto(
+                    entryPool.getMember().getId(),
+                    entryPool.getMember().getNickname(),
+                    entryPool.getMember().getProfileImg(),
+                    entryPool.getStatus()
+            ));
+        }
+        return ResponseEntity.ok(response);
     }
 
     /**

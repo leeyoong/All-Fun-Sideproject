@@ -5,8 +5,11 @@ import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface EntryPoolRepository extends JpaRepository<EntryPool, Long> {
     Optional<EntryPool> findByBoardAndMemberAndRole(Board board, Member member, String role);
+
+    Optional<List<EntryPool>> findAllByBoardAndRole(Board board,String role);
 }
