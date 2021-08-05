@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller.matching;
 
 import AllFun.SideProject.Exception.ErrorHeader;
+import AllFun.SideProject.domain.base.MatchingStatus;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
@@ -9,7 +10,6 @@ import AllFun.SideProject.service.matching.BoardService;
 import AllFun.SideProject.service.matching.EntryPoolService;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -94,7 +94,9 @@ public class MatchingEntryController {
 
     /**
      * 참여 성공 or 실패 (일괄 처리 / 단일 처리)
-     * 참여 성공 시 group 생성.
+     *
+     * ******* 참여 성공 시 group 생성.(아직 미완성) // 추후 진행 ********
+     *
      * @param boardId
      * @param role
      * @param memberId
@@ -106,7 +108,45 @@ public class MatchingEntryController {
                                          @PathVariable("role")String role,
                                          @PathVariable("memberId")Long memberId,
                                          @PathVariable("status")String status){
-        return null;
+
+        Board board = boardService.findById(boardId);
+        Member member = memberService.findById(memberId);
+
+        MatchingStatus matchingStatus = MatchingStatus.valueOf(status.toUpperCase());
+
+        entryPoolService.changeStatus(board, member, role,matchingStatus);
+
+        if(matchingStatus.equals(MatchingStatus.ACCEPT)){
+            boardService.updateEntry(board,role);
+        }
+
+        if((board.getBackendExpect() == board.getBackendEntry()) &&
+            role.equals("backend")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getFrontendEntry() == board.getFrontendExpect()) &&
+                role.equals("frontend")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getAiEntry() == board.getAiExpect()) &&
+                role.equals("ai")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getBigdataExpect() == board.getBigdataEntry()) &&
+                role.equals("bigdata")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getBlockchainExpect() == board.getBlockchainEntry()) &&
+                role.equals("blockchain")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getIosExpect() == board.getIosEntry()) &&
+                role.equals("ios")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getPmExpect() == board.getPmEntry()) &&
+                role.equals("pm")){
+            entryPoolService.changeBatchStatus(board,role);
+        }else if((board.getAndroidExpect() == board.getAndroidEntry()) &&
+                role.equals("android")){
+            entryPoolService.changeBatchStatus(board,role);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

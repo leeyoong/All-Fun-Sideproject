@@ -12,4 +12,5 @@ public interface EntryPoolRepository extends JpaRepository<EntryPool, Long> {
     Optional<EntryPool> findByBoardAndMemberAndRole(Board board, Member member, String role);
 
     Optional<List<EntryPool>> findAllByBoardAndRole(Board board,String role);
+
 }

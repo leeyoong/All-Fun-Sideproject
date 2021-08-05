@@ -236,30 +236,57 @@ public class BoardService {
     public List<BoardRoleDto> getBoardRoleDto(Board board){
         List<BoardRoleDto> response = new ArrayList<>();
         if(board.getBackendExpect()>0){
-            response.add(new BoardRoleDto("#backend", board.getBackendExpect(), board.getBackendEntry()));
+            response.add(new BoardRoleDto("backend", board.getBackendExpect(), board.getBackendEntry()));
         }
         if(board.getFrontendExpect()>0){
-            response.add(new BoardRoleDto("#frontend", board.getFrontendExpect(), board.getFrontendEntry()));
+            response.add(new BoardRoleDto("frontend", board.getFrontendExpect(), board.getFrontendEntry()));
         }
         if(board.getPmExpect()>0){
-            response.add(new BoardRoleDto("#pm", board.getPmExpect(), board.getPmEntry()));
+            response.add(new BoardRoleDto("pm", board.getPmExpect(), board.getPmEntry()));
         }
         if(board.getAndroidExpect()>0){
-            response.add(new BoardRoleDto("#android", board.getAndroidExpect(), board.getAndroidEntry()));
+            response.add(new BoardRoleDto("android", board.getAndroidExpect(), board.getAndroidEntry()));
         }
         if(board.getIosExpect()>0){
-            response.add(new BoardRoleDto("#ios", board.getIosExpect(), board.getIosEntry()));
+            response.add(new BoardRoleDto("ios", board.getIosExpect(), board.getIosEntry()));
         }
         if(board.getAiExpect()>0){
-            response.add(new BoardRoleDto("#ai", board.getAiExpect(), board.getAiEntry()));
+            response.add(new BoardRoleDto("ai", board.getAiExpect(), board.getAiEntry()));
         }
         if(board.getBigdataExpect()>0){
-            response.add(new BoardRoleDto("#bigdata", board.getBigdataExpect(), board.getBigdataEntry()));
+            response.add(new BoardRoleDto("bigdata", board.getBigdataExpect(), board.getBigdataEntry()));
         }
         if(board.getBlockchainExpect()>0){
-            response.add(new BoardRoleDto("#blockchain", board.getBlockchainExpect(), board.getBlockchainEntry()));
+            response.add(new BoardRoleDto("blockchain", board.getBlockchainExpect(), board.getBlockchainEntry()));
         }
         return response;
+    }
+
+    /**
+     * update status (ACCEPT case)
+     * @param board
+     * @param role
+     */
+    @Transactional
+    public void updateEntry(Board board, String role){
+        if(role.equals("backend")){
+            board.setBackendEntry(board.getBackendEntry()+1);
+        }else if(role.equals("frontend")){
+            board.setFrontendEntry(board.getFrontendEntry()+1);
+        }else if(role.equals("pm")){
+            board.setPmEntry(board.getPmEntry()+1);
+        }else if(role.equals("android")){
+            board.setAndroidEntry(board.getAndroidEntry()+1);
+        }else if(role.equals("ios")){
+            board.setIosEntry(board.getIosEntry()+1);
+        }else if(role.equals("ai")){
+            board.setAiEntry(board.getAiEntry()+1);
+        }else if(role.equals("bigdata")){
+            board.setBigdataEntry(board.getBigdataEntry()+1);
+        }else if(role.equals("blockchain")){
+            board.setBlockchainEntry(board.getBlockchainEntry()+1);
+        }
+        boardRepository.save(board);
     }
 
 
