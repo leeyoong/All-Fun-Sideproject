@@ -25,4 +25,11 @@ public class Note extends BaseEntity {
     @ManyToOne
     @JoinColumn(name="member_id")
     private Member member;
+
+    public static Note createNote(String message, Member member){
+        Note note = new Note();
+        note.setMessage(message);
+        note.setMember(member);
+        return note;
+    }
 }

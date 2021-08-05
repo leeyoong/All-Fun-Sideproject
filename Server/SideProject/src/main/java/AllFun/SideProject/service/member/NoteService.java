@@ -4,6 +4,7 @@ import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.domain.member.MemberRoom;
 import AllFun.SideProject.domain.member.Note;
 import AllFun.SideProject.domain.member.Room;
+import AllFun.SideProject.dto.note.MessageDto;
 import AllFun.SideProject.dto.note.NoteDataDto;
 import AllFun.SideProject.dto.note.NoteRoomDto;
 import AllFun.SideProject.repository.member.MemberRepository;
@@ -50,6 +51,11 @@ public class NoteService {
         return response;
     }
 
+    /**
+     * get chatting data
+     * @param roomId
+     * @return
+     */
     public List<NoteDataDto> getNoteData(Long roomId){
         Room room = roomRepository.findById(roomId).orElse(null);
         List<Note> notes = noteRepository.findAllByRoomOrderByCreatedDateDesc(room).orElse(null);
@@ -65,5 +71,62 @@ public class NoteService {
             response.add(noteDataDto);
         }
         return response;
+    }
+
+    /**
+     * me - opponent : room check
+     * @param myId
+     * @param userId
+     * @return
+     */
+    public Room hasRoom(Long myId, Long userId){
+        Member me = memberRepository.findById(myId).orElse(null);
+
+        List<MemberRoom> myMemberRooms = me.getMemberRooms();
+
+        for (MemberRoom memberRoom : myMemberRooms) {
+            MemberRoom opponentRoom = memberRoomRepository.findByRoomAndMemberNot(memberRoom.getRoom(),me)
+                    .orElse(null);
+            if(opponentRoom.getMember().getId() == userId){
+                return opponentRoom.getRoom();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * create chatting room
+     * @param myId
+     * @param userId
+     * @return
+     */
+    @Transactional
+    public Room createRoom(Long myId, Long userId){
+        Room room = Room.createRoom();
+        roomRepository.save(room);
+
+        Member me = memberRepository.findById(myId).orElse(null);
+        Member opponent = memberRepository.findById(userId).orElse(null);
+
+        MemberRoom myMemberRoom = MemberRoom.createMemberRoom(room);
+        me.addMemberRoom(myMemberRoom);
+        memberRoomRepository.save(myMemberRoom);
+
+        MemberRoom opponentMemberRoom = MemberRoom.createMemberRoom(room);
+        opponent.addMemberRoom(opponentMemberRoom);
+        memberRoomRepository.save(opponentMemberRoom);
+
+        return room;
+    }
+
+    @Transactional
+    public void createNote(Room room, Long senderId, MessageDto message){
+        Member sender = memberRepository.findById(senderId).orElse(null);
+        Note note = Note.createNote(message.getMessage(), sender);
+
+        room.addNotes(note);
+
+        noteRepository.save(note);
+
     }
 }

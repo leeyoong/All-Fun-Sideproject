@@ -2,10 +2,12 @@ package AllFun.SideProject.controller;
 
 import AllFun.SideProject.domain.member.Note;
 import AllFun.SideProject.domain.member.Room;
+import AllFun.SideProject.dto.note.MessageDto;
 import AllFun.SideProject.dto.note.NoteDataDto;
 import AllFun.SideProject.dto.note.NoteRoomDto;
 import AllFun.SideProject.service.member.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +44,15 @@ public class NoteController {
      * @return
      */
     @PostMapping("/from/{myId}/to/{userId}")
-    public ResponseEntity<?> sendNote(){
-        return null;
+    public ResponseEntity<?> sendNote(@PathVariable("myId")Long myId, @PathVariable("userId")Long userId,
+                                      @RequestBody MessageDto request){
+        Room room = noteService.hasRoom(myId, userId);
+        // 채팅 이력 없으면 방 개설
+        if(room == null){
+            room = noteService.createRoom(myId, userId);
+        }
+        noteService.createNote(room, myId, request);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

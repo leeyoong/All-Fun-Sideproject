@@ -19,4 +19,14 @@ public class Room {
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Note> notes = new ArrayList<>();
+
+    public static Room createRoom(){
+        Room room = new Room();
+        return room;
+    }
+
+    public void addNotes(Note note){
+        notes.add(note);
+        note.setRoom(this);
+    }
 }

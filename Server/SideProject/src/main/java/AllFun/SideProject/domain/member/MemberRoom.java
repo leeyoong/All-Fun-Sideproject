@@ -23,4 +23,10 @@ public class MemberRoom {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="room_id")
     private Room room;
+
+    public static MemberRoom createMemberRoom(Room room){
+        MemberRoom memberRoom = new MemberRoom();
+        memberRoom.setRoom(room);
+        return memberRoom;
+    }
 }
