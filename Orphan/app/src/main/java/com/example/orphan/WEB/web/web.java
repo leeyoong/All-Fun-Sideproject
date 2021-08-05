@@ -214,7 +214,7 @@ public class web {
         return ok.getResponse_massage();
     }
 
-    public String Post_Login_Sync(String Email, String password){
+    public String Post_Login_Sync(String Email, String password) throws IOException {
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
         //보낼 오브젝트 생성
@@ -225,9 +225,9 @@ public class web {
         try {
             response = call.execute();
         } catch (IOException e) {
-            System.out.println("연결실패");
+            System.out.println("sync ----연결실패");
         }
-        System.out.println("web완료");
+        System.out.println("sync ----web완료");
         if(response != null){
             return "ok";
         }
