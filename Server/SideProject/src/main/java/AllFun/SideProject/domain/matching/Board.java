@@ -102,6 +102,11 @@ public class Board extends BaseEntity {
         return board;
     }
 
+    public void addEntryPool(EntryPool entryPool){
+        entryPools.add(entryPool);
+        entryPool.setBoard(this);
+    }
+
     public void addScrap(Scrap scrap){
         scraps.add(scrap);
         scrap.setBoard(this);

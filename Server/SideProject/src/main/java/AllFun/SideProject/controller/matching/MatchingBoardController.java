@@ -1,4 +1,4 @@
-package AllFun.SideProject.controller;
+package AllFun.SideProject.controller.matching;
 
 import AllFun.SideProject.Exception.ErrorHeader;
 import AllFun.SideProject.domain.dashBoard.DashGroup;
@@ -26,7 +26,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
-public class BoardController {
+public class MatchingBoardController {
     private final BoardService boardService;
     private final MemberService memberService;
     private final DashGroupService dashGroupService;

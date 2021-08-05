@@ -34,4 +34,11 @@ public class EntryPool {
     @JoinColumn(name="board_id")
     private Board board; // 매칭 게시판 id
 
+    public static EntryPool createEntryPool(String role){
+        EntryPool entryPool = new EntryPool();
+        entryPool.setRole(role);
+        entryPool.setStatus(MatchingStatus.WAITING);
+        return entryPool;
+    }
+
 }
