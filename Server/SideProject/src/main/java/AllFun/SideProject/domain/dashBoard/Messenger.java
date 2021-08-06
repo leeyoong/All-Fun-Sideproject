@@ -1,5 +1,6 @@
 package AllFun.SideProject.domain.dashBoard;
 
+import AllFun.SideProject.domain.base.BaseEntity;
 import AllFun.SideProject.domain.member.Member;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Messenger {
+public class Messenger extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name="messenger_id")
@@ -26,6 +27,4 @@ public class Messenger {
 
     @Lob
     private String content; // 글 내용
-
-
 }

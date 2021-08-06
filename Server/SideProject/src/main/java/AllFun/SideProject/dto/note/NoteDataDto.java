@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class NoteDataDto {

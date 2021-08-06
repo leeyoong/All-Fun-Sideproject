@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
 public class GroupController {
+
     /**
      * get dashboard main page (show group)
      * @return
@@ -22,16 +23,8 @@ public class GroupController {
      * @return
      */
     @GetMapping("/{groupId}")
-    public ResponseEntity<?> dashGroup(){
+    public ResponseEntity<?> selectDashBoard(){
         return null;
     }
 
-    /**
-     * 깃허브 이력 변경사항 저장
-     * @return
-     */
-    @PostMapping("/{groupId}/github")
-    public ResponseEntity<?> dashGithub(){
-        return null;
-    }
 }

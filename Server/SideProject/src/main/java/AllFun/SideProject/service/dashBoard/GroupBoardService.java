@@ -1,11 +1,17 @@
 package AllFun.SideProject.service.dashBoard;
 
+import AllFun.SideProject.domain.base.BoardKinds;
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.dashBoard.GroupBoard;
+import AllFun.SideProject.domain.matching.Board;
+import AllFun.SideProject.dto.dashBoard.GroupBoardListDto;
 import AllFun.SideProject.dto.mainPage.MyGroupBoardDto;
 import AllFun.SideProject.dto.mainPage.MyGroupDto;
+import AllFun.SideProject.repository.dashBoard.DashGroupRepository;
 import AllFun.SideProject.repository.dashBoard.GroupBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +26,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class GroupBoardService {
     private final GroupBoardRepository groupBoardRepository;
+    private final DashGroupRepository dashGroupRepository;
 
     /**
      * 내가 속한 그룹의 게시판중 최신 5개 반환
@@ -62,4 +69,42 @@ public class GroupBoardService {
         response = response.subList(0,5);
         return response;
     }
+
+    /**
+     * {group Id} 의 그룹게시판 (pageable)
+     * @param pageable
+     * @param groupId
+     * @return
+     */
+    public Page<GroupBoard> boardList(Pageable pageable, Long groupId){
+        DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
+        Page<GroupBoard> groupBoards = groupBoardRepository.findAllByGroupAndKinds(dashGroup, BoardKinds.NORMAL, pageable);
+        return groupBoards;
+    }
+
+    /**
+     * {group Id} 의 그룹 게시판 리스트 (공지사항)
+     * @param groupId
+     * @return
+     */
+    public List<GroupBoardListDto> boardNotice(Long groupId){
+        DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
+        List<GroupBoard> groupBoards = groupBoardRepository.findAllByGroupAndKindsOrderByCreatedDateDesc(dashGroup,
+                BoardKinds.NOTICE).orElse(null);
+        List<GroupBoardListDto> response = new ArrayList<>();
+        for (GroupBoard groupBoard : groupBoards) {
+            response.add(
+                    new GroupBoardListDto(
+                            groupBoard.getId(),
+                            groupBoard.getMember().getId(),
+                            groupBoard.getMember().getNickname(),
+                            groupBoard.getTitle(),
+                            groupBoard.getCreatedDate(),
+                            groupBoard.getKinds()
+                    )
+            );
+        }
+        return response;
+    }
+
 }
