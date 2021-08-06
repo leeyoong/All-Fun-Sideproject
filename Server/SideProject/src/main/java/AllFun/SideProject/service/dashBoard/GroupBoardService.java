@@ -8,6 +8,7 @@ import AllFun.SideProject.domain.dashBoard.GroupBoard;
 import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.member.Member;
 import AllFun.SideProject.dto.dashBoard.groupBoard.CreateGroupBoardDto;
+import AllFun.SideProject.dto.dashBoard.groupBoard.EditGroupBoardDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardDetailDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardListDto;
 import AllFun.SideProject.dto.mainPage.MyGroupBoardDto;
@@ -168,10 +169,32 @@ public class GroupBoardService {
 
     }
 
+    /**
+     * delete board
+     * @param groupBoardId
+     */
     @Transactional
     public void deleteBoard(Long groupBoardId){
         GroupBoard groupBoard = groupBoardRepository.findById(groupBoardId).orElse(null);
         groupBoardRepository.delete(groupBoard);
+    }
+
+    public EditGroupBoardDto getGroupBoardData(Long groupBoardId){
+        GroupBoard groupBoard = groupBoardRepository.findById(groupBoardId).orElse(null);
+        EditGroupBoardDto response = new EditGroupBoardDto(
+                groupBoard.getId(),
+                groupBoard.getTitle(),
+                groupBoard.getContent()
+        );
+        return response;
+    }
+
+    @Transactional
+    public void editGroupBoard(EditGroupBoardDto request){
+        GroupBoard groupBoard = groupBoardRepository.findById(request.getGroupBoardId()).orElse(null);
+        groupBoard.setTitle(request.getTitle());
+        groupBoard.setContent(request.getContent());
+        groupBoardRepository.save(groupBoard);
     }
 
 }

@@ -11,20 +11,26 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Messenger extends BaseEntity {
+public class Comment extends BaseEntity {
     @Id
     @GeneratedValue
-    @Column(name="messenger_id")
+    @Column(name="comment_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="group_id")
-    private DashGroup group; //그룹 id, 채팅 작성자 id 및 닉네임
+    @JoinColumn(name="group_board_id")
+    private GroupBoard groupBoard;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    private Member member; // member id
+    private Member member;
 
-    @Lob
-    private String content; // 글 내용
+    private String comment;
+
+    public static Comment createComment(Member member, String comment){
+        Comment comment1 = new Comment();
+        comment1.setMember(member);
+        comment1.setComment(comment);
+        return comment1;
+    }
 }

@@ -39,6 +39,9 @@ public class GroupBoard extends BaseEntity {
     @OneToMany(mappedBy = "groupBoard",cascade = CascadeType.REMOVE)
     private List<BoardHit> boardHits = new ArrayList<>();
 
+    @OneToMany(mappedBy = "groupBoard", cascade = CascadeType.REMOVE)
+    private List<Comment> comments = new ArrayList<>();
+
     public static GroupBoard createGroupBoard(String title, String content, BoardKinds kinds, Member member){
         GroupBoard groupBoard = new GroupBoard();
         groupBoard.setMember(member);
@@ -50,5 +53,10 @@ public class GroupBoard extends BaseEntity {
     public void addBoardHit(BoardHit boardHit){
         boardHits.add(boardHit);
         boardHit.setGroupBoard(this);
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+        comment.setGroupBoard(this);
     }
 }

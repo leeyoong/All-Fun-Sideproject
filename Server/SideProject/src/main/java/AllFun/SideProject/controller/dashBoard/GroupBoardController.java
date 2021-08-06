@@ -2,6 +2,7 @@ package AllFun.SideProject.controller.dashBoard;
 
 import AllFun.SideProject.domain.dashBoard.GroupBoard;
 import AllFun.SideProject.dto.dashBoard.groupBoard.CreateGroupBoardDto;
+import AllFun.SideProject.dto.dashBoard.groupBoard.EditGroupBoardDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardDetailDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardListDto;
 import AllFun.SideProject.service.dashBoard.GroupBoardService;
@@ -13,8 +14,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 그룹 게시판
@@ -82,12 +81,25 @@ public class GroupBoardController {
     }
 
     /**
+     * 수정하기 위해 기존 데이터 반환
+     * @param groupBoardId
+     * @return
+     */
+    @GetMapping("/edit/{groupBoardId}")
+    public ResponseEntity<?> getEditBoard(@PathVariable("groupBoardId") Long groupBoardId){
+        EditGroupBoardDto response = groupBoardService.getGroupBoardData(groupBoardId);
+        return ResponseEntity.ok(response);
+    }
+
+
+    /**
      * edit group board
      * @return
      */
-    @PatchMapping("/edit/{groupBoardId}")
-    public ResponseEntity<?> editBoard(){
-        return null;
+    @PatchMapping("/edit")
+    public ResponseEntity<?> editBoard(@RequestBody EditGroupBoardDto request){
+        groupBoardService.editGroupBoard(request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
