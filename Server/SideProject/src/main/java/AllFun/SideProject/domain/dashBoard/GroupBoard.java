@@ -36,7 +36,7 @@ public class GroupBoard extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private BoardKinds kinds;
 
-    @OneToMany(mappedBy = "groupBoard")
+    @OneToMany(mappedBy = "groupBoard",cascade = CascadeType.REMOVE)
     private List<BoardHit> boardHits = new ArrayList<>();
 
     public static GroupBoard createGroupBoard(String title, String content, BoardKinds kinds, Member member){

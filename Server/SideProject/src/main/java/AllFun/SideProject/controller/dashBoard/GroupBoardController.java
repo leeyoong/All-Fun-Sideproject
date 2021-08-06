@@ -85,7 +85,7 @@ public class GroupBoardController {
      * edit group board
      * @return
      */
-    @PostMapping("/edit/{groupBoardId}")
+    @PatchMapping("/edit/{groupBoardId}")
     public ResponseEntity<?> editBoard(){
         return null;
     }
@@ -94,9 +94,10 @@ public class GroupBoardController {
      * delete group board
      * @return
      */
-    @PostMapping("/delete/{groupBoardId}")
-    public ResponseEntity<?> deleteCalendar(){
-        return null;
+    @DeleteMapping("/delete/{groupBoardId}")
+    public ResponseEntity<?> deleteCalendar(@PathVariable("groupBoardId")Long groupBoardId){
+        groupBoardService.deleteBoard(groupBoardId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

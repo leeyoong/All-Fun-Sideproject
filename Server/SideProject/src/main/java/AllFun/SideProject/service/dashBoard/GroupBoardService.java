@@ -168,4 +168,10 @@ public class GroupBoardService {
 
     }
 
+    @Transactional
+    public void deleteBoard(Long groupBoardId){
+        GroupBoard groupBoard = groupBoardRepository.findById(groupBoardId).orElse(null);
+        groupBoardRepository.delete(groupBoard);
+    }
+
 }
