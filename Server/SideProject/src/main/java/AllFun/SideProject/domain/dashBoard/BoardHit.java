@@ -27,4 +27,10 @@ public class BoardHit {
 
     @Enumerated(EnumType.STRING)
     private HitStatus hit;
+
+    public static BoardHit createBoardHit(Member member){
+        BoardHit boardHit = new BoardHit();
+        boardHit.setMember(member);
+        return boardHit;
+    }
 }

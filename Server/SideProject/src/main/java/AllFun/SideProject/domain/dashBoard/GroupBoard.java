@@ -30,6 +30,7 @@ public class GroupBoard extends BaseEntity {
 
     private String title;
 
+    @Lob
     private String content;
 
     @Enumerated(EnumType.STRING)
@@ -37,4 +38,17 @@ public class GroupBoard extends BaseEntity {
 
     @OneToMany(mappedBy = "groupBoard")
     private List<BoardHit> boardHits = new ArrayList<>();
+
+    public static GroupBoard createGroupBoard(String title, String content, BoardKinds kinds, Member member){
+        GroupBoard groupBoard = new GroupBoard();
+        groupBoard.setMember(member);
+        groupBoard.setContent(content);
+        groupBoard.setTitle(title);
+        groupBoard.setKinds(kinds);
+        return groupBoard;
+    }
+    public void addBoardHit(BoardHit boardHit){
+        boardHits.add(boardHit);
+        boardHit.setGroupBoard(this);
+    }
 }

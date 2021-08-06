@@ -30,9 +30,6 @@ public class DashGroup extends BaseEntity {
     
     @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private List<GroupBoard> groupBoards; // 그룹 게시판
-    
-    @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
-    private List<Messenger> messengers; // 메신저
 
     @OneToMany(mappedBy= "group",cascade = CascadeType.REMOVE)
     private List<ToDo> toDos; // to-do list
@@ -43,11 +40,6 @@ public class DashGroup extends BaseEntity {
     public void addGroupBoard(GroupBoard groupBoard){
         groupBoards.add(groupBoard);
         groupBoard.setGroup(this);
-    }
-
-    public void addMessenger(Messenger messenger){
-        messengers.add(messenger);
-        messenger.setGroup(this);
     }
 
     public void addToDo(ToDo todo){

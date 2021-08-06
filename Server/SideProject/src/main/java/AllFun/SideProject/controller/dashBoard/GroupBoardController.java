@@ -1,15 +1,16 @@
 package AllFun.SideProject.controller.dashBoard;
 
 import AllFun.SideProject.domain.dashBoard.GroupBoard;
-import AllFun.SideProject.dto.dashBoard.GroupBoardDetailDto;
-import AllFun.SideProject.dto.dashBoard.GroupBoardListDto;
-import AllFun.SideProject.dto.matching.SearchResponseDto;
+import AllFun.SideProject.dto.dashBoard.groupBoard.CreateGroupBoardDto;
+import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardDetailDto;
+import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardListDto;
 import AllFun.SideProject.service.dashBoard.GroupBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class GroupBoardController {
      */
     @GetMapping("/list/notice")
     public ResponseEntity<?> groupBoardNotice(@PathVariable("groupId")Long groupId){
-        List<GroupBoardListDto> response = groupBoardService.boardNotice(groupId);
+        GroupBoardListDto response = groupBoardService.boardNotice(groupId);
         return ResponseEntity.ok(response);
     }
 
@@ -43,6 +44,7 @@ public class GroupBoardController {
     public ResponseEntity<?> groupBoardList(@PathVariable("groupId")Long groupId,
                                             @PageableDefault(size = 20, sort = "group_board_id", direction = Sort.Direction.DESC) Pageable pageable){
         Page<GroupBoard> groupBoards = groupBoardService.boardList(pageable, groupId);
+
         Page<GroupBoardListDto> response = groupBoards.map(
                 groupBoard -> new GroupBoardListDto(
                         groupBoard.getId(),
@@ -53,6 +55,7 @@ public class GroupBoardController {
                         groupBoard.getKinds()
                 )
         );
+
         return ResponseEntity.ok(response);
     }
 
@@ -71,9 +74,11 @@ public class GroupBoardController {
      * create group board
      * @return
      */
-    @PostMapping("/create")
-    public ResponseEntity<?> createBoard(){
-        return null;
+    @PostMapping("/create/{memberId}")
+    public ResponseEntity<?> createBoard(@PathVariable("groupId")Long groupId, @PathVariable("memberId") Long memberId,
+                                         @RequestBody CreateGroupBoardDto request){
+        groupBoardService.createBoard(groupId, memberId, request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**

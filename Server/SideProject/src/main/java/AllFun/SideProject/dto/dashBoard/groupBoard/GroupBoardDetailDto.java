@@ -1,4 +1,4 @@
-package AllFun.SideProject.dto.dashBoard;
+package AllFun.SideProject.dto.dashBoard.groupBoard;
 
 import AllFun.SideProject.dto.matching.BoardRoleDto;
 import lombok.AllArgsConstructor;

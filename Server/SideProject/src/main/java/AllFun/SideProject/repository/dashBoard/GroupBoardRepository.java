@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface GroupBoardRepository extends JpaRepository<GroupBoard,Long> {
     Optional<List<GroupBoard>> findAllByGroupOrderByCreatedDateDesc(DashGroup dashGroup);
 
-    Optional<List<GroupBoard>> findAllByGroupAndKindsOrderByCreatedDateDesc(DashGroup dashGroup, BoardKinds kinds);
+    Optional<GroupBoard> findFirstByGroupAndKindsOrderByCreatedDateDesc(DashGroup dashGroup, BoardKinds kinds);
 
-    Page<GroupBoard> findAllByGroupAndKinds(DashGroup dashGroup, BoardKinds kinds, Pageable pageable);
+    Page<GroupBoard> findAllByGroup(DashGroup dashGroup, Pageable pageable);
 }

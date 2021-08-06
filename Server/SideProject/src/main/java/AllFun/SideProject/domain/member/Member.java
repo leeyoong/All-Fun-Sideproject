@@ -91,4 +91,9 @@ public class Member extends BaseEntity {
         scraps.add(scrap);
         scrap.setMember(this);
     }
+
+    public void addBoardHit(BoardHit boardHit){
+        boardHits.add(boardHit);
+        boardHit.setMember(this);
+    }
 }
