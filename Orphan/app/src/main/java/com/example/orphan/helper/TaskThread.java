@@ -15,6 +15,8 @@ public class TaskThread extends Thread {
         this.pass = pass;
 
     }
+
+
     public boolean Result(){
         return this.connect;
 

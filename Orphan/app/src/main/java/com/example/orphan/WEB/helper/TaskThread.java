@@ -11,9 +11,10 @@ import java.io.IOException;
 
 public class TaskThread extends Thread {
     static int count = 0;
-    private web Clinet = new web();
+
     private String id = null;
     private String pass = null;
+    boolean result = false;
 
 
     public TaskThread(String id, String pass) {
@@ -26,11 +27,16 @@ public class TaskThread extends Thread {
 
     @Override
     public void run() {
-
+        web Clinet = new web();
         try {
-            Clinet.Post_Login_Sync(id,pass);
+            this.result=Clinet.Post_Login_Sync(id,pass);
+            System.out.println("여기");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean Result() {
+        return result;
     }
 }
