@@ -36,5 +36,5 @@ public class GroupBoard extends BaseEntity {
     private BoardKinds kinds;
 
     @OneToMany(mappedBy = "groupBoard")
-    private List<BoardHit> groupBoardHits = new ArrayList<>();
+    private List<BoardHit> boardHits = new ArrayList<>();
 }

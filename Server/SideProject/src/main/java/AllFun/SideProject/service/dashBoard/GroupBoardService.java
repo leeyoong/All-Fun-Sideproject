@@ -1,14 +1,20 @@
 package AllFun.SideProject.service.dashBoard;
 
 import AllFun.SideProject.domain.base.BoardKinds;
+import AllFun.SideProject.domain.base.HitStatus;
+import AllFun.SideProject.domain.dashBoard.BoardHit;
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.dashBoard.GroupBoard;
 import AllFun.SideProject.domain.matching.Board;
+import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.dto.dashBoard.GroupBoardDetailDto;
 import AllFun.SideProject.dto.dashBoard.GroupBoardListDto;
 import AllFun.SideProject.dto.mainPage.MyGroupBoardDto;
 import AllFun.SideProject.dto.mainPage.MyGroupDto;
+import AllFun.SideProject.repository.dashBoard.BoardHitRepository;
 import AllFun.SideProject.repository.dashBoard.DashGroupRepository;
 import AllFun.SideProject.repository.dashBoard.GroupBoardRepository;
+import AllFun.SideProject.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +33,8 @@ import java.util.List;
 public class GroupBoardService {
     private final GroupBoardRepository groupBoardRepository;
     private final DashGroupRepository dashGroupRepository;
+    private final MemberRepository memberRepository;
+    private final BoardHitRepository boardHitRepository;
 
     /**
      * 내가 속한 그룹의 게시판중 최신 5개 반환
@@ -104,6 +112,36 @@ public class GroupBoardService {
                     )
             );
         }
+        return response;
+    }
+
+    /**
+     * get detail, member hit
+     * @param groupBoardId
+     * @param memberId
+     * @return
+     */
+    @Transactional
+    public GroupBoardDetailDto boardDetail(Long groupBoardId, Long memberId){
+        GroupBoard groupBoard = groupBoardRepository.findById(groupBoardId).orElse(null);
+
+        Member member = memberRepository.findById(memberId).orElse(null);
+        BoardHit boardHit = boardHitRepository.findByGroupBoardAndMember(groupBoard, member).orElse(null);
+
+        if(boardHit.getHit().equals(HitStatus.NOT_READ)){
+            boardHit.setHit(HitStatus.READ);
+            boardHitRepository.save(boardHit);
+        }
+
+        GroupBoardDetailDto response = new GroupBoardDetailDto(
+                groupBoard.getId(),
+                groupBoard.getTitle(),
+                groupBoard.getContent(),
+                groupBoard.getMember().getNickname(),
+                groupBoard.getCreatedDate(),
+                groupBoard.getMember().getId()
+        );
+
         return response;
     }
 

@@ -14,9 +14,11 @@ public class GroupBoardListDto {
     private Long groupBoardId;
 
     private Long memberId;
+
     private String memberNickname;
 
     private String title;
+
     private LocalDateTime createdDate;
 
     private BoardKinds kinds;

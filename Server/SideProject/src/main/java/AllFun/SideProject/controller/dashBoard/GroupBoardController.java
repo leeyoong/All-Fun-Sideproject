@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller.dashBoard;
 
 import AllFun.SideProject.domain.dashBoard.GroupBoard;
+import AllFun.SideProject.dto.dashBoard.GroupBoardDetailDto;
 import AllFun.SideProject.dto.dashBoard.GroupBoardListDto;
 import AllFun.SideProject.dto.matching.SearchResponseDto;
 import AllFun.SideProject.service.dashBoard.GroupBoardService;
@@ -52,7 +53,6 @@ public class GroupBoardController {
                         groupBoard.getKinds()
                 )
         );
-
         return ResponseEntity.ok(response);
     }
 
@@ -60,9 +60,11 @@ public class GroupBoardController {
      * groupBoardId detail = 게시판 클릭
      * @return
      */
-    @GetMapping("/list/{groupBoardId}")
-    public ResponseEntity<?> groupBoardDetail(){
-        return null;
+    @PatchMapping("/list/{groupBoardId}/member/{memberId}")
+    public ResponseEntity<?> groupBoardDetail(@PathVariable("groupBoardId")Long groupBoardId,
+                                              @PathVariable("memberId") Long memberId){
+        GroupBoardDetailDto response = groupBoardService.boardDetail(groupBoardId, memberId);
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -91,4 +93,5 @@ public class GroupBoardController {
     public ResponseEntity<?> deleteCalendar(){
         return null;
     }
+
 }
