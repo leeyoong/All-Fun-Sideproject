@@ -12,6 +12,7 @@ import AllFun.SideProject.dto.dashBoard.groupBoard.EditGroupBoardDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardDetailDto;
 import AllFun.SideProject.dto.dashBoard.groupBoard.GroupBoardListDto;
 import AllFun.SideProject.dto.mainPage.MyGroupBoardDto;
+import AllFun.SideProject.dto.mainPage.MyNoHitBoardDto;
 import AllFun.SideProject.repository.dashBoard.BoardHitRepository;
 import AllFun.SideProject.repository.dashBoard.DashGroupRepository;
 import AllFun.SideProject.repository.dashBoard.GroupBoardRepository;
@@ -196,6 +197,27 @@ public class GroupBoardService {
         groupBoard.setTitle(request.getTitle());
         groupBoard.setContent(request.getContent());
         groupBoardRepository.save(groupBoard);
+    }
+
+    public List<MyNoHitBoardDto> noHitBoardList(Long memberId){
+        Member member = memberRepository.findById(memberId).orElse(null);
+        List<BoardHit> boardHits = member.getBoardHits();
+        List<MyNoHitBoardDto> response = new ArrayList<>();
+        for (BoardHit boardHit : boardHits) {
+            MyNoHitBoardDto myNoHitBoardDto = new MyNoHitBoardDto(
+                    boardHit.getGroupBoard().getGroup().getId(),
+                    boardHit.getGroupBoard().getId(),
+                    boardHit.getGroupBoard().getTitle(),
+                    boardHit.getGroupBoard().getContent(),
+                    boardHit.getGroupBoard().getCreatedDate(),
+                    boardHit.getGroupBoard().getMember().getId(),
+                    boardHit.getGroupBoard().getMember().getNickname(),
+                    boardHit.getGroupBoard().getGroup().getGroupName(),
+                    boardHit.getGroupBoard().getKinds()
+            );
+            response.add(myNoHitBoardDto);
+        }
+        return response;
     }
 
 }

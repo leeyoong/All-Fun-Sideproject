@@ -123,9 +123,9 @@ public class HomeController {
      * 내가 읽지 않은 게시판
      */
     @GetMapping("/group/board/no/hit")
-    public  ResponseEntity<?> boardNoHit(){
-
-        return null;
+    public  ResponseEntity<?> boardNoHit(@PathVariable("memberId")Long memberId){
+        List<MyNoHitBoardDto> response = groupBoardService.noHitBoardList(memberId);
+        return ResponseEntity.ok(response);
     }
 
 }
