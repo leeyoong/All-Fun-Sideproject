@@ -47,7 +47,7 @@ public class ToDoService {
     public void createTodo(Long groupId, CreateToDoDto request){
         DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
 
-        ToDo toDo = ToDo.createToDo(request.getTitle(), request.getEndTime());
+        ToDo toDo = ToDo.createToDo(request.getTitle(), request.getStartTime(), request.getEndTime());
         dashGroup.addToDo(toDo);
 
         toDoRepository.save(toDo);
@@ -66,6 +66,7 @@ public class ToDoService {
         for (ToDo toDo : toDos) {
             GroupToDoDto groupToDoDto = new GroupToDoDto(
                     toDo.getId(),
+                    toDo.getStartDate(),
                     toDo.getEndDate(),
                     toDo.getTitle()
             );
@@ -77,6 +78,7 @@ public class ToDoService {
     public EditToDoDto getToDo(Long todoId){
         ToDo toDo = toDoRepository.findById(todoId).orElse(null);
         EditToDoDto response = new EditToDoDto(
+                toDo.getStartDate(),
                 toDo.getEndDate(),
                 toDo.getTitle()
         );

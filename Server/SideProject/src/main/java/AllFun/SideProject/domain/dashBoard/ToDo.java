@@ -21,14 +21,18 @@ public class ToDo extends BaseEntity {
     @JoinColumn(name="group_id")
     private DashGroup group;
 
+    @Column(name="start_date")
+    private LocalDateTime startDate;
+
     @Column(name="end_date")
     private LocalDateTime endDate;
 
     private String title;
 
-    public static ToDo createToDo(String title, LocalDateTime endDate){
+    public static ToDo createToDo(String title,LocalDateTime startDate, LocalDateTime endDate){
         ToDo toDo = new ToDo();
         toDo.setTitle(title);
+        toDo.setStartDate(startDate);
         toDo.setEndDate(endDate);
         return toDo;
     }

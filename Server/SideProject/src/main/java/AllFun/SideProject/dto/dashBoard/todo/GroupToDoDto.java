@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class GroupToDoDto {
     private Long todoId;
-
+    private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String title;
 }

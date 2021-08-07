@@ -84,6 +84,6 @@ public class ToDoController {
     @PostMapping("/delete/{todoId}")
     public ResponseEntity<?> deleteTodo(@PathVariable("todoId")Long todoId){
         toDoService.deleteToDo(todoId);
-        return null;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
