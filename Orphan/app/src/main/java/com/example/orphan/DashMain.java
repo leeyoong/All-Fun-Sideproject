@@ -25,7 +25,6 @@ public class DashMain extends AppCompatActivity {
 
         boardFragment = new BoardFragment();
         scheduleFragment = new ScheduleFragment();
-        chatFragment = new ChatFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, scheduleFragment).commit();
 
@@ -39,7 +38,7 @@ public class DashMain extends AppCompatActivity {
                 if(pos == 0)
                     selected = scheduleFragment;
                 else
-                    selected = chatFragment;
+                    selected = boardFragment;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
 
             }

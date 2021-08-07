@@ -8,14 +8,7 @@
     android:orientation="vertical"
     tools:context=".MatchFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,14 +40,14 @@
                             android:textSize="20dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView"
+                            app:layout_constraintEnd_toStartOf="@+id/matchpencil"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                         </TextView>
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/matchpencil"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
@@ -216,7 +209,7 @@
                 android:background="?android:attr/listDivider" />
 
             <ListView
-                android:id="@+id/listview"
+                android:id="@+id/boardview"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
                 android:layout_margin="16dp"
@@ -224,6 +217,5 @@
                 android:dividerHeight="16dp">
 
             </ListView>
-        </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

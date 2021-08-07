@@ -1,5 +1,8 @@
 package com.example.orphan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,38 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        LinearLayout scheset = (LinearLayout) view.findViewById(R.id.scheset);
+        TextView scheplus = (TextView) view.findViewById(R.id.scheplus);
+        Button schesign = (Button) view.findViewById(R.id.schesign);
+        Button schenono = (Button) view.findViewById(R.id.schenono);
+
+        scheset.setVisibility(View.GONE);
+
+        scheplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scheset.setVisibility(View.VISIBLE);
+            }
+        });
+
+        schesign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scheset.setVisibility(View.GONE);
+            }
+        });
+
+        schenono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scheset.setVisibility(View.GONE);
+            }
+        });
+
+
+
+        return view;
     }
 }

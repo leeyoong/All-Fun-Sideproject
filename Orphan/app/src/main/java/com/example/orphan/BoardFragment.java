@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +15,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BoardFragment extends Fragment {
+
+
+    private BoardListAdapter adapter;
+    private ListView listView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +64,21 @@ public class BoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_board, container, false);
+        View view = inflater.inflate(R.layout.fragment_board, container, false);
+
+        adapter = new BoardListAdapter();
+
+        listView = (ListView) view.findViewById(R.id.boardview);
+        listView.setAdapter(adapter);
+
+        adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
+        adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
+        adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
+
+
+        adapter.notifyDataSetChanged();
+
+
+        return view;
     }
 }

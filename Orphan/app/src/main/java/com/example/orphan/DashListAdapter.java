@@ -25,7 +25,7 @@ public class DashListAdapter extends BaseAdapter {
 
     private ArrayList<DashListItem> dashListItemsList = new ArrayList<DashListItem>();
 
-    public  DashListAdapter(){
+    public  DashListAdapter() {
 
     }
 

@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.NoActionBar">
-        <activity android:name=".DashMain"></activity>
+        <activity android:name=".MatchMake"></activity>
+        <activity android:name=".BoardDetail" />
+        <activity android:name=".DashMain" />
         <activity
             android:name=".DashNavy"
             android:label="@string/title_activity_dash_navy"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".DashActivity"
             android:label="@string/title_activity_dash"
