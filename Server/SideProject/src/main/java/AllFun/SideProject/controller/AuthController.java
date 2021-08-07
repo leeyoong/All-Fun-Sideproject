@@ -24,15 +24,14 @@ public class AuthController {
     @GetMapping("/check/email")
     public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
 
-        System.out.println(request);
         Member find = memberService.findByEmail(request.getItem());
         if (find != null){
 
             return ErrorHeader.errorMessage("duplicated email",HttpStatus.CONFLICT);
         }else{
-            System.out.println("HI");
-            return ResponseEntity.ok(null);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
     }
 
     /**
@@ -46,7 +45,7 @@ public class AuthController {
         if (find != null){
             return ErrorHeader.errorMessage("duplicated nickname",HttpStatus.CONFLICT);
         }else{
-            return ResponseEntity.ok(null);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -55,9 +54,11 @@ public class AuthController {
      * @param request
      * @return
      */
-    @GetMapping("/sendMail")
+    @GetMapping("/send/mail")
     public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
-        return ResponseEntity.ok(memberService.sendMail(request.getItem()));
+        memberService.sendMail(request.getItem());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**
@@ -77,7 +78,8 @@ public class AuthController {
                 request.getNickname(),
                 request.getGender());
         memberService.save(newMember);
-        return ResponseEntity.ok(null);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 
 
@@ -148,7 +150,7 @@ public class AuthController {
                 return ErrorHeader.errorMessage("email send fail",HttpStatus.CONFLICT);
             }
             else{
-                return ResponseEntity.ok(null);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
         }
     }
@@ -163,7 +165,9 @@ public class AuthController {
         Member find = memberService.findById(member_id);
         if (find == null){
             return ErrorHeader.errorMessage("wrong_member",HttpStatus.BAD_REQUEST);
-        }
-        return ResponseEntity.ok(memberService.deleteMember(find));
+
+        }memberService.deleteMember(find);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

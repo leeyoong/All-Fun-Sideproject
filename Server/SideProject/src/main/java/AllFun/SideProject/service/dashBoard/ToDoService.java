@@ -2,7 +2,11 @@ package AllFun.SideProject.service.dashBoard;
 
 import AllFun.SideProject.domain.dashBoard.DashGroup;
 import AllFun.SideProject.domain.dashBoard.ToDo;
+import AllFun.SideProject.dto.dashBoard.todo.CreateToDoDto;
+import AllFun.SideProject.dto.dashBoard.todo.EditToDoDto;
+import AllFun.SideProject.dto.dashBoard.todo.GroupToDoDto;
 import AllFun.SideProject.dto.mainPage.MyToDoDto;
+import AllFun.SideProject.repository.dashBoard.DashGroupRepository;
 import AllFun.SideProject.repository.dashBoard.ToDoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +21,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ToDoService {
     private final ToDoRepository toDoRepository;
-
+    private final DashGroupRepository dashGroupRepository;
     public List<MyToDoDto> getGroupTodo(List<DashGroup> dashGroups,
                                         LocalDateTime startDateTime,
                                         LocalDateTime endDateTime){
@@ -38,5 +42,62 @@ public class ToDoService {
             }
         }
         return response;
+    }
+
+    @Transactional
+    public void createTodo(Long groupId, CreateToDoDto request){
+        DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
+
+        ToDo toDo = ToDo.createToDo(request.getTitle(), request.getContent(), request.getEndTime());
+        dashGroup.addToDo(toDo);
+
+        toDoRepository.save(toDo);
+
+    }
+
+    public List<GroupToDoDto> getToDoList(Long groupId, LocalDateTime startDateTime, LocalDateTime endDateTime){
+        DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
+        List<ToDo> toDos = toDoRepository.findAllByGroupAndEndDateBetween(dashGroup,
+                startDateTime,
+                endDateTime)
+                .orElse(null);
+
+        List<GroupToDoDto> response = new ArrayList<>();
+
+        for (ToDo toDo : toDos) {
+            GroupToDoDto groupToDoDto = new GroupToDoDto(
+                    toDo.getId(),
+                    toDo.getEndDate(),
+                    toDo.getTitle(),
+                    toDo.getContent()
+            );
+            response.add(groupToDoDto);
+        }
+        return response;
+    }
+
+    public EditToDoDto getToDo(Long todoId){
+        ToDo toDo = toDoRepository.findById(todoId).orElse(null);
+        EditToDoDto response = new EditToDoDto(
+                toDo.getEndDate(),
+                toDo.getTitle(),
+                toDo.getContent()
+        );
+        return response;
+    }
+
+    @Transactional
+    public void editToDo(Long todoId, EditToDoDto request){
+        ToDo toDo = toDoRepository.findById(todoId).orElse(null);
+        toDo.setEndDate(request.getEndTime());
+        toDo.setTitle(request.getTitle());
+        toDo.setContent(request.getContent());
+
+    }
+
+    @Transactional
+    public void deleteToDo(Long todoId){
+        ToDo toDo = toDoRepository.findById(todoId).orElse(null);
+        toDoRepository.delete(toDo);
     }
 }

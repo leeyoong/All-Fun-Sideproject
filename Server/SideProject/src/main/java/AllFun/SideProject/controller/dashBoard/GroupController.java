@@ -18,13 +18,8 @@ public class GroupController {
         return null;
     }
 
-    /**
-     * Select dashboard group (show 게시판, 일정, 깃허브, 프로젝트 소개)
-     * @return
-     */
-    @GetMapping("/{groupId}")
-    public ResponseEntity<?> selectDashBoard(){
-        return null;
-    }
+    // POST ; create group -> 매칭글 작성
+    // DELETE : delete group
+    // 멤버 추가 -> matching board 에서 승인된 인원 충원
 
 }
