@@ -95,6 +95,7 @@ public class AuthController {
         if (find == null){
             return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
         }
+
         // Check correct password
         if (!find.getPasswd().equals(request.getPasswd())){
             return ErrorHeader.errorMessage("wrong password",HttpStatus.CONFLICT);

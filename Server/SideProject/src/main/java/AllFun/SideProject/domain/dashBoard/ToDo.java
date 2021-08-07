@@ -26,13 +26,9 @@ public class ToDo extends BaseEntity {
 
     private String title;
 
-    @Lob
-    private String content;
-
-    public static ToDo createToDo(String title, String content, LocalDateTime endDate){
+    public static ToDo createToDo(String title, LocalDateTime endDate){
         ToDo toDo = new ToDo();
         toDo.setTitle(title);
-        toDo.setContent(content);
         toDo.setEndDate(endDate);
         return toDo;
     }

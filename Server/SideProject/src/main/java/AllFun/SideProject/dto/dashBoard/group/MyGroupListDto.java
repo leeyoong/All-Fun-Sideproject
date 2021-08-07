@@ -1,16 +1,13 @@
-package AllFun.SideProject.dto.dashBoard.todo;
+package AllFun.SideProject.dto.dashBoard.group;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GroupToDoDto {
-    private Long todoId;
-
-    private LocalDateTime endDateTime;
+public class MyGroupListDto {
+    private Long groupId;
     private String title;
 }

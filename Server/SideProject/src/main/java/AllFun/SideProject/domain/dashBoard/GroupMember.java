@@ -29,4 +29,10 @@ public class GroupMember {
 
     @Enumerated(EnumType.STRING)
     private GroupMemberStatus status;
+
+    public static GroupMember createGroupMember(){
+        GroupMember groupMember = new GroupMember();
+        return groupMember;
+    }
+
 }

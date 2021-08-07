@@ -12,5 +12,4 @@ import java.time.LocalDateTime;
 public class CreateToDoDto {
     private LocalDateTime endTime;
     private String title;
-    private String content;
 }

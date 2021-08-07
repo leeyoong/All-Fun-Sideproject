@@ -37,6 +37,14 @@ public class DashGroup extends BaseEntity {
     @OneToMany(mappedBy="group",cascade = CascadeType.REMOVE)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
+    public static DashGroup createDashGroup(String groupName){
+        DashGroup dashGroup = new DashGroup();
+
+        dashGroup.setGroupName(groupName);
+
+        return dashGroup;
+    }
+
     public void addGroupBoard(GroupBoard groupBoard){
         groupBoards.add(groupBoard);
         groupBoard.setGroup(this);
