@@ -1,9 +1,13 @@
 package AllFun.SideProject.service.matching;
 
+import AllFun.SideProject.domain.base.GroupMemberStatus;
 import AllFun.SideProject.domain.base.MatchingStatus;
+import AllFun.SideProject.domain.dashBoard.DashGroup;
+import AllFun.SideProject.domain.dashBoard.GroupMember;
 import AllFun.SideProject.domain.matching.Board;
 import AllFun.SideProject.domain.matching.EntryPool;
 import AllFun.SideProject.domain.member.Member;
+import AllFun.SideProject.repository.dashBoard.GroupMemberRepository;
 import AllFun.SideProject.repository.matching.EntryPoolRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +21,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class EntryPoolService {
     private final EntryPoolRepository entryPoolRepository;
-
+    private final GroupMemberRepository groupMemberRepository;
     /**
      * create entry pool
      * @param entryPool
@@ -52,6 +56,16 @@ public class EntryPoolService {
             selectEntry.setStatus(status);
             entryPoolRepository.save(selectEntry);
         });
+
+        // 멤버 추가
+        if(status.equals(MatchingStatus.ACCEPT)){
+            DashGroup dashGroup = board.getGroup();
+            GroupMember groupMember = GroupMember.createGroupMember();
+            groupMember.setStatus(GroupMemberStatus.OTHER);
+            dashGroup.addGroupMember(groupMember);
+            member.addGroupMember(groupMember);
+            groupMemberRepository.save(groupMember);
+        }
     }
 
     @Transactional

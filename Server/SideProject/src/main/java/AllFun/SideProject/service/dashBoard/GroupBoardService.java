@@ -157,12 +157,13 @@ public class GroupBoardService {
         groupBoardRepository.save(groupBoard);
 
         for(GroupMember groupMember : group.getGroupMembers()){
-            BoardHit boardHit = BoardHit.createBoardHit(groupMember.getMember());
+            BoardHit boardHit = BoardHit.createBoardHit();
             if(groupMember.getMember().getId() == memberId){
                 boardHit.setHit(HitStatus.READ);
             }else{
                 boardHit.setHit(HitStatus.NOT_READ);
             }
+            groupMember.getMember().addBoardHit(boardHit);
             groupBoard.addBoardHit(boardHit);
             boardHitRepository.save(boardHit);
         }

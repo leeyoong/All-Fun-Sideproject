@@ -32,14 +32,27 @@ public class GroupController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 그룹 삭제
+     * @param groupId
+     * @return
+     */
     @DeleteMapping("/group/{groupId}")
     public ResponseEntity<?> deleteGroup(@PathVariable("groupId")Long groupId){
         dashGroupService.deleteGroup(groupId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // POST ; create group -> 매칭글 작성
-    // DELETE : delete group
-    // 멤버 추가 -> matching board 에서 승인된 인원 충원
-
+    /**
+     * 그룹 탈퇴
+     * @param groupId
+     * @param memberId
+     * @return
+     */
+    @DeleteMapping("group/{groupId}/member/{memberId}")
+    public ResponseEntity<?> secessionGroup(@PathVariable("groupId")Long groupId,
+                                            @PathVariable("memberId")Long memberId){
+        dashGroupService.secessionGroup(groupId, memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

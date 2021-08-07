@@ -86,7 +86,7 @@ public class MatchingBoardController {
                 request.getBigData(),
                 request.getBlockChain()
         );
-
+        dashGroup.setBoard(newBoard);
         boardService.save(newBoard, find);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

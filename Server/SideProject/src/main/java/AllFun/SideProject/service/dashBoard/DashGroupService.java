@@ -57,9 +57,26 @@ public class DashGroupService {
         groupMemberRepository.save(groupMember);
     }
 
+    /**
+     * 그룹 삭제
+     * @param groupId
+     */
     @Transactional
     public void deleteGroup(Long groupId){
         DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
         dashGroupRepository.delete(dashGroup);
+    }
+
+    /**
+     * 그룹 탈퇴
+     * @param groupId
+     * @param memberId
+     */
+    @Transactional
+    public void secessionGroup(Long groupId, Long memberId){
+        DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
+        Member member = memberRepository.findById(memberId).orElse(null);
+        GroupMember groupMember = groupMemberRepository.findByGroupAndMember(dashGroup, member).orElse(null);
+        groupMemberRepository.delete(groupMember);
     }
 }
