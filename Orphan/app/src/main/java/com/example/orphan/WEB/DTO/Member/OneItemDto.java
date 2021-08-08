@@ -1,12 +1,6 @@
-package AllFun.SideProject.dto.member;
+package com.example.orphan.WEB.DTO.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class OneItemDto {
     private String item;
 }

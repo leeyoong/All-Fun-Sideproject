@@ -1,12 +1,6 @@
-package AllFun.SideProject.dto.member;
+package com.example.orphan.WEB.DTO.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class CreateMemberDto {
     private String email; //중복체크 & 이메일 인증 완료된 이메일
     private String passwd;
