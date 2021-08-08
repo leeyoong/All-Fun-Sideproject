@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.orphan.WEB.DTO.member.MemberLoginDto;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -18,11 +20,35 @@ public class MainActivity extends AppCompatActivity {
     Fragment matchFragment;
     Fragment dashFragment;
     Fragment settingFragment;
-
+    public static String nick;
+    private static Long  memberid;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+            // 로그인에서 받아온 값  /////////////////////
+
+        Intent inten = getIntent();
+
+        String email = getIntent().getStringExtra("email");
+        String birth = getIntent().getStringExtra("password");
+        memberid  = getIntent().getLongExtra("memberid" , 0);
+        String nick = getIntent().getStringExtra("nick");;
+
+
+
+        /// 로그인에서 받아온값 ///////////////////////
+
+
+
+
+
+
+
+
 
         homeFragment = new HomeFragment();
         matchFragment = new MatchFragment();

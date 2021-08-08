@@ -299,7 +299,7 @@ public class web {
         return null;
     }
 
-    public int Post_Login_Sync(String Email, String password){
+    public Response<MemberLoginDto> Post_Login_Sync(String Email, String password){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
         //보낼 오브젝트 생성
@@ -316,10 +316,10 @@ public class web {
         if(response != null){
             System.out.println(response.headers().toString());
 
-            return response.code();
+            return response;
         }
         else{
-            return -1;
+            return null;
         }
 
 

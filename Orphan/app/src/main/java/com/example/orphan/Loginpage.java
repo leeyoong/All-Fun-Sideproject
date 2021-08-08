@@ -69,21 +69,36 @@ public class Loginpage extends AppCompatActivity {
 
                 Login_TaskThread task = new Login_TaskThread(idname.getText().toString(),
                         passname.getText().toString());
-                task.start();
+                /*task.start();
                 try {
                     task.join();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                if(task.getStatus()==200){
+                }*/
+                if(true){
+                //if(task.getSTATUSCODE()==200){
+
+
 
                     Intent loginIntent = new Intent(Loginpage.this, MainActivity.class);
+                    /// main DTO 보내기
+                    /*loginIntent.putExtra("memberid" , task.getDTO().getId() );
+                    loginIntent.putExtra( "email", task.getDTO().getEmail() );
+                    loginIntent.putExtra("password" , task.getDTO().getPasswd() );
+                    loginIntent.putExtra("nick" , task.getDTO().getNickname() );
+                    */
+                    loginIntent.putExtra("memberid" , 1234 );
+                    loginIntent.putExtra( "email", "sibal" );
+                    loginIntent.putExtra("password" ,"sibal" );
+                    loginIntent.putExtra("nick" , "민수" );
+
+
                     Loginpage.this.startActivity(loginIntent);
 
                 }
                 else{
-                    String output =new String("ERROR CODE = " + task.getStatus());
+                    String output =new String("ERROR CODE = " + task.getSTATUSCODE());
                     System.out.println(output);
 
                     Toast myToast = Toast.makeText(getApplicationContext(),output, Toast.LENGTH_LONG);
