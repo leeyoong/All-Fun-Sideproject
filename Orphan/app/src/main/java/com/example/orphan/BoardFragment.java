@@ -1,5 +1,6 @@
 package com.example.orphan;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 /**
@@ -68,6 +71,8 @@ public class BoardFragment extends Fragment {
 
         adapter = new BoardListAdapter();
 
+        ImageView boardpencil = (ImageView) view.findViewById(R.id.boardpencil);
+
         listView = (ListView) view.findViewById(R.id.boardview);
         listView.setAdapter(adapter);
 
@@ -77,6 +82,14 @@ public class BoardFragment extends Fragment {
 
 
         adapter.notifyDataSetChanged();
+
+        boardpencil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Intent = new Intent(view.getContext(), BoardMake.class);
+                view.getContext().startActivity(Intent);
+            }
+        });
 
 
         return view;

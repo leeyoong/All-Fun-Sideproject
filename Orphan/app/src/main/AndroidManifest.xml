@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.NoActionBar">
-        <activity android:name=".MatchMake"></activity>
+        <activity android:name=".BoardMake"></activity>
+        <activity android:name=".MatchMake" />
         <activity android:name=".BoardDetail" />
         <activity android:name=".DashMain" />
         <activity

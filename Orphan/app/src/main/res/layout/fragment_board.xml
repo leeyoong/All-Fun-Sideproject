@@ -33,12 +33,12 @@
                 android:textAlignment="center"
                 android:textColor="@color/teal_700"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/boardpencil"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/boardpencil"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="16dp"

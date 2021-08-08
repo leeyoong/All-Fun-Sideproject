@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#1C2323"
     android:orientation="vertical"
-    tools:context=".MatchMake" >
+    tools:context=".BoardMake" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
-            android:text="MatchBoard"
+            android:text="Board"
             android:textColor="@color/teal_200"
             android:textSize="20dp"
             android:textStyle="bold"></TextView>
@@ -74,13 +74,14 @@
         android:text="내용" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_width="380dp"
+        android:layout_height="475dp"
         android:layout_margin="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
             android:background="@drawable/custom_layout6"
             android:orientation="vertical">
 
@@ -88,42 +89,38 @@
             <EditText
                 android:id="@+id/editTextTextPersonName2"
                 android:layout_width="match_parent"
-                android:layout_height="330dp"
+                android:layout_height="450dp"
                 android:gravity="top|start"
-                android:inputType="textPersonName"/>
+                android:inputType="textPersonName" />
         </LinearLayout>
 
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="모집 분야 선택" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="185dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="123dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="100dp"
+            android:text="CheckBox" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="176dp"
-                android:layout_height="wrap_content"
-                android:text="추가" />
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
+            android:layout_width="115dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_button"
+            android:text="Submit" />
 
-        <ListView
-            android:layout_width="221dp"
-            android:layout_height="match_parent"></ListView>
     </LinearLayout>
 
 </LinearLayout>
