@@ -1,14 +1,17 @@
-package AllFun.SideProject.dto.note;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@RequiredArgsConstructor
+package com.example.orphan.WEB.DTO.note;
 
 public class MessageDto {
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public MessageDto(String message) {
+        this.message = message;
+    }
+
     private String message;
 }

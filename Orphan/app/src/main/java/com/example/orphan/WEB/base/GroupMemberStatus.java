@@ -1,4 +1,4 @@
-package AllFun.SideProject.domain.base;
+package com.example.orphan.WEB.base;
 
 public enum GroupMemberStatus {
     OWNER, OTHER
