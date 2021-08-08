@@ -1,13 +1,6 @@
-package AllFun.SideProject.dto.member;
+package com.example.orphan.WEB.DTO.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class FindEmailDto {
     private String name;
     private String birth;

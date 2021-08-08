@@ -1,14 +1,8 @@
-package AllFun.SideProject.dto.member;
+package com.example.orphan.WEB.DTO.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class MemberLoginDto {
     private Long id; // member id (pk)
     private String email; // Log-In Id
