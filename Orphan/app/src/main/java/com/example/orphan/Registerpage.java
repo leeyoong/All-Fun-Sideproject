@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,14 @@ import android.widget.Toast;
 import com.example.orphan.WEB.Thread.EmailCheck_TaskThread;
 import com.example.orphan.WEB.Thread.FindID_TaskThread;
 import com.example.orphan.WEB.Thread.Register_TaskThread;
+import com.example.orphan.WEB.web.ApiInterface;
+import com.example.orphan.WEB.web.web;
+
+import org.w3c.dom.Text;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Registerpage extends AppCompatActivity {
     String[] yearList = new String[70];
@@ -22,7 +31,7 @@ public class Registerpage extends AppCompatActivity {
     String[] dayList = new String[31];
 
 
-    boolean checked_emailcode = true;
+    boolean checked_emailcode = false;
     boolean checked_password = false;
     boolean checked_nick = false;
     String CODE = null;
@@ -37,8 +46,9 @@ public class Registerpage extends AppCompatActivity {
         setContentView(R.layout.activity_registerpage);
 
 
-
-
+        TextView emailpasswordCheckBox = (TextView) findViewById(R.id.passwordCheck);
+        TextView emailCheckBox = (TextView) findViewById(R.id.emailCheck);
+        TextView emailcodeBox = (TextView) findViewById(R.id.codeCheck);
         TextView email = (TextView) findViewById(R.id.editTextTextEmailAddress);
         TextView email_code = (TextView) findViewById(R.id.certmail);
         TextView password = (TextView) findViewById(R.id.passmade);
@@ -84,25 +94,45 @@ public class Registerpage extends AppCompatActivity {
         emailcheckbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String chkMail = email.getText().toString();
-                EmailCheck_TaskThread task = new EmailCheck_TaskThread(chkMail);
-                task.start();
-                try {
-                    task.join();
+                String webEmail = email.getText().toString();
+                web Clinet = new web();
+                ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                // 요청 시작
+                Call<com.example.orphan.WEB.DTO.member.OneItemDto> call = apiService.emailCheck(webEmail);
+                emailCheckBox.setText("CHECKING");
+                call.enqueue(new Callback<com.example.orphan.WEB.DTO.member.OneItemDto>() {
+                    @Override
+                    public void onResponse(Call<com.example.orphan.WEB.DTO.member.OneItemDto> call, Response<com.example.orphan.WEB.DTO.member.OneItemDto> response) {
+                        try {
+                            Log.d("TEST", response.body().toString());
+                            com.example.orphan.WEB.DTO.member.OneItemDto OneItemDto = response.body();
+                            if(response.code() == 200){
+                                //성공했을 때 200
+                                emailCheckBox.setText("DONE");
+                                CODE = response.body().getItem();
+                            }
+
+                            else{
+                                // 실패할 경우 404
+                                emailCheckBox.setText("Fail");
+
+                            }
+                            //idfound.setText(OneItemDto.toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<com.example.orphan.WEB.DTO.member.OneItemDto> call, Throwable t) {
+                        //idfound.setText(t.toString());
+                    }
+                });
 
 
-                if(task.getCode() != null){
-                    send_email =   chkMail;
-                    CODE = task.getCode();
-                    System.out.println("사용 가능");
-                }
-                else{
-                    System.out.println("이미 회원가입한 아이디 입니다");
-                }
+
             }
         });
 
@@ -121,9 +151,11 @@ public class Registerpage extends AppCompatActivity {
                     if(CODE.equals(email_code.getText().toString())){
 
                         checked_emailcode = true;
+                        emailcodeBox.setText("DONE");
                         System.out.println("완료");
                     }
                     else{
+                        emailcodeBox.setText("Fail");
                         System.out.println("인증 오류");
 
                     }
@@ -153,12 +185,14 @@ public class Registerpage extends AppCompatActivity {
                     if (passwd.equals(passwd2)) {
                         checked_password = true;
                         send_pass = passwd;
+                        emailpasswordCheckBox.setText("DONE");
                         System.out.println("이 비밀번호로 저장됩니다. 다른 비밀번호를 원하시면 다시 Check를 눌러주세요" );
 
                     }
 
                     else{
                         System.out.println("비밀번호 확인과 다릅니다");
+                        emailpasswordCheckBox.setText("Fail");
 
                     }
 
