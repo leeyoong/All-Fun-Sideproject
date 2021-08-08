@@ -45,15 +45,30 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:gravity="center"
-                    android:text="김민수"
-                    android:textColor="@color/teal_200"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:gravity="center"
+                        android:text="김민수"
+                        android:textColor="@color/teal_200"
+                        android:textSize="16dp"
+                        android:layout_marginEnd="110dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="clip_vertical"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:text="회원탈퇴" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,72 +222,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
-            android:text="E-mail"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/teal_200"></TextView>
-
-        <EditText
-            android:id="@+id/editTextTextEmailAddress"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="ex) abc@google.com"
-            android:inputType="textEmailAddress"
-            android:textColorHint="#B3D3CC" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button3"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_button"
-            android:text="변경" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp">
-
-        <EditText
-            android:id="@+id/certmail"
-            android:layout_width="278dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Please enter the code."
-            android:textColorHint="#B3D3CC" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button4"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_button"
-            android:text="CHECK" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -364,6 +313,7 @@
         android:id="@+id/button14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Change password" />

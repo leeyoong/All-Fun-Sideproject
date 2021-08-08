@@ -96,14 +96,6 @@
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="모집 분야 선택" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -114,15 +106,37 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내 그룹 선택" />
+
+            <Spinner
+                android:id="@+id/spinner11"
+                android:layout_width="match_parent"
+                android:layout_height="38dp" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="모집 분야 선택" />
+
             <Button
-                android:id="@+id/button"
+                android:id="@+id/cateadd"
                 android:layout_width="176dp"
                 android:layout_height="wrap_content"
                 android:text="추가" />
+
         </LinearLayout>
 
         <ListView
-            android:layout_width="221dp"
+            android:id="@+id/cateview"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
     </LinearLayout>
 

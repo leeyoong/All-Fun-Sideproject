@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/catetouch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="#1C2323">
+
+    <TextView
+        android:id="@+id/catetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="분야" />
+
+    <TextView
+        android:id="@+id/catenow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+
+        android:text="4" />
+
+    <TextView
+        android:id="@+id/cateslash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/" />
+
+    <TextView
+        android:id="@+id/catemax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="8dp"
+        android:text="5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/catebutton"
+        android:layout_width="29dp"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/custom_button"
+        android:text="지원"
+        android:textSize="10dp" />
+</LinearLayout>

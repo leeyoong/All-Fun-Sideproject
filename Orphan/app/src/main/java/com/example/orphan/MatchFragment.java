@@ -21,6 +21,7 @@ public class MatchFragment extends Fragment {
     private MatchListAdapter adapter;
     private ListView listView;
 
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,9 +88,11 @@ public class MatchFragment extends Fragment {
 
         adapter = new MatchListAdapter();
 
+
         ImageView matchpencil = (ImageView) view.findViewById(R.id.matchpencil);
         listView = (ListView) view.findViewById(R.id.boardview);
         listView.setAdapter(adapter);
+
 
         matchpencil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +105,8 @@ public class MatchFragment extends Fragment {
         adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
         adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
         adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
+
+
         adapter.notifyDataSetChanged();
 
         return view;

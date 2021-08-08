@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
@@ -63,6 +64,30 @@ public class BoardFragment extends Fragment {
         }
     }
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            //listItem.measure(0, 0);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight;
+        listView.setLayoutParams(params);
+
+        listView.requestLayout();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +105,7 @@ public class BoardFragment extends Fragment {
         adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
         adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
 
-
+        setListViewHeightBasedOnChildren(listView);
         adapter.notifyDataSetChanged();
 
         boardpencil.setOnClickListener(new View.OnClickListener() {
