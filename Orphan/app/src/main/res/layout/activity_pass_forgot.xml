@@ -116,7 +116,7 @@
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:layout_width="77dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="16dp"
@@ -126,21 +126,21 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="116dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
 
     </LinearLayout>

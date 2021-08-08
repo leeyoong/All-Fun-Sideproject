@@ -1,5 +1,6 @@
 package com.example.orphan.WEB.web;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
@@ -34,6 +35,9 @@ public class web {
         }
         return retrofit;
     }
+
+
+
 
     public String Post_EmailCheck(String Email){
         //Web 생성
@@ -210,34 +214,6 @@ public class web {
         return ok.getResponse_massage();
     }
 
-    public boolean Post_Login_Sync(String Email, String password){
-        //Web 생성
-        ApiInterface apiService = web.getClient().create(ApiInterface.class);
-        //보낼 오브젝트 생성
-        LoginDto object = new LoginDto(Email,password);
-        // 요청 시작
-        Call<MemberDataDto> call = apiService.login(object);
-        Response<MemberDataDto> response = null;
-        try {
-            response = call.execute();
-        } catch (IOException e) {
-            System.out.println("sync ----연결실패");
-        }
-        System.out.println("sync ----web완료");
-        if(response != null){
-            return true;
-        }
-        else{
-            return false;
-
-        }
-
-
-
-    }
-
-
-
     public String Post_FindPassword(String name,String birth,String phone, String email){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
@@ -332,7 +308,158 @@ public class web {
         return null;
     }
 
+    public int Post_Login_Sync(String Email, String password){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        LoginDto object = new LoginDto(Email,password);
+        // 요청 시작
+        Call<MemberDataDto> call = apiService.login(object);
+        Response<MemberDataDto> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+            return response.code();
+        }
+        else{
+            return -1;
+        }
 
+
+
+    }
+    public int Post_FindPassword_Sync(String name,String birth,String phone, String email) {
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        FindPasswordDto object = new FindPasswordDto(name, birth, phone, email);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.findPW(object);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
+    public int Post_FindEmail_Sync(String name,String birth,String phone){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        FindEmailDto object = new FindEmailDto(name,birth,phone);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.findID(object);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
+    public int Post_SignUp_Sync(String email, String passwd, String birth, String name, String phone, String nickname, String gender){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        CreateMemberDto object = new CreateMemberDto(email, passwd, birth, name, phone, nickname, gender);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.createMember(object);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
+
+    public int Post_EmailCheck_Sync(String Email){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        OneItemDto email = new OneItemDto(Email);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.emailCheck(email);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
+    public int Post_Nickname_Sync(String Nickname){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        OneItemDto Object= new OneItemDto(Nickname);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.nickNameCheck(Object);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
+    public int Post_SendEmail_Sync(String Email){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+
+        //보낼 오브젝트 생성
+        OneItemDto object= new OneItemDto(Email);
+        // 요청 시작
+        Call<ResponseJson> call = apiService.emailCheck(object);
+        Response<ResponseJson> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if (response != null) {
+            return response.code();
+        } else {
+            return -1;
+        }
+    }
 
 
 

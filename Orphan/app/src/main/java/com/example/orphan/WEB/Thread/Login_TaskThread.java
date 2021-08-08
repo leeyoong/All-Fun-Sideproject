@@ -1,26 +1,30 @@
-package com.example.orphan.WEB.helper;
+package com.example.orphan.WEB.Thread;
 
 import com.example.orphan.WEB.web.web;
 
-public class TaskThread extends Thread {
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+public class Login_TaskThread extends Thread {
     static int count = 0;
     web Client = new web();
     String id = null;
     String pass = null;
-    boolean status = false;
+    int status = 0;
 
-    public TaskThread(String id,String pass){
+
+    public Login_TaskThread(String id,String pass){
         this.id = id;
         this.pass = pass;
 
 
     }
-    public boolean getStatus(){
+    public int getStatus(){
         return status;
     }
 
     @Override
-    public void run() {
+    public void run(){
         status=Client.Post_Login_Sync(id,pass);
     }
 
