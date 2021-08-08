@@ -56,9 +56,8 @@ public class AuthController {
      */
     @GetMapping("/send/mail")
     public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
-        memberService.sendMail(request.getItem());
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        OneItemDto oneItemDto = new OneItemDto(memberService.sendMail(request.getItem()));
+        return ResponseEntity.ok(oneItemDto);
     }
 
     /**

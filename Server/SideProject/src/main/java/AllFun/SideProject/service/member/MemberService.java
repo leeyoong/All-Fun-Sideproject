@@ -114,7 +114,7 @@ public class MemberService {
         message.setSubject("인증번호 입력을 위한 메일입니다.");
         message.setText("인증번호 : " + key);
         javaMailSender.send(message);
-        return null;
+        return key;
     }
 
     /**
