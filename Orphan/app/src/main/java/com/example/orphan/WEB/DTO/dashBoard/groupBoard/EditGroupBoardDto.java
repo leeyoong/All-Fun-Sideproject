@@ -1,14 +1,6 @@
-package AllFun.SideProject.dto.dashBoard.groupBoard;
+package com.example.orphan.WEB.DTO.dashBoard.groupBoard;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
-
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class EditGroupBoardDto {
 
     private Long groupBoardId;
@@ -17,4 +9,33 @@ public class EditGroupBoardDto {
 
     private String content;
 
+    public Long getGroupBoardId() {
+        return groupBoardId;
+    }
+
+    public void setGroupBoardId(Long groupBoardId) {
+        this.groupBoardId = groupBoardId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public EditGroupBoardDto(Long groupBoardId, String title, String content) {
+        this.groupBoardId = groupBoardId;
+        this.title = title;
+        this.content = content;
+    }
 }
