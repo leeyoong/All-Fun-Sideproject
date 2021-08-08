@@ -235,7 +235,7 @@ public class Registerpage extends AppCompatActivity {
                 String send_nick = nick.getText().toString();
                 String send_gender = "male";
                 String send_birth = new String(year
-                        +"-"+mouth+"-"+day);
+                        +"-"+mouth+"+"+day);
                 if(send_name.isEmpty()){
                     String output = "Name is empth";
                     System.out.println(output);
