@@ -18,17 +18,18 @@ public class AuthController {
 
     /**
      * Check Duplicated Email
-     * @param request
+     * @param email
      * @return
      */
-    @GetMapping("/check/email")
-    public ResponseEntity<?> emailChk(@RequestBody OneItemDto request){
+    @GetMapping("/check/email/{email}")
+    public ResponseEntity<?> emailChk(@PathVariable("email")String email){
 
-        Member find = memberService.findByEmail(request.getItem());
+        Member find = memberService.findByEmail(email);
         if (find != null){
 
             return ErrorHeader.errorMessage("duplicated email",HttpStatus.CONFLICT);
         }else{
+
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
@@ -36,12 +37,12 @@ public class AuthController {
 
     /**
      * Check Duplicated Nickname
-     * @param request
+     * @param nickname
      * @return
      */
-    @GetMapping("/check/nickname")
-    public ResponseEntity<?> nicknameChk(@RequestBody OneItemDto request){
-        Member find = memberService.findByNickname(request.getItem());
+    @GetMapping("/check/nickname/{nickname}")
+    public ResponseEntity<?> nicknameChk(@PathVariable("nickname") String nickname){
+        Member find = memberService.findByNickname(nickname);
         if (find != null){
             return ErrorHeader.errorMessage("duplicated nickname",HttpStatus.CONFLICT);
         }else{
@@ -51,12 +52,12 @@ public class AuthController {
 
     /**
      * Email Authentication
-     * @param request
+     * @param email
      * @return
      */
-    @GetMapping("/send/mail")
-    public ResponseEntity<?> sendMail(@RequestBody OneItemDto request){
-        OneItemDto oneItemDto = new OneItemDto(memberService.sendMail(request.getItem()));
+    @GetMapping("/send/email/{email}")
+    public ResponseEntity<?> sendMail(@PathVariable("email")String email){
+        OneItemDto oneItemDto = new OneItemDto(memberService.sendMail(email));
         return ResponseEntity.ok(oneItemDto);
     }
 
@@ -116,13 +117,15 @@ public class AuthController {
 
     /**
      * find user email
-     * @param request
-     * @return {email}
+     * @param name
+     * @param birth
+     * @param phone
+     * @return
      */
-    @GetMapping("/find/email")
-    public ResponseEntity<?> findEmail(@RequestBody FindEmailDto request){
-        Member find = memberService.findByNameAndBirthAndPhoneAndGender(
-                request.getName(),request.getBirth(),request.getPhone());
+    @GetMapping("/find/email/name/{name}/birth/{birth}/phone/{phone}")
+    public ResponseEntity<?> findEmail(@PathVariable("name") String name, @PathVariable("birth") String birth,
+                                       @PathVariable("phone") String phone){
+        Member find = memberService.findByNameAndBirthAndPhoneAndGender(name,birth,phone);
 
         if (find == null){
             return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);

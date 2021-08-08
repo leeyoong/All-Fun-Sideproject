@@ -33,6 +33,7 @@ public class ToDoService {
                                                                                 .orElse(null);
             for (ToDo toDo : toDos) {
                 MyToDoDto myToDoDto = new MyToDoDto(
+                        toDo.getStartDate(),
                         toDo.getEndDate(),
                         dashGroup.getGroupName(),
                         toDo.getTitle()

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class MyToDoDto {
+    private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String groupName;
     private String title;
