@@ -10,8 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+
 
 public class HomeFragment extends Fragment {
+
+    private CalListAdapter adapter;
+    private ListView listView;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,48 +62,56 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            //listItem.measure(0, 0);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight;
+        listView.setLayoutParams(params);
+
+        listView.requestLayout();
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        // 추가하는 내용
-        Bundle bundle = getArguments();
-        String email;
-        String password;
-        String nick;
-        Long memberid;
-
-        if (bundle != null) {
-            email = bundle.getString("email");
-            password = bundle.getString("password");
-            nick = bundle.getString("nick");
-            memberid = bundle.getLong("memberid");
-        }
-        else{
-            email = null;
-            password = null;
-            nick = null;
-            memberid = 0L;
-        }
-
-        TextView Nickname = (TextView) view.findViewById(R.id.textView4);
-        TextView StatusHit = (TextView) view.findViewById(R.id.textView7);
-        Nickname.setText(nick);
-        //StatusHit.setText();
 
 
-        Nickname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        adapter = new CalListAdapter();
 
 
 
 
-        //
+
+        listView = (ListView) view.findViewById(R.id.calview);
+        listView.setAdapter(adapter);
+
+
+        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
+        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
+        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
+
+        setListViewHeightBasedOnChildren(listView);
+        adapter.notifyDataSetChanged();
+        
         return view;
 
     }
