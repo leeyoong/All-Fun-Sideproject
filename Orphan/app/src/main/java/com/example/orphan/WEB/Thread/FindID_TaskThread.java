@@ -7,7 +7,7 @@ public class FindID_TaskThread extends Thread {
     String name = null;
     String birth = null;
     String phone = null;
-    int status = 0;
+    String status;
 
 
     public FindID_TaskThread(String name, String birth, String PhoneNum){
@@ -17,7 +17,7 @@ public class FindID_TaskThread extends Thread {
 
 
     }
-    public int getStatus(){
+    public String getStatus(){
         return status;
     }
 

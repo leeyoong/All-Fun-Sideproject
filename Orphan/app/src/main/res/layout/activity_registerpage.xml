@@ -335,7 +335,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Please set your Nickname."
-                    android:inputType="phone"
                     android:textColorHint="#B3D3CC" />
 
 

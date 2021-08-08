@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.orphan.WEB.Thread.FindID_TaskThread;
+import com.example.orphan.WEB.Thread.FindPass_TaskThread;
 
 public class PassForgot extends AppCompatActivity {
     String[] yearList = new String[70];
@@ -90,12 +91,12 @@ public class PassForgot extends AppCompatActivity {
         String birth = getIntent().getStringExtra("birth");
         String phone = getIntent().getStringExtra("phone");
 
-        if(!email.isEmpty()){
+        if(email!=null){
             Email.setText(email);
         }
-        if(!name.isEmpty()){
+        if(name!=null){
         Name.setText(name);}
-        if(!phone.isEmpty()){
+        if(phone!=null){
         PhoneNumber.setText(phone);}
 
         FindPass.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +149,7 @@ public class PassForgot extends AppCompatActivity {
                     System.out.println(output);
                 }
                 else{
-                    FindID_TaskThread task = new FindID_TaskThread(name,birth,phonenumber);
+                    FindPass_TaskThread task = new FindPass_TaskThread(name,birth,phonenumber,email);
                     task.start();
                     try {
                         task.join();
@@ -157,7 +158,7 @@ public class PassForgot extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     //융이에게 물어볼꺼
-                    if(task.getStatus()==404){
+                    if(task.getStatus()==204){
 
                         Intent passForgetIntent = new Intent(PassForgot.this, Loginpage.class);
                         passForgetIntent.putExtra("Email", email);

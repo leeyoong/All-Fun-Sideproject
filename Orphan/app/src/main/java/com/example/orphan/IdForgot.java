@@ -129,18 +129,14 @@ public class IdForgot extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     //융이에게 물어볼꺼
-                    if(task.getStatus()==404){
+                    if(task.getStatus()!=null){
 
                         Intent IdForgetIntent = new Intent(IdForgot.this, IdFound.class);
-                        IdForgetIntent.putExtra("email", "wejofjsadof");
-                        IdForgetIntent.putExtra("date","69/07/04");
+                        IdForgetIntent.putExtra("email", task.getStatus());
                         IdForgetIntent.putExtra("name",name);
                         IdForgetIntent.putExtra("birth",birth);
                         IdForgetIntent.putExtra("phone",phonenumber);
                         IdForgot.this.startActivity(IdForgetIntent);
-
-
-
 
                     }
                     else{

@@ -306,7 +306,6 @@ public class web {
         if(response != null){
             System.out.println(response.headers().toString());
 
-            System.out.println(response.body().getCreateDate());
             return response.code();
         }
         else{
@@ -321,7 +320,7 @@ public class web {
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
         //보낼 오브젝트 생성
-        FindPasswordDto object = new FindPasswordDto(name, birth, phone, email);
+        FindPasswordDto object = new FindPasswordDto( name, birth, phone, email);
         // 요청 시작
         Call<OneItemDto> call = apiService.findPW(object);
         Response<OneItemDto> response = null;
@@ -337,7 +336,7 @@ public class web {
             return -1;
         }
     }
-    public int Post_FindEmail_Sync(String name,String birth,String phone){
+    public String Post_FindEmail_Sync(String name,String birth,String phone){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
@@ -353,9 +352,9 @@ public class web {
         }
         System.out.println("sync ----web완료");
         if (response != null) {
-            return response.code();
+            return response.body().getItem();
         } else {
-            return -1;
+            return null;
         }
     }
     public int Post_SignUp_Sync(String email, String passwd, String birth, String name, String phone, String nickname, String gender){
