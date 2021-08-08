@@ -122,7 +122,7 @@ public class PassForgot extends AppCompatActivity {
                 String mouth = MonthSpinner.getSelectedItem().toString();
                 String day = DaySpinner.getSelectedItem().toString();
                 String birth = new String(year
-                        +"-"+mouth+"+"+day);
+                        +"-"+mouth+"-"+day);
 
 
                 if(email.isEmpty()){

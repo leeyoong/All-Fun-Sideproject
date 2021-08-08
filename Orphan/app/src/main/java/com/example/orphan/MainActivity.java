@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent inten = getIntent();
 
-       Memberid = getIntent().getLongExtra("memberid",0);
+       Memberid = getIntent().getLongExtra("memberid",0L);
        email = getIntent().getStringExtra("email");
        nick = getIntent().getStringExtra("nick");
        password = getIntent().getStringExtra("password");
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         settingFragment = new SettingsFragment();
 
         Bundle bundle = new Bundle(4); // 파라미터의 숫자는 전달하려는 값의 갯수
-        bundle.putLong("memberid",0);
+        bundle.putLong("memberid",0L);
         bundle.putString("email",email);
         bundle.putString("password",password);
         bundle.putString("nick",nick);

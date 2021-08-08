@@ -147,12 +147,14 @@
 
             </LinearLayout>
 
-            <CalendarView
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="32dp"
+                app:mcv_selectionColor="#82BC91"
+                app:mcv_showOtherDates="all"
                 android:background="@drawable/custom_layout2" />
 
             <LinearLayout
