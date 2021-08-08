@@ -2,13 +2,12 @@ package com.example.orphan.WEB.web;
 
 
 
-import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
-import com.example.orphan.WEB.DTO.Member.FindEmailDto;
-import com.example.orphan.WEB.DTO.Member.FindPasswordDto;
-import com.example.orphan.WEB.DTO.Member.ImageDto;
-import com.example.orphan.WEB.DTO.Member.LoginDto;
-import com.example.orphan.WEB.DTO.Member.MemberDataDto;
-import com.example.orphan.WEB.DTO.Member.OneItemDto;
+import com.example.orphan.WEB.DTO.member.CreateMemberDto;
+import com.example.orphan.WEB.DTO.member.FindEmailDto;
+import com.example.orphan.WEB.DTO.member.FindPasswordDto;
+import com.example.orphan.WEB.DTO.member.LoginDto;
+import com.example.orphan.WEB.DTO.member.MemberLoginDto;
+import com.example.orphan.WEB.DTO.member.OneItemDto;
 
 
 import okhttp3.MultipartBody;
@@ -37,7 +36,7 @@ public interface ApiInterface {
 
 
     @POST("/auth/login")
-    Call<MemberDataDto> login(@Body LoginDto Object);
+    Call<MemberLoginDto> login(@Body LoginDto Object);
 
 
     //sign up
@@ -53,15 +52,6 @@ public interface ApiInterface {
     //send email
     @PATCH("/auth/find/password")
     Call<OneItemDto> findPW(@Body FindPasswordDto Object);
-
-
-
-    //upload image
-
-    //get image
-    @GET("images/{apiName}")
-    @Streaming
-    Call<ImageDto> downloadImage(@Path("apiName") String apiName);
 
 
 

@@ -3,12 +3,12 @@ package com.example.orphan.WEB.web;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.orphan.WEB.DTO.Member.CreateMemberDto;
-import com.example.orphan.WEB.DTO.Member.FindEmailDto;
-import com.example.orphan.WEB.DTO.Member.FindPasswordDto;
-import com.example.orphan.WEB.DTO.Member.LoginDto;
-import com.example.orphan.WEB.DTO.Member.MemberDataDto;
-import com.example.orphan.WEB.DTO.Member.OneItemDto;
+import com.example.orphan.WEB.DTO.member.CreateMemberDto;
+import com.example.orphan.WEB.DTO.member.FindEmailDto;
+import com.example.orphan.WEB.DTO.member.FindPasswordDto;
+import com.example.orphan.WEB.DTO.member.LoginDto;
+import com.example.orphan.WEB.DTO.member.MemberLoginDto;
+import com.example.orphan.WEB.DTO.member.OneItemDto;
 
 import java.io.IOException;
 
@@ -156,13 +156,13 @@ public class web {
         LoginDto object = new LoginDto(Email,password);
         // 요청 시작
 
-        Call<MemberDataDto> call = apiService.login(object);
-        call.enqueue(new Callback<MemberDataDto>() {
+        Call<MemberLoginDto> call = apiService.login(object);
+        call.enqueue(new Callback<MemberLoginDto>() {
             @Override
-            public void onResponse(Call<MemberDataDto> call, Response<MemberDataDto> response) {
+            public void onResponse(Call<MemberLoginDto> call, Response<MemberLoginDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    MemberDataDto data = response.body();
+                    MemberLoginDto data = response.body();
                     if(response.code() == 200){
 
 
@@ -188,7 +188,7 @@ public class web {
 
 
             @Override
-            public void onFailure(Call<MemberDataDto> call, Throwable t) {
+            public void onFailure(Call<MemberLoginDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -295,8 +295,8 @@ public class web {
         //보낼 오브젝트 생성
         LoginDto object = new LoginDto(Email,password);
         // 요청 시작
-        Call<MemberDataDto> call = apiService.login(object);
-        Response<MemberDataDto> response = null;
+        Call<MemberLoginDto> call = apiService.login(object);
+        Response<MemberLoginDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
