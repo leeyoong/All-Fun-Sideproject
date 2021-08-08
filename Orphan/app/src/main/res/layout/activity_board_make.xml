@@ -109,7 +109,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="100dp"
-            android:text="CheckBox" />
+            android:text="공지로 작성" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
