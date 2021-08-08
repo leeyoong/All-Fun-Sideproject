@@ -11,7 +11,9 @@ import com.example.orphan.WEB.DTO.member.MemberLoginDto;
 import com.example.orphan.WEB.DTO.member.OneItemDto;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,12 +28,20 @@ public class web {
 
 
     public static Retrofit getClient() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL).client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+
+
         return retrofit;
     }
 

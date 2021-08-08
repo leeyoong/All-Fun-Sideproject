@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,8 +12,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.orphan.WEB.DTO.member.FindPasswordDto;
+import com.example.orphan.WEB.DTO.member.OneItemDto;
 import com.example.orphan.WEB.Thread.FindID_TaskThread;
 import com.example.orphan.WEB.Thread.FindPass_TaskThread;
+import com.example.orphan.WEB.web.ApiInterface;
+import com.example.orphan.WEB.web.web;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PassForgot extends AppCompatActivity {
     String[] yearList = new String[70];
@@ -149,36 +158,39 @@ public class PassForgot extends AppCompatActivity {
                     System.out.println(output);
                 }
                 else{
-                    FindPass_TaskThread task = new FindPass_TaskThread(name,birth,phonenumber,email);
-                    task.start();
-                    try {
-                        task.join();
+                    web Clinet = new web();
+                    ApiInterface apiService = web.getClient().create(ApiInterface.class);
+                    FindPasswordDto object = new FindPasswordDto(name,birth,phonenumber,email);
+                    // 요청 시작
+                    Call<OneItemDto> call = apiService.findPW(object);
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //융이에게 물어볼꺼
-                    if(task.getStatus()==204){
+                    call.enqueue(new Callback<OneItemDto>() {
+                        @Override
+                        public void onResponse(Call<com.example.orphan.WEB.DTO.member.OneItemDto> call, Response<OneItemDto> response) {
+                            try {
+                                com.example.orphan.WEB.DTO.member.OneItemDto OneItemDto = response.body();
+                                if(response.code() == 204){
+                                    //성공했을 때 200
+                                    System.out.println("이메이;ㄹ로 비밀번호 보냄 ");
+                                }
 
-                        Intent passForgetIntent = new Intent(PassForgot.this, Loginpage.class);
-                        passForgetIntent.putExtra("Email", email);
-                        PassForgot.this.startActivity(passForgetIntent);
+                                else{
+                                    // 실패할 경우 404
 
+                                    System.out.println("실패");
+                                }
+                                //idfound.setText(OneItemDto.toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
 
+                            }
+                        }
 
-
-                    }
-                    else{
-                        String output =new String("ERROR CODE = " + task.getStatus());
-                        System.out.println(output);
-
-                        Toast myToast = Toast.makeText(getApplicationContext(),output, Toast.LENGTH_LONG);
-                        myToast.show();
-                    }
-
-
-
-
+                        @Override
+                        public void onFailure(Call<com.example.orphan.WEB.DTO.member.OneItemDto> call, Throwable t) {
+                            //idfound.setText(t.toString());
+                        }
+                    });
                 }
 
             }
