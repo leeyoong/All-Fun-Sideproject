@@ -249,7 +249,6 @@
                             android:layout_width="83dp"
                             android:layout_height="34dp"
                             android:layout_margin="16dp"
-                            android:layout_weight="1"
                             android:background="@drawable/custom_layout2"
                             android:gravity="center"
                             android:text="지원 현황"
@@ -265,16 +264,15 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="16dp"
-                            android:layout_weight="1"
                             android:background="@color/teal_700" />
 
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="237dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:layout_weight="1"
-                            android:text="TextView" />
+                        <ListView
+                            android:id="@+id/postview"
+                            android:layout_width="274dp"
+                            android:layout_height="185dp">
+
+                        </ListView>
+
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>

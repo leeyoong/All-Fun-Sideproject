@@ -7,7 +7,7 @@
     android:background="#1C2323">
 
     <TextView
-        android:id="@+id/catetitle"
+        android:id="@+id/posttitle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -15,7 +15,7 @@
         android:text="분야" />
 
     <TextView
-        android:id="@+id/catenow"
+        android:id="@+id/postnow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -23,18 +23,26 @@
         android:text="4" />
 
     <TextView
-        android:id="@+id/cateslash"
+        android:id="@+id/postslash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="/" />
 
     <TextView
-        android:id="@+id/catemax"
+        android:id="@+id/postmax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_marginEnd="8dp"
         android:text="5" />
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/postbutton"
+        android:layout_width="29dp"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/custom_button"
+        android:text="지원"
+        android:textSize="10dp" />
 </LinearLayout>
