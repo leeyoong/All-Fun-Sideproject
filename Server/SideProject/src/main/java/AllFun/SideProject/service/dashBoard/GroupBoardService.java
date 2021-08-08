@@ -23,10 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +51,7 @@ public class GroupBoardService {
                             groupBoard.getId(),
                             groupBoard.getTitle(),
                             groupBoard.getMember().getNickname(),
-                            groupBoard.getCreatedDate()
+                            groupBoard.getCreatedDate().toString()
                     );
                     response.add(myGroupBoardDto);
                 }else{
@@ -62,17 +59,7 @@ public class GroupBoardService {
                 }
             }
         }
-        Collections.sort(response, new Comparator<MyGroupBoardDto>() {
-            public int compare(MyGroupBoardDto o1, MyGroupBoardDto o2) {
-                if(o1.getCreatedDate().isAfter(o2.getCreatedDate())) {
-                    return 1;
-                }else if(o1.getCreatedDate().isBefore(o2.getCreatedDate())) {
-                    return -1;
-                }else {
-                    return 0;
-                }
-            }
-        });
+
         if(response.size()<5)
             return response;
         response = response.subList(0,5);
@@ -151,9 +138,9 @@ public class GroupBoardService {
     public void createBoard(Long groupId, Long memberId, CreateGroupBoardDto request){
         DashGroup group = dashGroupRepository.findById(groupId).orElse(null);
         Member member = memberRepository.findById(memberId).orElse(null);
-
+        BoardKinds kinds = BoardKinds.valueOf(request.getKinds().toUpperCase(Locale.ROOT));
         GroupBoard groupBoard = GroupBoard.createGroupBoard(request.getTitle(), request.getContent(),
-                request.getKinds(), member);
+                kinds, member);
         group.addGroupBoard(groupBoard);
         groupBoardRepository.save(groupBoard);
 
@@ -204,6 +191,9 @@ public class GroupBoardService {
         List<BoardHit> boardHits = member.getBoardHits();
         List<MyNoHitBoardDto> response = new ArrayList<>();
         for (BoardHit boardHit : boardHits) {
+            if(boardHit.getHit().equals(HitStatus.READ)){
+                continue;
+            }
             MyNoHitBoardDto myNoHitBoardDto = new MyNoHitBoardDto(
                     boardHit.getGroupBoard().getGroup().getId(),
                     boardHit.getGroupBoard().getId(),

@@ -1,6 +1,7 @@
 package AllFun.SideProject.controller.dashBoard;
 
 import AllFun.SideProject.dto.dashBoard.group.MyGroupListDto;
+import AllFun.SideProject.dto.member.OneItemDto;
 import AllFun.SideProject.service.dashBoard.DashGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class GroupController {
 
     @PostMapping("/group/member/{memberId}")
     public ResponseEntity<?> createGroup(@PathVariable("memberId") Long memberId,
-                                         @RequestBody String groupName){
-        dashGroupService.createGroup(memberId, groupName);
+                                         @RequestBody OneItemDto request){
+        dashGroupService.createGroup(memberId, request.getItem());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

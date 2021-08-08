@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +48,11 @@ public class ToDoService {
     @Transactional
     public void createTodo(Long groupId, CreateToDoDto request){
         DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
-
-        ToDo toDo = ToDo.createToDo(request.getTitle(), request.getStartTime(), request.getEndTime());
+        LocalDateTime start = LocalDateTime.parse(request.getStartTime(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime end = LocalDateTime.parse(request.getEndTime(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        ToDo toDo = ToDo.createToDo(request.getTitle(), start, end);
         dashGroup.addToDo(toDo);
 
         toDoRepository.save(toDo);

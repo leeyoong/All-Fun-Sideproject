@@ -109,7 +109,7 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        boardService.getBoardRoleDto(board)
+                        board.getContent()
                 )
         );
         return ResponseEntity.ok(response);
@@ -131,7 +131,7 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        boardService.getBoardRoleDto(board)
+                        board.getContent()
                 )
         );
         return ResponseEntity.ok(response);
@@ -152,7 +152,7 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        boardService.getBoardRoleDto(board)
+                        board.getContent()
                 )
         );
         return ResponseEntity.ok(response);
@@ -173,7 +173,7 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        boardService.getBoardRoleDto(board)
+                        board.getContent()
                 )
         );
         return ResponseEntity.ok(response);

@@ -42,7 +42,7 @@ public class HomeController {
     @GetMapping("/todo/{year}/{month}")
     public ResponseEntity<?> getMonthTodo(@PathVariable("memberId")Long memberId, @PathVariable("year")String year,
                                         @PathVariable("month")String month){
-        LocalDateTime startDateTime = LocalDateTime.parse(year+"-"+month+"-"+"1 00:00:00",
+        LocalDateTime startDateTime = LocalDateTime.parse(year+"-"+"0"+month+"-"+"01 00:00:00",
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime endDateTime = startDateTime.plusMonths(1).minusSeconds(1);
 

@@ -18,6 +18,6 @@ public class SearchResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime endDate;
 
-    private List<BoardRoleDto> expect;
+    private String content;
 
 }

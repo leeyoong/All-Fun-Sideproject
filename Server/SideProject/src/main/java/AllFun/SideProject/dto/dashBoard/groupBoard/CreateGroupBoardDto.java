@@ -12,5 +12,5 @@ public class CreateGroupBoardDto {
     private String title;
     private String content;
 
-    private BoardKinds kinds;
+    private String kinds;
 }
