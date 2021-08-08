@@ -4,24 +4,24 @@ package com.example.orphan.WEB.DTO.mainPage;
 import java.time.LocalDateTime;
 
 public class MyToDoDto {
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private String startDateTime;
+    private String endDateTime;
     private String groupName;
     private String title;
 
-    public LocalDateTime getStartDateTime() {
+    public String getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
+    public void setStartDateTime(String startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public LocalDateTime getEndDateTime() {
+    public String getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
+    public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
     }
 
@@ -41,7 +41,7 @@ public class MyToDoDto {
         this.title = title;
     }
 
-    public MyToDoDto(LocalDateTime startDateTime, LocalDateTime endDateTime, String groupName, String title) {
+    public MyToDoDto(String startDateTime, String endDateTime, String groupName, String title) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.groupName = groupName;

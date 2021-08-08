@@ -1,8 +1,10 @@
 package com.example.orphan.WEB.web;
 
-import android.content.Intent;
 import android.util.Log;
 
+import com.example.orphan.WEB.DTO.mainPage.MyGroupBoardDto;
+import com.example.orphan.WEB.DTO.mainPage.MyNoHitBoardDto;
+import com.example.orphan.WEB.DTO.mainPage.MyToDoDto;
 import com.example.orphan.WEB.DTO.member.CreateMemberDto;
 import com.example.orphan.WEB.DTO.member.FindEmailDto;
 import com.example.orphan.WEB.DTO.member.FindPasswordDto;
@@ -11,6 +13,7 @@ import com.example.orphan.WEB.DTO.member.MemberLoginDto;
 import com.example.orphan.WEB.DTO.member.OneItemDto;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -455,6 +458,82 @@ public class web {
         }
     }
 
+    public Response<List<MyToDoDto>> Post_Mytodo_sync(Long memberid, String year, String month){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<MyToDoDto>> call = apiService.GetMytodo(memberid,year,month);
+        Response<List<MyToDoDto>> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response;
+        }
+        else{
+            return null;
+        }
+
+
+
+    }
+    public Response<List<MyGroupBoardDto>> GET_GroupBoard_sync(Long memberid){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<MyGroupBoardDto>> call = apiService.groupBoard(memberid);
+        Response<List<MyGroupBoardDto>> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response;
+        }
+        else{
+            return null;
+        }
+
+
+
+    }
+    public Response<List<MyNoHitBoardDto>> GET_No_Hit_sync(Long memberid){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<MyNoHitBoardDto>> call = apiService.groupBoardNoHit(memberid);
+        Response<List<MyNoHitBoardDto>>
+                response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response;
+        }
+        else{
+            return null;
+        }
+
+
+
+    }
 
 
 

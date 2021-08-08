@@ -11,14 +11,14 @@ public class MyNoHitBoardDto {
 
     private String title;
     private String content;
-    private LocalDateTime createdDate;
+    private String createdDate;
 
     private Long memberId;
     private String memberNickname;
 
     private String groupName;
 
-    private BoardKinds kinds;
+    private String kinds;
 
     public Long getGroupId() {
         return groupId;
@@ -52,11 +52,11 @@ public class MyNoHitBoardDto {
         this.content = content;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -84,15 +84,15 @@ public class MyNoHitBoardDto {
         this.groupName = groupName;
     }
 
-    public BoardKinds getKinds() {
+    public String getKinds() {
         return kinds;
     }
 
-    public void setKinds(BoardKinds kinds) {
+    public void setKinds(String kinds) {
         this.kinds = kinds;
     }
 
-    public MyNoHitBoardDto(Long groupId, Long groupBoardId, String title, String content, LocalDateTime createdDate, Long memberId, String memberNickname, String groupName, BoardKinds kinds) {
+    public MyNoHitBoardDto(Long groupId, Long groupBoardId, String title, String content, String createdDate, Long memberId, String memberNickname, String groupName, String kinds) {
         this.groupId = groupId;
         this.groupBoardId = groupBoardId;
         this.title = title;

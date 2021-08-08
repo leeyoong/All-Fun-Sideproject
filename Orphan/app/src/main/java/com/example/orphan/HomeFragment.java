@@ -8,40 +8,33 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 
-
-import com.example.orphan.WEB.Thread.Mytodo_TaskThread_CallBack;
+import com.example.orphan.WEB.DTO.mainPage.MyGroupBoardDto;
+import com.example.orphan.WEB.DTO.mainPage.MyToDoDto;
+import com.example.orphan.WEB.Thread.GroupBoard_TaskThread;
+import com.example.orphan.WEB.Thread.Mytodo_TaskThread;
+import com.example.orphan.WEB.Thread.groupBoardNoHit_TaskThread;
 import com.example.orphan.WEB.helper.EventDecorator;
-import com.example.orphan.calendarColor.friDecorator;
-import com.example.orphan.calendarColor.monDecorator;
-import com.example.orphan.calendarColor.saturdayDecorator;
 import com.example.orphan.calendarColor.sundayDecorator;
-import com.example.orphan.calendarColor.thuDecorator;
-import com.example.orphan.calendarColor.tueDecorator;
-import com.example.orphan.calendarColor.wedDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
+import android.widget.TextView;
 
 
 public class HomeFragment extends Fragment {
 
     private CalListAdapter adapter;
     private ListView listView;
-
+    private List<MyToDoDto> todoList;
+    private List<MyGroupBoardDto> GroupBoardList;
+    private int nohit;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,6 +48,44 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
         // Required empty public constructor
     }
+
+    public void REQUEST_GroupBoard(Long memberid){
+        GroupBoard_TaskThread task = new GroupBoard_TaskThread(memberid);
+        task.start();
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        GroupBoardList = task.getDTO();
+
+    }
+    public void REQUEST_Mytodo(Long memberid, String year , String month){
+        Mytodo_TaskThread task = new Mytodo_TaskThread(memberid, year, month);
+        task.start();
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        todoList =  task.getDTO();
+
+
+    }
+    public void REQUEST_NoHit(Long memberid){
+        groupBoardNoHit_TaskThread task = new groupBoardNoHit_TaskThread(memberid);
+        task.start();
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        nohit=  task.getNoHit();
+
+    }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -114,35 +145,69 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // 추가하는 내용
+        Bundle bundle = getArguments();
+        String email;
+        String password;
+        String nick;
+        Long memberid;
 
+        if (bundle != null) {
+            email = bundle.getString("email");
+            password = bundle.getString("password");
+            nick = bundle.getString("nick");
+            memberid = bundle.getLong("memberid");
+        }
+        else{
+            email = null;
+            password = null;
+            nick = null;
+            memberid = 0L;
+        }
+
+        TextView Nickname = (TextView) view.findViewById(R.id.textView4);
+        TextView StatusHit = (TextView) view.findViewById(R.id.textView7);
+        Nickname.setText(nick);
+        //StatusHit.setText();
+
+
+
+
+
+        REQUEST_GroupBoard(1001L);
+        REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
+        REQUEST_NoHit(1001L);
+
+        StatusHit.setText(Integer.toString(nohit));
+        System.out.println("NONONONONONO : " + nohit);
+        System.out.println(todoList.get(0).getStartDateTime());
         //System.out.println(CalendarDay.today());
 
         MaterialCalendarView  materialCalendarView = view.findViewById(R.id.calendarView);
         materialCalendarView.setSelectedDate(CalendarDay.today());
         materialCalendarView.addDecorators(
-                new monDecorator(),
-                new tueDecorator(),
-                new wedDecorator(),
-                new thuDecorator(),
-                new friDecorator(),
-                new saturdayDecorator(),
+                //new monDecorator(),
+                //new tueDecorator(),
+                //new wedDecorator(),
+                //new thuDecorator(),
+                //new friDecorator(),
+                //new saturdayDecorator(),
                 new sundayDecorator(),
                 new EventDecorator(Color.CYAN, Collections.singleton(CalendarDay.from(2021,0,15)))
         );
 
         materialCalendarView.setOnMonthChangedListener(
                 (widget, date) -> {
-
-
-
-
+                    REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
 
                 }
         );
 
         materialCalendarView.setOnDateChangedListener(
                 (widget, date, selected) -> {
-                    System.out.println("섹스합시다.");
+
+
+
                 }
         );
 
@@ -151,6 +216,7 @@ public class HomeFragment extends Fragment {
 
 
 /*
+
         Mytodo_TaskThread_CallBack Mytodo_task = Mytodo_TaskThread_CallBack(memberid,"2021","5"){
 
         }
@@ -165,6 +231,8 @@ public class HomeFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.calview);
         listView.setAdapter(adapter);
+
+
 
 
         adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");

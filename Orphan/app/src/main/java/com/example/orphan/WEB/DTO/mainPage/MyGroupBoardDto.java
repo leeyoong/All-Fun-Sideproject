@@ -8,7 +8,7 @@ public class MyGroupBoardDto {
     private Long groupBoardId;
     private String title;
     private String writer;
-    private LocalDateTime createdDate;
+    private String createdDate;
 
     public String getGroupName() {
         return groupName;
@@ -42,15 +42,15 @@ public class MyGroupBoardDto {
         this.writer = writer;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
-    public MyGroupBoardDto(String groupName, Long groupBoardId, String title, String writer, LocalDateTime createdDate) {
+    public MyGroupBoardDto(String groupName, Long groupBoardId, String title, String writer, String createdDate) {
         this.groupName = groupName;
         this.groupBoardId = groupBoardId;
         this.title = title;
