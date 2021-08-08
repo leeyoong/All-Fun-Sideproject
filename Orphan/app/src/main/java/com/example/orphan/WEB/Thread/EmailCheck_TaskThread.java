@@ -7,7 +7,7 @@ public class EmailCheck_TaskThread extends Thread {
     web Client = new web();
     String email = null;
     int status = 0;
-    String CODE = null;
+    private String code;
 
     public EmailCheck_TaskThread(String email){
         this.email = email;
@@ -15,12 +15,16 @@ public class EmailCheck_TaskThread extends Thread {
     public int getStatus(){
         return status;
     }
-    public String getCode(){return CODE;}
+    public String getCode(){return code;}
 
+    public void setCode(String code){
+        this.code = code;
+    }
 
     @Override
     public void run(){
-        CODE=Client.Post_EmailCheck_Sync(this.email);
+        setCode(Client.Post_EmailCheck_Sync(this.email));
+        System.out.println("섹스다 시발"+code);
     }
 
 

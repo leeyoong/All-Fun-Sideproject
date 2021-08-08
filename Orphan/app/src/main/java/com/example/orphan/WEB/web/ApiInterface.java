@@ -10,16 +10,12 @@ import com.example.orphan.WEB.DTO.member.MemberLoginDto;
 import com.example.orphan.WEB.DTO.member.OneItemDto;
 
 
-import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Streaming;
 
 public interface ApiInterface {
 
@@ -44,8 +40,8 @@ public interface ApiInterface {
     Call<OneItemDto> createMember(@Body CreateMemberDto jsonObject);
 
     //이메일 찾기
-    @GET("/auth/find/email")
-    Call<OneItemDto> findID(@Body FindEmailDto Object);
+    @GET("/auth/find/email/name/{name}/birth/{birth}/phone/{phone}")
+    Call<OneItemDto> findID(@Path("name") String name, @Path("birth")String birth, @Path("phone")String phone);
 
 
 

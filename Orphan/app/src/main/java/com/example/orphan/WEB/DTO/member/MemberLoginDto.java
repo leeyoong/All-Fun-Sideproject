@@ -11,7 +11,7 @@ public class MemberLoginDto {
     private String name; // user korean name
     private String phone; //phone number
     private String nickname; // nickname
-    private LocalDateTime createDate; // create member time (yyyy-mm-dd hh:mm:ss)
+    private String createDate; // create member time (yyyy-mm-dd hh:mm:ss)
     private String gender; // gender(M / F)
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class MemberLoginDto {
         this.nickname = nickname;
     }
 
-    public LocalDateTime getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
@@ -86,7 +86,7 @@ public class MemberLoginDto {
         this.gender = gender;
     }
 
-    public MemberLoginDto(Long id, String email, String passwd, String birth, String name, String phone, String nickname, LocalDateTime createDate, String gender) {
+    public MemberLoginDto(Long id, String email, String passwd, String birth, String name, String phone, String nickname, String createDate, String gender) {
         this.id = id;
         this.email = email;
         this.passwd = passwd;

@@ -233,7 +233,7 @@ public class web {
         //보낼 오브젝트 생성
         FindEmailDto object = new FindEmailDto(name,birth,phone);
         // 요청 시작
-        Call<OneItemDto> call = apiService.findID(object);
+        Call<OneItemDto> call = apiService.findID(name, birth, phone);
         call.enqueue(new Callback<OneItemDto>() {
             @Override
             public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
@@ -305,6 +305,8 @@ public class web {
         System.out.println("sync ----web완료");
         if(response != null){
             System.out.println(response.headers().toString());
+
+            System.out.println(response.body().getCreateDate());
             return response.code();
         }
         else{
@@ -342,7 +344,7 @@ public class web {
         //보낼 오브젝트 생성
         FindEmailDto object = new FindEmailDto(name,birth,phone);
         // 요청 시작
-        Call<OneItemDto> call = apiService.findID(object);
+        Call<OneItemDto> call = apiService.findID(name,birth,phone);
         Response<OneItemDto> response = null;
         try {
             response = call.execute();
@@ -393,10 +395,12 @@ public class web {
             System.out.println("sync ----연결실패");
         }
         System.out.println("sync ----web완료");
+
         if (response != null) {
-            return  response.body().toString();
+            System.out.println("web 의 web : >>>>>>>"+response.body().getItem()+">>>>>>>>>>");
+            return  response.body().getItem();
         } else {
-            return "error";
+            return null;
         }
     }
     public int Post_Nickname_Sync(String Nickname){

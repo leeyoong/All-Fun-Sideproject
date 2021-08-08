@@ -18,6 +18,8 @@ public class Loginpage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
 
+        TextView idname = (TextView) findViewById(R.id.idname);
+        TextView passname = (TextView) findViewById(R.id.passname);
 
         TextView idfound = (TextView) findViewById(R.id.idfound);
         TextView passfound = (TextView) findViewById(R.id.passfound);
@@ -65,7 +67,8 @@ public class Loginpage extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Login_TaskThread task = new Login_TaskThread("id","pass");
+                Login_TaskThread task = new Login_TaskThread(idname.getText().toString(),
+                        passname.getText().toString());
                 task.start();
                 try {
                     task.join();

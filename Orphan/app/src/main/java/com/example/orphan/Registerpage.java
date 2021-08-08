@@ -22,7 +22,7 @@ public class Registerpage extends AppCompatActivity {
     String[] dayList = new String[31];
 
 
-    boolean checked_emailcode = false;
+    boolean checked_emailcode = true;
     boolean checked_password = false;
     boolean checked_nick = false;
     String CODE = null;
@@ -242,7 +242,7 @@ public class Registerpage extends AppCompatActivity {
                 //}
 
                 else{
-                    Register_TaskThread task = new Register_TaskThread(send_email,send_pass,send_birth,send_name,send_phone,send_nick,send_gender);
+                    Register_TaskThread task = new Register_TaskThread(email.getText().toString(),send_pass,send_birth,send_name,send_phone,send_nick,send_gender);
                     task.start();
                     try {
                         task.join();
