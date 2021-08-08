@@ -1,27 +1,12 @@
-package com.example.orphan.WEB.DTO.Member;
+package AllFun.SideProject.dto.member;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class OneItemDto {
-    public OneItemDto(String item) {
-        this.item = item;
-    }
-
     private String item;
-
-
-    public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
-    }
-
-    @Override
-    public String toString() {
-        return "OneItemDto{" +
-                "item='" + item + '\'' +
-                '}';
-    }
-
-
 }

@@ -1,8 +1,9 @@
 package com.example.orphan.WEB.DTO.mainPage;
 
+
 import java.time.LocalDateTime;
 
-public class MyMatchingBoardDto {
+public class MyScrapDto {
     private Long boardId;
     private String title;
     private String writer;
@@ -12,5 +13,4 @@ public class MyMatchingBoardDto {
     private List<BoardRoleDto> expect;
 
     private BoardStatus status;
-
 }

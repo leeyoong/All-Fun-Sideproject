@@ -1,7 +1,14 @@
-package com.example.orphan.WEB.DTO.matching;
+package AllFun.SideProject.dto.matching;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class CreateBoardResponseDto {
     private String writer;// 작성자 닉네임
     private String title; // 제목

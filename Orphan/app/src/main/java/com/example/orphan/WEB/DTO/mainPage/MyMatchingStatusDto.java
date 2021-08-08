@@ -1,5 +1,4 @@
 package com.example.orphan.WEB.DTO.mainPage;
-import com.example.orphan.WEB.DTO.MatchingStatus;
 
 public class MyMatchingStatusDto {
     private Long boardId;
@@ -7,4 +6,3 @@ public class MyMatchingStatusDto {
     private String role;
     private MatchingStatus status;
 }
-
