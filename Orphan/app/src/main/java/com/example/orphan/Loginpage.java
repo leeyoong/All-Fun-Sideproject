@@ -67,6 +67,8 @@ public class Loginpage extends AppCompatActivity {
             public void onClick(View view) {
 
 
+
+
                 Login_TaskThread task = new Login_TaskThread(idname.getText().toString(),
                         passname.getText().toString());
                 /*task.start();
@@ -91,7 +93,7 @@ public class Loginpage extends AppCompatActivity {
                     loginIntent.putExtra("memberid" , 1234 );
                     loginIntent.putExtra( "email", "sibal" );
                     loginIntent.putExtra("password" ,"sibal" );
-                    loginIntent.putExtra("nick" , "민수" );
+                    loginIntent.putExtra("nick" , "리융" );
 
 
                     Loginpage.this.startActivity(loginIntent);

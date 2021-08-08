@@ -70,6 +70,8 @@ public class MatchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
+
+        //
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner4);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
