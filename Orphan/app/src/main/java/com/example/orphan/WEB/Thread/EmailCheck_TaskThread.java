@@ -7,7 +7,7 @@ public class EmailCheck_TaskThread extends Thread {
     web Client = new web();
     String email = null;
     int status = 0;
-
+    String CODE = null;
 
     public EmailCheck_TaskThread(String email){
         this.email = email;
@@ -15,10 +15,12 @@ public class EmailCheck_TaskThread extends Thread {
     public int getStatus(){
         return status;
     }
+    public String getCode(){return CODE;}
+
 
     @Override
     public void run(){
-        status=Client.Post_EmailCheck_Sync(this.email);
+        CODE=Client.Post_EmailCheck_Sync(this.email);
     }
 
 

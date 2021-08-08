@@ -9,7 +9,6 @@ import com.example.orphan.WEB.DTO.Member.FindPasswordDto;
 import com.example.orphan.WEB.DTO.Member.LoginDto;
 import com.example.orphan.WEB.DTO.Member.MemberDataDto;
 import com.example.orphan.WEB.DTO.Member.OneItemDto;
-import com.example.orphan.WEB.Response.ResponseJson;
 
 import java.io.IOException;
 
@@ -46,13 +45,13 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto email = new OneItemDto(Email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.emailCheck(email);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.emailCheck(email);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     if(response.code() == 200){
                         //성공했을 때 200
 
@@ -62,7 +61,7 @@ public class web {
                         // 실패할 경우 404
 
                     }
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -70,7 +69,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -83,13 +82,13 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto Object= new OneItemDto(Nickname);
         // 요청 시작
-        Call<ResponseJson> call = apiService.nickNameCheck(Object);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.nickNameCheck(Object);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     if(response.code() == 200){
                         //성공했을 때 200
 
@@ -99,7 +98,7 @@ public class web {
                         // 실패할 경우 404
 
                     }
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -107,7 +106,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -120,13 +119,13 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto object= new OneItemDto(Email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.emailCheck(object);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.emailCheck(object);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     if(response.code() == 200){
                         //성공했을 때 200
 
@@ -136,7 +135,7 @@ public class web {
                         // 실패할 경우 404
 
                     }
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -144,7 +143,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -157,7 +156,6 @@ public class web {
         LoginDto object = new LoginDto(Email,password);
         // 요청 시작
 
-        ResponseJson ok = new ResponseJson();
         Call<MemberDataDto> call = apiService.login(object);
         call.enqueue(new Callback<MemberDataDto>() {
             @Override
@@ -167,35 +165,18 @@ public class web {
                     MemberDataDto data = response.body();
                     if(response.code() == 200){
 
-                        ok.setResponse_massage("ok");
 
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
 
 
                     }
 
 
                     else{
-                        ok.setResponse_massage("no");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
-                        System.out.println("2분기");
+
                         // 실패할 경우 40
 
                     }
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
 
                     e.printStackTrace();
@@ -211,7 +192,7 @@ public class web {
                 //idfound.setText(t.toString());
             }
         });
-        return ok.getResponse_massage();
+        return "ok";
     }
 
     public String Post_FindPassword(String name,String birth,String phone, String email){
@@ -221,16 +202,16 @@ public class web {
         //보낼 오브젝트 생성
         FindPasswordDto object = new FindPasswordDto(name,birth,phone,email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.findPW(object);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.findPW(object);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     //성공시
 
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     //ㅈ망했을 시
@@ -239,7 +220,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -252,16 +233,16 @@ public class web {
         //보낼 오브젝트 생성
         FindEmailDto object = new FindEmailDto(name,birth,phone);
         // 요청 시작
-        Call<ResponseJson> call = apiService.findID(object);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.findID(object);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     //성공시
 
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     //ㅈ망했을 시
@@ -270,7 +251,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -283,16 +264,16 @@ public class web {
         //보낼 오브젝트 생성
         CreateMemberDto object = new CreateMemberDto(email, passwd, birth, name, phone, nickname, gender);
         // 요청 시작
-        Call<ResponseJson> call = apiService.createMember(object);
-        call.enqueue(new Callback<ResponseJson>() {
+        Call<OneItemDto> call = apiService.createMember(object);
+        call.enqueue(new Callback<OneItemDto>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
                 try {
                     Log.d("TEST", response.body().toString());
-                    ResponseJson responseJson = response.body();
+                    OneItemDto OneItemDto = response.body();
                     //성공시
 
-                    //idfound.setText(responseJson.toString());
+                    //idfound.setText(OneItemDto.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                     //ㅈ망했을 시
@@ -301,7 +282,7 @@ public class web {
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<OneItemDto> call, Throwable t) {
                 //idfound.setText(t.toString());
             }
         });
@@ -340,8 +321,8 @@ public class web {
         //보낼 오브젝트 생성
         FindPasswordDto object = new FindPasswordDto(name, birth, phone, email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.findPW(object);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.findPW(object);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -361,8 +342,8 @@ public class web {
         //보낼 오브젝트 생성
         FindEmailDto object = new FindEmailDto(name,birth,phone);
         // 요청 시작
-        Call<ResponseJson> call = apiService.findID(object);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.findID(object);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -382,8 +363,8 @@ public class web {
         //보낼 오브젝트 생성
         CreateMemberDto object = new CreateMemberDto(email, passwd, birth, name, phone, nickname, gender);
         // 요청 시작
-        Call<ResponseJson> call = apiService.createMember(object);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.createMember(object);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -397,15 +378,15 @@ public class web {
         }
     }
 
-    public int Post_EmailCheck_Sync(String Email){
+    public String Post_EmailCheck_Sync(String Email){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
         //보낼 오브젝트 생성
         OneItemDto email = new OneItemDto(Email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.emailCheck(email);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.emailCheck(email);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -413,9 +394,9 @@ public class web {
         }
         System.out.println("sync ----web완료");
         if (response != null) {
-            return response.code();
+            return response.body().getItem();
         } else {
-            return -1;
+            return "error";
         }
     }
     public int Post_Nickname_Sync(String Nickname){
@@ -425,8 +406,8 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto Object= new OneItemDto(Nickname);
         // 요청 시작
-        Call<ResponseJson> call = apiService.nickNameCheck(Object);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.nickNameCheck(Object);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -439,15 +420,15 @@ public class web {
             return -1;
         }
     }
-    public int Post_SendEmail_Sync(String Email){
+    public String Get_SendEmail_Sync(String Email){
         //Web 생성
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
         //보낼 오브젝트 생성
         OneItemDto object= new OneItemDto(Email);
         // 요청 시작
-        Call<ResponseJson> call = apiService.emailCheck(object);
-        Response<ResponseJson> response = null;
+        Call<OneItemDto> call = apiService.emailCheck(object);
+        Response<OneItemDto> response = null;
         try {
             response = call.execute();
         } catch (IOException e) {
@@ -455,9 +436,9 @@ public class web {
         }
         System.out.println("sync ----web완료");
         if (response != null) {
-            return response.code();
+            return response.body().getItem();
         } else {
-            return -1;
+            return null;
         }
     }
 

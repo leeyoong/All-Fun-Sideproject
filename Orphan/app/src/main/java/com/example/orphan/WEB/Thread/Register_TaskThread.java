@@ -2,7 +2,7 @@ package com.example.orphan.WEB.Thread;
 
 import com.example.orphan.WEB.web.web;
 
-public class Resiger_TaskThread  extends Thread {
+public class Register_TaskThread  extends Thread {
     web Client = new web();
     String email = null;
     String passwd = null;
@@ -14,7 +14,7 @@ public class Resiger_TaskThread  extends Thread {
     int status = 0;
 
 
-    public Resiger_TaskThread(String email, String passwd, String birth, String name, String phone, String nickname, String gender) {
+    public Register_TaskThread(String email, String passwd, String birth, String name, String phone, String nickname, String gender) {
         this.email = email;
         this.passwd = passwd;
         this.birth = birth;

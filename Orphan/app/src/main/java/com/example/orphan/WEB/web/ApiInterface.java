@@ -9,7 +9,7 @@ import com.example.orphan.WEB.DTO.Member.ImageDto;
 import com.example.orphan.WEB.DTO.Member.LoginDto;
 import com.example.orphan.WEB.DTO.Member.MemberDataDto;
 import com.example.orphan.WEB.DTO.Member.OneItemDto;
-import com.example.orphan.WEB.Response.ResponseJson;
+
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -26,32 +26,32 @@ public interface ApiInterface {
 
 
     @POST("/auth/check/email")
-    Call<ResponseJson> emailCheck(@Body OneItemDto Object);
+    Call<OneItemDto> emailCheck(@Body OneItemDto Object);
 
+    @GET("/auth/send/email")
+    Call<OneItemDto> getEmailCODE(@Body OneItemDto Object);
 
     @POST("/auth/check/nickname")
-    Call<ResponseJson> nickNameCheck(@Body OneItemDto Object);
+    Call<OneItemDto> nickNameCheck(@Body OneItemDto Object);
 
 
     @POST("/auth/login")
     Call<MemberDataDto> login(@Body LoginDto Object);
 
-    @POST("/auth/login")
-    MemberDataDto login_sync(@Body LoginDto Object);
 
     //sign up
     @POST("/auth/create")
-    Call<ResponseJson> createMember(@Body CreateMemberDto jsonObject);
+    Call<OneItemDto> createMember(@Body CreateMemberDto jsonObject);
 
     //sign up
     @POST("/auth/findid")
-    Call<ResponseJson> findID(@Body FindEmailDto Object);
+    Call<OneItemDto> findID(@Body FindEmailDto Object);
 
 
 
     //send email
     @POST("/auth/findpw")
-    Call<ResponseJson> findPW(@Body FindPasswordDto Object);
+    Call<OneItemDto> findPW(@Body FindPasswordDto Object);
 
 
 
@@ -63,9 +63,6 @@ public interface ApiInterface {
     Call<ImageDto> downloadImage(@Path("apiName") String apiName);
 
 
-    @Multipart
-    @POST("api주소")
-    Call<ResponseJson> uploadImage(@Part MultipartBody.Part file);
 
 
 
