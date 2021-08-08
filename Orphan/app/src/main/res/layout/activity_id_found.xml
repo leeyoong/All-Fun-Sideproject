@@ -70,8 +70,8 @@
         android:orientation="horizontal">
 
 
-
         <TextView
+            android:id="@+id/found_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -86,7 +86,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button7"
+        android:id="@+id/Register"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"

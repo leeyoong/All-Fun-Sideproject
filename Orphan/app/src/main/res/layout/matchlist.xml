@@ -27,38 +27,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="106dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="127dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textView40"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="-백 : 1/1"
-            android:textColor="@color/teal_200"
-            android:textSize="12dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="-프론트 : 0/1"
-            android:textColor="@color/teal_200"
-            android:textSize="12dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="대충 이렇게?"
-            android:textColor="@color/teal_200"
-            android:textSize="12dp" />
-
-
+            android:layout_height="match_parent"
+            android:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="33dp"
         android:gravity="right"
         android:orientation="horizontal">
 
@@ -67,19 +48,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:text="#태그예시"
             android:textColor="@color/teal_200"
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/writedate"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="YY/DD/MM"
             android:textColor="@color/teal_700"
@@ -88,9 +69,9 @@
         <TextView
             android:id="@+id/scheplus"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="작성자"
