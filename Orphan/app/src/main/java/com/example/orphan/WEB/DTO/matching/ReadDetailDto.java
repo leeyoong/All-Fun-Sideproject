@@ -1,18 +1,9 @@
-package AllFun.SideProject.dto.matching;
-
-import AllFun.SideProject.domain.base.BoardStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+package com.example.orphan.WEB.DTO.matching;
 
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 public class ReadDetailDto {
     private String title;
     private String content;
@@ -28,4 +19,78 @@ public class ReadDetailDto {
 
     private Long memberId; // 사용자 id
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<BoardRoleDto> getExpect() {
+        return expect;
+    }
+
+    public void setExpect(List<BoardRoleDto> expect) {
+        this.expect = expect;
+    }
+
+    public int getHit() {
+        return hit;
+    }
+
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+
+    public ReadDetailDto(String title, String content, String writer, LocalDateTime createdDate, LocalDateTime endDate, List<BoardRoleDto> expect, int hit, Long memberId) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.createdDate = createdDate;
+        this.endDate = endDate;
+        this.expect = expect;
+        this.hit = hit;
+        this.memberId = memberId;
+    }
 }
