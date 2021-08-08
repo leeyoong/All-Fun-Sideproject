@@ -73,7 +73,7 @@
         android:layout_marginBottom="8dp">
 
         <TextView
-            android:layout_width="62dp"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="16dp"
@@ -83,23 +83,21 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="123dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center" />
+            android:layout_width="116dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="108dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            />
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="109dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            />
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
 
     </LinearLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1C2323"
+    android:orientation="vertical"
+    tools:context=".PostDetail">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/backtomatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+            android:text="Board"
+            android:textColor="@color/teal_200"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="690dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="160dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="김민수"
+                    android:textColor="@color/teal_200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="yy/mm/dd"
+                    android:textColor="#6CA6A6"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="수정"
+                    android:textAlignment="center"
+                    android:textColor="#6CA6A6" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="삭제"
+                    android:textAlignment="center"
+                    android:textColor="#6CA6A6" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="제목이 들어갈 공간"
+            android:textColor="@color/teal_200"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="539dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="상처를 치료해줄 사람 어디 없나
+        가만히 놔두다간 끊임없이 덧나
+        사랑도 사람도 너무나도 겁나
+        혼자인게 무서워 난 잊혀질까 두려워
+
+        상처를 치료해줄 사람 어디 없나
+
+        내 안에 숨어 있는 또 다른 나와 싸워
+        그녀가 떠나갈때 내게 말했었지
+        너는 곁에 있어도 있는 게 아닌것 같다고
+        만지면 베어버리는 칼날같은 사람
+        심장이 얼어붙은 차가웠던 사랑
+        그래 1분 1초가 사는게 사는게 아냐
+        매일 매일이 너무나 두려워
+
+        부르고 불러도 한없이 소리쳐 대봐도
+        아무런 대답이 없는 널
+
+        내 기억 속에서 너라는 사람의
+        존재를 완전히 지우려 끝없이 몸부림쳐 봐도
+
+        슬픔을 등에 지고 살아가는 바보
+        두 눈을 감고 두 귀를 막고
+        캄캄한 어둠속에 내 자신을 가둬"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

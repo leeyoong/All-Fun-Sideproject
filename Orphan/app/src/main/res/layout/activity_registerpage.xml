@@ -58,7 +58,7 @@
                     android:inputType="textEmailAddress" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/emailCheck"
+                    android:id="@+id/button3"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -87,7 +87,7 @@
                     android:textColorHint="#B3D3CC"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/codeCheck"
+                    android:id="@+id/button4"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -165,8 +165,8 @@
                     android:hint="enter your password twice"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/passwordCheck"
-                    android:layout_width="111dp"
+                    android:id="@+id/button6"
+                    android:layout_width="114dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -280,8 +280,8 @@
                 android:layout_marginBottom="8dp">
 
                 <TextView
-                    android:layout_width="114dp"
-                    android:layout_height="50dp"
+                    android:layout_width="87dp"
+                    android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
                     android:text="Phone Number"
@@ -290,13 +290,24 @@
 
                 <EditText
                     android:id="@+id/regphone"
-                    android:layout_width="match_parent"
+                    android:layout_width="75dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:ems="10"
-                    android:hint="000-0000-0000"
-                    android:inputType="phone"
                     android:textColorHint="#B3D3CC" />
+
+                <EditText
+                    android:id="@+id/rephone2"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/regphone2"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
 
 
             </LinearLayout>
@@ -320,7 +331,7 @@
                 android:layout_marginBottom="8dp">
 
                 <TextView
-                    android:layout_width="114dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="16dp"
@@ -330,12 +341,22 @@
 
                 <EditText
                     android:id="@+id/regnick"
-                    android:layout_width="match_parent"
+                    android:layout_width="178dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Please set your Nickname."
                     android:textColorHint="#B3D3CC" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button13"
+                    android:layout_width="65dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK" />
 
 
             </LinearLayout>

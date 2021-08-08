@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,7 +50,7 @@ public class MatchListAdapter extends BaseAdapter {
         }
         TextView matchtitleTextView = (TextView) convertView.findViewById(R.id.matchtitle);
         TextView matchtagTextView = (TextView) convertView.findViewById(R.id.matchtag);
-        TextView wrterTextView = (TextView) convertView.findViewById(R.id.writer);
+        TextView wrterTextView = (TextView) convertView.findViewById(R.id.scheplus);
         TextView writedateTextView = (TextView) convertView.findViewById(R.id.writedate);
 
         MatchListItem matchListItem = matchListItemsList.get(position);

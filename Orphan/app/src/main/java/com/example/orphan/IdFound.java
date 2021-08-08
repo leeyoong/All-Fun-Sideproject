@@ -30,8 +30,7 @@ public class IdFound extends AppCompatActivity {
 
 
 
-        TextView Email = (TextView) findViewById(R.id.id_found_Email);
-        TextView Date = (TextView) findViewById(R.id.id_found_DATE);
+        TextView Email = (TextView) findViewById(R.id.found_Email);
         Button Forgot = (Button) findViewById(R.id.Register);
         Button login = (Button) findViewById(R.id.button8);
 
@@ -41,7 +40,6 @@ public class IdFound extends AppCompatActivity {
 // 초기값 설정
 
         Email.setText(email);
-        Date.setText(date);
 
 
 

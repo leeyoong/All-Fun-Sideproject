@@ -1,16 +1,15 @@
 package com.example.orphan;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -86,8 +85,17 @@ public class MatchFragment extends Fragment {
 
         adapter = new MatchListAdapter();
 
-        listView = (ListView) view.findViewById(R.id.listview);
+        ImageView matchpencil = (ImageView) view.findViewById(R.id.matchpencil);
+        listView = (ListView) view.findViewById(R.id.boardview);
         listView.setAdapter(adapter);
+
+        matchpencil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Intent = new Intent(view.getContext(), MatchMake.class);
+                view.getContext().startActivity(Intent);
+            }
+        });
 
         adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
         adapter.addItem("실바나스 최정예 구인합니다.", "#프론트", "김민수", "21/08/04");
