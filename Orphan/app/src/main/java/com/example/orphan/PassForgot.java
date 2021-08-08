@@ -56,7 +56,7 @@ public class PassForgot extends AppCompatActivity {
         setYear();setMonth();setDay();
 
         //각종 버튼 선언
-        Button FindPass = (Button) findViewById(R.id.button7);
+        Button FindPass = (Button) findViewById(R.id.Register);
         TextView Email = (TextView) findViewById(R.id.passfgtmail);
         TextView Name = (TextView) findViewById(R.id.idfgtname);
         TextView PhoneNumber = (TextView) findViewById(R.id.regphone);
@@ -101,8 +101,6 @@ public class PassForgot extends AppCompatActivity {
         FindPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
 
 

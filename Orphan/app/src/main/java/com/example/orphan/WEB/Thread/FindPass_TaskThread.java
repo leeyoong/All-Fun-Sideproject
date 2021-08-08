@@ -3,7 +3,6 @@ package com.example.orphan.WEB.Thread;
 import com.example.orphan.WEB.web.web;
 
 public class FindPass_TaskThread extends Thread{
-    static int count = 0;
     web Client = new web();
     String email = null;
     String name = null;

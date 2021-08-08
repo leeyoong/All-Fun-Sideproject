@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.orphan.WEB.Thread.FindID_TaskThread;
-import com.example.orphan.WEB.Thread.Login_TaskThread;
 
 public class IdForgot extends AppCompatActivity {
 
@@ -59,7 +58,7 @@ public class IdForgot extends AppCompatActivity {
         setYear();setMonth();setDay();
 
         //각종 버튼 선언
-        Button FindEmail = (Button) findViewById(R.id.button7);
+        Button FindEmail = (Button) findViewById(R.id.Register);
         TextView Name = (TextView) findViewById(R.id.idfgtname);
         TextView PhoneNumber = (TextView) findViewById(R.id.regphone);
 

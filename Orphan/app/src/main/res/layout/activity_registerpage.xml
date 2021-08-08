@@ -58,7 +58,7 @@
                     android:inputType="textEmailAddress" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button3"
+                    android:id="@+id/emailCheck"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -87,7 +87,7 @@
                     android:textColorHint="#B3D3CC"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button4"
+                    android:id="@+id/codeCheck"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -165,7 +165,7 @@
                     android:hint="enter your password twice"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button6"
+                    android:id="@+id/passwordCheck"
                     android:layout_width="111dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -403,7 +403,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button7"
+                android:id="@+id/Register"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

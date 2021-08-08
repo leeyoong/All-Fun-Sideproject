@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class IdFound extends AppCompatActivity {
@@ -34,7 +32,7 @@ public class IdFound extends AppCompatActivity {
 
         TextView Email = (TextView) findViewById(R.id.id_found_Email);
         TextView Date = (TextView) findViewById(R.id.id_found_DATE);
-        Button Forgot = (Button) findViewById(R.id.button7);
+        Button Forgot = (Button) findViewById(R.id.Register);
         Button login = (Button) findViewById(R.id.button8);
 
 
