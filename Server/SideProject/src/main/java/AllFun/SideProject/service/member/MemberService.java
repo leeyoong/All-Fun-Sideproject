@@ -96,14 +96,11 @@ public class MemberService {
 
     /**
      * Email Authentication
-     * @param email
      * @return
      */
-    public String sendMail(String email){
+    public String generatedKey(){
         Random random = new Random();
         String key = "";
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
 
         for (int i = 0; i < 3; i++) {
             int index = random.nextInt(25) + 65;
@@ -111,10 +108,17 @@ public class MemberService {
         }
         int numIndex = random.nextInt(9999)+1000;
         key += numIndex;
+
+        return key;
+
+    }
+
+    public void sendMail(String key, String email){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
         message.setSubject("인증번호 입력을 위한 메일입니다.");
         message.setText("인증번호 : " + key);
         javaMailSender.send(message);
-        return key;
     }
 
     /**
@@ -211,7 +215,9 @@ public class MemberService {
                 member.getPhone(),
                 member.getNickname(),
                 member.getGender(),
-                member.getIntroduce()
+                member.getIntroduce(),
+                member.getGroupMembers().size(),
+                member.getEntryPools().size()
         );
         return response;
     }

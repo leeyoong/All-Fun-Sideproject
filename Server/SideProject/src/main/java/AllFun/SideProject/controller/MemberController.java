@@ -63,7 +63,6 @@ public class MemberController {
 
     /**
      * get my info
-     *
      * @return
      */
     @GetMapping("/member/{memberId}")

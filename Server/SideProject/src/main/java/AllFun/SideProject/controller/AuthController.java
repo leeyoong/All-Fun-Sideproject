@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -29,8 +31,16 @@ public class AuthController {
 
             return ErrorHeader.errorMessage("duplicated email",HttpStatus.CONFLICT);
         }else{
+            OneItemDto oneItemDto = new OneItemDto(memberService.generatedKey());
+            try{
+                System.out.println("여기임 씨발");
+                System.out.println(oneItemDto.getItem());
+                return ResponseEntity.ok(oneItemDto);
+            }finally{
+                memberService.sendMail(oneItemDto.getItem(),email);
+                System.out.println("이메일 전송 완료");
+            }
 
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
     }
@@ -55,11 +65,14 @@ public class AuthController {
      * @param email
      * @return
      */
+/*
     @GetMapping("/send/email/{email}")
     public ResponseEntity<?> sendMail(@PathVariable("email")String email){
         OneItemDto oneItemDto = new OneItemDto(memberService.sendMail(email));
         return ResponseEntity.ok(oneItemDto);
     }
+
+ */
 
     /**
      * Create Member (Sign Up) / application create version (Not social)
@@ -91,6 +104,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto request){
         // Find valid email
+        System.out.println(request.getPasswd());
         Member find = memberService.findByEmail(request.getEmail());
         if (find == null){
             return ErrorHeader.errorMessage("wrong email",HttpStatus.CONFLICT);
@@ -112,6 +126,7 @@ public class AuthController {
                 find.getCreatedDate(),
                 find.getGender()
         );
+
         return ResponseEntity.ok(response);
     }
 
@@ -142,6 +157,7 @@ public class AuthController {
      */
     @PatchMapping("/find/password")
     public ResponseEntity<?> findPassword(@RequestBody FindPasswordDto request){
+        System.out.println(request);
         Member find = memberService.findByNameAndBirthAndPhoneAndGenderAndEmail
                 (request.getName(), request.getBirth(), request.getPhone(), request.getEmail());
         if (find == null){
