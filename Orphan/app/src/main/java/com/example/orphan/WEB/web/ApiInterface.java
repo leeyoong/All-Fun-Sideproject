@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -25,13 +26,13 @@ public interface ApiInterface {
 
 
 
-    @POST("/auth/check/email")
-    Call<OneItemDto> emailCheck(@Body OneItemDto Object);
+    @GET("/auth/check/email/{email}")
+    Call<OneItemDto> emailCheck(@Path("email") String email);
 
     @GET("/auth/send/email")
     Call<OneItemDto> getEmailCODE(@Body OneItemDto Object);
 
-    @POST("/auth/check/nickname")
+    @GET("/auth/check/nickname")
     Call<OneItemDto> nickNameCheck(@Body OneItemDto Object);
 
 
@@ -43,14 +44,14 @@ public interface ApiInterface {
     @POST("/auth/create")
     Call<OneItemDto> createMember(@Body CreateMemberDto jsonObject);
 
-    //sign up
-    @POST("/auth/findid")
+    //이메일 찾기
+    @GET("/auth/find/email")
     Call<OneItemDto> findID(@Body FindEmailDto Object);
 
 
 
     //send email
-    @POST("/auth/findpw")
+    @PATCH("/auth/find/password")
     Call<OneItemDto> findPW(@Body FindPasswordDto Object);
 
 

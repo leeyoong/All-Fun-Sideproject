@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class web {
 
-    public static final String BASE_URL = "http://10.0.2.2:5000";
+    public static final String BASE_URL = "http://10.0.2.2:8080";
     private static Retrofit retrofit = null;
 
 
@@ -43,9 +43,9 @@ public class web {
         ApiInterface apiService = web.getClient().create(ApiInterface.class);
 
         //보낼 오브젝트 생성
-        OneItemDto email = new OneItemDto(Email);
+
         // 요청 시작
-        Call<OneItemDto> call = apiService.emailCheck(email);
+        Call<OneItemDto> call = apiService.emailCheck(Email);
         call.enqueue(new Callback<OneItemDto>() {
             @Override
             public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
@@ -119,7 +119,7 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto object= new OneItemDto(Email);
         // 요청 시작
-        Call<OneItemDto> call = apiService.emailCheck(object);
+        Call<OneItemDto> call = apiService.emailCheck(Email);
         call.enqueue(new Callback<OneItemDto>() {
             @Override
             public void onResponse(Call<OneItemDto> call, Response<OneItemDto> response) {
@@ -385,7 +385,7 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto email = new OneItemDto(Email);
         // 요청 시작
-        Call<OneItemDto> call = apiService.emailCheck(email);
+        Call<OneItemDto> call = apiService.emailCheck(Email);
         Response<OneItemDto> response = null;
         try {
             response = call.execute();
@@ -394,7 +394,7 @@ public class web {
         }
         System.out.println("sync ----web완료");
         if (response != null) {
-            return response.body().getItem();
+            return  response.body().toString();
         } else {
             return "error";
         }
@@ -427,7 +427,7 @@ public class web {
         //보낼 오브젝트 생성
         OneItemDto object= new OneItemDto(Email);
         // 요청 시작
-        Call<OneItemDto> call = apiService.emailCheck(object);
+        Call<OneItemDto> call = apiService.emailCheck(Email);
         Response<OneItemDto> response = null;
         try {
             response = call.execute();

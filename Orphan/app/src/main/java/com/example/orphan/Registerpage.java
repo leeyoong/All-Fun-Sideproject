@@ -84,7 +84,8 @@ public class Registerpage extends AppCompatActivity {
         emailcheckbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EmailCheck_TaskThread task = new EmailCheck_TaskThread(email.getText().toString());
+                String chkMail = email.getText().toString();
+                EmailCheck_TaskThread task = new EmailCheck_TaskThread(chkMail);
                 task.start();
                 try {
                     task.join();
@@ -95,9 +96,9 @@ public class Registerpage extends AppCompatActivity {
 
 
                 if(task.getCode() != null){
-                    send_email =   email.getText().toString();
+                    send_email =   chkMail;
                     CODE = task.getCode();
-
+                    System.out.println("사용 가능");
                 }
                 else{
                     System.out.println("이미 회원가입한 아이디 입니다");
@@ -250,7 +251,7 @@ public class Registerpage extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     //융이에게 물어볼꺼
-                    if(task.getStatus()==404){
+                    if(task.getStatus()==204){
 
                         Intent nextIntent = new Intent(Registerpage.this, Loginpage.class);
                         nextIntent.putExtra("email", send_email);

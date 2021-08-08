@@ -73,7 +73,7 @@ public class Loginpage extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(task.getStatus()==405){
+                if(task.getStatus()==200){
 
                     Intent loginIntent = new Intent(Loginpage.this, MainActivity.class);
                     Loginpage.this.startActivity(loginIntent);
