@@ -3,12 +3,17 @@ package com.example.orphan;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.orphan.WEB.DTO.dashBoard.group.MyGroupListDto;
 import com.example.orphan.WEB.Thread.GroupBoard_TaskThread;
@@ -103,18 +108,36 @@ public class DashFragment extends Fragment {
 
 
 
-       /* adapter = new DashListAdapter();
-
-        listView = (ListView) view.findViewById(R.id.dashview);
-        listView.setAdapter(adapter);
-
-        adapter.addItem("해커톤 ALL-FUN 사이드프로젝트", "해커톤 ALL-FUN 사이드프로젝트");
-        adapter.addItem("캡스톤 Youtube Add-on", "캡스톤 Youtube Add-on");
-        adapter.addItem("자연어 처리를 통한 주문처리", "자연어 처리를 통한 주문처리");
 
 
-        adapter.notifyDataSetChanged();
-*/
+
+        newproject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder aBuilder = new AlertDialog.Builder(view.getContext());
+
+
+                aBuilder.setTitle("새 프로젝트 생성");
+                aBuilder.setMessage("새 프로젝트의 이름을 설정해주세요.");
+
+                final EditText et = new EditText(view.getContext());
+                aBuilder.setView(et);
+
+
+
+                aBuilder.setPositiveButton("확인", null);
+                aBuilder.setNegativeButton("취소", null);
+
+
+
+                AlertDialog dialog = aBuilder.create();
+                dialog.show();
+
+
+            }
+        });
+
+
         return view;
     }
 

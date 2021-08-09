@@ -104,7 +104,7 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/imageButton1"
+                        android:id="@+id/mypagebt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
@@ -312,15 +312,15 @@
                     android:layout_marginEnd="16dp"
                     android:background="@color/teal_200" />
 
-                <TextView
+                <ListView
+                    android:id="@+id/recentlist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="예시"
-                    android:textColor="@color/teal_200"
-                    android:textSize="16dp"></TextView>
+                    android:layout_margin="16dp"
+                    android:divider="@color/teal_700"
+                    android:dividerHeight="1dp">
+
+                </ListView>
 
 
             </LinearLayout>

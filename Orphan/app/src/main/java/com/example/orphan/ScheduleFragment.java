@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -39,8 +40,9 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ScheduleFragment extends Fragment {
+
     private ListView listView;
-    private CalListAdapter adapter;
+    private RecentListAdapter adapter;
 
     private List<GroupToDoDto> todoList;
     private List<GroupToDoDto> someDayTodoList;
@@ -145,6 +147,15 @@ public class ScheduleFragment extends Fragment {
         Button schesign = (Button) view.findViewById(R.id.schesign);
         Button schenono = (Button) view.findViewById(R.id.schenono);
 
+
+        /*
+        adapter = new RecentListAdapter();
+        listView = (ListView) view.findViewById(R.id.scheduleview);
+        listView.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(listView);
+
+        adapter.notifyDataSetChanged();
+        */
         MaterialCalendarView materialCalendarView = view.findViewById(R.id.calendarView2);
         materialCalendarView.setSelectedDate(CalendarDay.today());
 
