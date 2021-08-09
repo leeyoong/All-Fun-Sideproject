@@ -87,14 +87,14 @@ public class Board extends BaseEntity {
         board.setStatus(BoardStatus.WAITING);
         board.setEndDate(endDate);
 
-        board.setBackendEntry(backendEntry);
-        board.setFrontendEntry(frontendEntry);
-        board.setPmEntry(pmEntry);
-        board.setAndroidEntry(androidEntry);
-        board.setIosEntry(iosEntry);
-        board.setAiEntry(aiEntry);
-        board.setBigdataEntry(bigdataEntry);
-        board.setBlockchainEntry(blockchainEntry);
+        board.setBackendExpect(backendEntry);
+        board.setFrontendExpect(frontendEntry);
+        board.setPmExpect(pmEntry);
+        board.setAndroidExpect(androidEntry);
+        board.setIosExpect(iosEntry);
+        board.setAiExpect(aiEntry);
+        board.setBigdataExpect(bigdataEntry);
+        board.setBlockchainExpect(blockchainEntry);
 
         return board;
     }

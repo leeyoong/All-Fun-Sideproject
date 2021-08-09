@@ -1,0 +1,28 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>백</item>
+        <item>프론트</item>
+        <item>PM</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>블록체인</item>
+        <item>AI</item>
+        <item>빅데이터</item>
+    </string-array>
+
+    <string-array name="sort">
+        <item>최신 순으로 정렬</item>
+        <item>마감 임박 순으로 정렬</item>
+    </string-array>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.orphan">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        <activity android:name=".PassChange"></activity>
+        <activity android:name=".MyPage" />
+        <activity android:name=".Bookmark" />
+        <activity android:name=".MyApplicant" />
+        <activity android:name=".MyPost" />
+        <activity android:name=".BoardMake" />
+        <activity android:name=".MatchMake" />
+        <activity android:name=".BoardDetail" />
+        <activity android:name=".DashMain" />
+        <activity
+            android:name=".DashNavy"
+            android:label="@string/title_activity_dash_navy"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".DashActivity"
+            android:label="@string/title_activity_dash"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".PostDetail" />
+        <activity
+            android:name=".Post"
+            android:label="@string/title_activity_post"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".PassForgot" />
+        <activity android:name=".IdFound" />
+        <activity android:name=".IdForgot" />
+        <activity android:name=".Registerpage" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Loginpage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

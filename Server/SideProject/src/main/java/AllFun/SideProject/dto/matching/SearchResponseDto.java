@@ -15,9 +15,10 @@ public class SearchResponseDto {
     private Long boardId;
     private String title;
     private String writer;
+
     private LocalDateTime createdDate;
     private LocalDateTime endDate;
 
     private String content;
-
+    private List<String> role;
 }

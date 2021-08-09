@@ -10,6 +10,7 @@ import AllFun.SideProject.service.dashBoard.GroupMemberService;
 import AllFun.SideProject.service.matching.BoardService;
 import AllFun.SideProject.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,11 +75,11 @@ public class MatchingBoardController {
             return ErrorHeader.errorMessage("wrong id", HttpStatus.BAD_REQUEST);
         }
 
+        LocalDateTime endDate = LocalDateTime.parse(request.getEndDate(),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Board newBoard = Board.createBoard(
                 request.getTitle(),
                 request.getContent(),
-                request.getEndDate(),
-
+                endDate,
                 request.getBackend(),
                 request.getFrontend(),
                 request.getPm(),
@@ -94,24 +97,14 @@ public class MatchingBoardController {
 
     /**
      * get board list recently
-     * @param pageable
+
      * @return
      */
 
     @GetMapping("/list/recently/filter/{filter}")
-    public ResponseEntity<?> listRecently (@PageableDefault(size = 20, sort = "board_id", direction = Sort.Direction.DESC) Pageable pageable,
-                                           @PathVariable("filter") String filter){
-        Page<Board> boards = boardService.boardList(pageable, filter);
-        Page<SearchResponseDto> response = boards.map(
-                board->new SearchResponseDto(
-                        board.getId(),
-                        board.getTitle(),
-                        board.getMember().getNickname(),
-                        board.getCreatedDate(),
-                        board.getEndDate(),
-                        board.getContent()
-                )
-        );
+    public ResponseEntity<?> listRecently (@PathVariable("filter") String filter){
+        List<SearchResponseDto> response = boardService.boardList(filter);
+
         return ResponseEntity.ok(response);
     }
 
@@ -121,19 +114,8 @@ public class MatchingBoardController {
      * @return
      */
     @GetMapping("/list/deadline/filter/{filter}")
-    public ResponseEntity<?> listDeadline(@PageableDefault(size = 20, sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable,
-                                          @PathVariable("filter") String filter) {
-        Page<Board> boards = boardService.boardList(pageable, filter);
-        Page<SearchResponseDto> response = boards.map(
-                board->new SearchResponseDto(
-                        board.getId(),
-                        board.getTitle(),
-                        board.getMember().getNickname(),
-                        board.getCreatedDate(),
-                        board.getEndDate(),
-                        board.getContent()
-                )
-        );
+    public ResponseEntity<?> listDeadline(@PathVariable("filter") String filter) {
+        List<SearchResponseDto> response = boardService.boardListDead(filter);
         return ResponseEntity.ok(response);
     }
 
@@ -152,7 +134,8 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        board.getContent()
+                        board.getContent(),
+                        null
                 )
         );
         return ResponseEntity.ok(response);
@@ -173,7 +156,8 @@ public class MatchingBoardController {
                         board.getMember().getNickname(),
                         board.getCreatedDate(),
                         board.getEndDate(),
-                        board.getContent()
+                        board.getContent(),
+                        null
                 )
         );
         return ResponseEntity.ok(response);

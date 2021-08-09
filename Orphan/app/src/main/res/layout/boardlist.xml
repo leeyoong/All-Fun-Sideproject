@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/boardtouch"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:background="@color/pink"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/boardtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="글 제목"
+        android:textColor="@color/milk"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/boardtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="글 내용" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/boardwriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글쓴이" />
+
+        <View
+            android:id="@+id/divider13"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/boarddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성날짜" />
+    </LinearLayout>
+
+</LinearLayout>

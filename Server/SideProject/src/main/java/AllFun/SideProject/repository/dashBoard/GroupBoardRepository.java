@@ -16,5 +16,5 @@ public interface GroupBoardRepository extends JpaRepository<GroupBoard,Long> {
 
     Optional<GroupBoard> findFirstByGroupAndKindsOrderByCreatedDateDesc(DashGroup dashGroup, BoardKinds kinds);
 
-    Page<GroupBoard> findAllByGroup(DashGroup dashGroup, Pageable pageable);
+    Optional<List<GroupBoard>> findAllByGroup(DashGroup dashGroup);
 }

@@ -23,6 +23,6 @@ public class CreateBoardRequestDto {
     private int bigData;
     private int blockChain;
 
-    private  LocalDateTime endDate;
+    private  String endDate;
 
 }

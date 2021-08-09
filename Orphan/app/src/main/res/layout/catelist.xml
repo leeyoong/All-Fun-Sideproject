@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/posttouch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@color/b1"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/catetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/milk"
+        android:gravity="center_vertical"
+        android:text="분야" />
+
+    <TextView
+        android:id="@+id/catenow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/milk"
+        android:gravity="center_vertical"
+        android:text="4" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/milk"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="명" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button7"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button"
+        android:text="X" />
+
+
+</LinearLayout>

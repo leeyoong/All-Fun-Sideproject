@@ -6,29 +6,52 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface BoardRepository extends JpaRepository<Board, Long> {
     /**
-     * list pageable
-     * @param pageable
+     * list pageable (recently)
      * @return
      */
-    Page<Board> findAllByStatus(BoardStatus status, Pageable pageable);
+    Optional<List<Board>> findAllByStatusOrderByCreatedDateDesc(BoardStatus status);
 
-    Page<Board> findAllByStatusAndBackendExpectGreaterThanEqual(BoardStatus status, int backendExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndBackendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int backendExpect);
 
-    Page<Board> findAllByStatusAndFrontendExpectGreaterThanEqual(BoardStatus status, int frontendExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndFrontendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int frontendExpect);
 
-    Page<Board> findAllByStatusAndPmExpectGreaterThanEqual(BoardStatus status, int pmExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndPmExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int pmExpect);
 
-    Page<Board> findAllByStatusAndAndroidExpectGreaterThanEqual(BoardStatus status, int androidExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndAndroidExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int androidExpect);
 
-    Page<Board> findAllByStatusAndIosExpectGreaterThanEqual(BoardStatus status, int iosExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndIosExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int iosExpect);
 
-    Page<Board> findAllByStatusAndAiExpectGreaterThanEqual(BoardStatus status, int aiExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndAiExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int aiExpect);
 
-    Page<Board> findAllByStatusAndBigdataExpectGreaterThanEqual(BoardStatus status, int bigdataExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndBigdataExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int bigdataExpect);
 
-    Page<Board> findAllByStatusAndBlockchainExpectGreaterThanEqual(BoardStatus status, int blockchainExpect, Pageable pageable);
+    Optional<List<Board>> findAllByStatusAndBlockchainExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus status, int blockchainExpect);
+    /**
+     * list pageable (deadline)
+     * @return
+     */
+    Optional<List<Board>> findAllByStatusOrderByEndDateAsc(BoardStatus status);
+
+    Optional<List<Board>> findAllByStatusAndBackendExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int backendExpect);
+
+    Optional<List<Board>> findAllByStatusAndFrontendExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int frontendExpect);
+
+    Optional<List<Board>> findAllByStatusAndPmExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int pmExpect);
+
+    Optional<List<Board>> findAllByStatusAndAndroidExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int androidExpect);
+
+    Optional<List<Board>> findAllByStatusAndIosExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int iosExpect);
+
+    Optional<List<Board>> findAllByStatusAndAiExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int aiExpect);
+
+    Optional<List<Board>> findAllByStatusAndBigdataExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int bigdataExpect);
+
+    Optional<List<Board>> findAllByStatusAndBlockchainExpectGreaterThanEqualOrderByEndDateAsc(BoardStatus status, int blockchainExpect);
 
     /**
      * title 검색

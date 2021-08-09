@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 그룹 게시판
  */
@@ -40,22 +42,9 @@ public class GroupBoardController {
      * @return
      */
     @GetMapping("/list")
-    public ResponseEntity<?> groupBoardList(@PathVariable("groupId")Long groupId,
-                                            @PageableDefault(size = 20, sort = "group_board_id", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<GroupBoard> groupBoards = groupBoardService.boardList(pageable, groupId);
-
-        Page<GroupBoardListDto> response = groupBoards.map(
-                groupBoard -> new GroupBoardListDto(
-                        groupBoard.getId(),
-                        groupBoard.getMember().getId(),
-                        groupBoard.getMember().getNickname(),
-                        groupBoard.getTitle(),
-                        groupBoard.getCreatedDate(),
-                        groupBoard.getKinds()
-                )
-        );
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> groupBoardList(@PathVariable("groupId")Long groupId){
+        List<GroupBoardListDto> groupBoards = groupBoardService.boardList(groupId);
+        return ResponseEntity.ok(groupBoards);
     }
 
     /**

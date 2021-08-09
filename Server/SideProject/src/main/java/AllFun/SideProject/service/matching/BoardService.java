@@ -53,48 +53,118 @@ public class BoardService {
      * get all board list (recently)
      * @return
      */
-    public Page<Board> boardList(Pageable pageable, String filter){
-        Page<Board> boards = null;
+    public List<SearchResponseDto> boardList(String filter){
+        List<Board> boards = null;
         switch (filter){
             case "none":
-                boards = boardRepository.findAllByStatus(BoardStatus.WAITING, pageable);
+                boards = boardRepository.findAllByStatusOrderByCreatedDateDesc(BoardStatus.WAITING).orElse(null);
                 break;
             case "backend":
-                boards = boardRepository.findAllByStatusAndBackendExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndBackendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "frontend":
-                boards = boardRepository.findAllByStatusAndFrontendExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndFrontendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "pm":
-                boards = boardRepository.findAllByStatusAndPmExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndPmExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "android":
-                boards = boardRepository.findAllByStatusAndAndroidExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndAndroidExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "ios":
-                boards = boardRepository.findAllByStatusAndIosExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndIosExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "ai":
-                boards = boardRepository.findAllByStatusAndAiExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndAiExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "bigdata":
-                boards = boardRepository.findAllByStatusAndBigdataExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndBigdataExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
             case "blockchain":
-                boards = boardRepository.findAllByStatusAndBlockchainExpectGreaterThanEqual(BoardStatus.WAITING,
-                        1, pageable);
+                boards = boardRepository.findAllByStatusAndBlockchainExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
                 break;
         }
-        return boards;
+        List<SearchResponseDto> response = new ArrayList<>();
+        for (Board board : boards) {
+            response.add(
+            new SearchResponseDto(
+                    board.getId(),
+                    board.getTitle(),
+                    board.getMember().getNickname(),
+                    board.getCreatedDate(),
+                    board.getEndDate(),
+                    board.getContent(),
+                    getRole(board)
+            ));
+        }
+        return response;
     }
-
+    /**
+     * get all board list (deadline)
+     * @return
+     */
+    public List<SearchResponseDto> boardListDead(String filter){
+        List<Board> boards = null;
+        switch (filter){
+            case "none":
+                boards = boardRepository.findAllByStatusOrderByCreatedDateDesc(BoardStatus.WAITING).orElse(null);
+                break;
+            case "backend":
+                boards = boardRepository.findAllByStatusAndBackendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "frontend":
+                boards = boardRepository.findAllByStatusAndFrontendExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "pm":
+                boards = boardRepository.findAllByStatusAndPmExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "android":
+                boards = boardRepository.findAllByStatusAndAndroidExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "ios":
+                boards = boardRepository.findAllByStatusAndIosExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "ai":
+                boards = boardRepository.findAllByStatusAndAiExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "bigdata":
+                boards = boardRepository.findAllByStatusAndBigdataExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+            case "blockchain":
+                boards = boardRepository.findAllByStatusAndBlockchainExpectGreaterThanEqualOrderByCreatedDateDesc(BoardStatus.WAITING,
+                        1).orElse(null);
+                break;
+        }
+        List<SearchResponseDto> response = new ArrayList<>();
+        for (Board board : boards) {
+            response.add(
+                    new SearchResponseDto(
+                            board.getId(),
+                            board.getTitle(),
+                            board.getMember().getNickname(),
+                            board.getCreatedDate(),
+                            board.getEndDate(),
+                            board.getContent(),
+                            getRole(board)
+                    ));
+        }
+        return response;
+    }
     /**
      * read detail board page and increase hit
      * @param boardId
@@ -240,31 +310,63 @@ public class BoardService {
     public List<BoardRoleDto> getBoardRoleDto(Board board){
         List<BoardRoleDto> response = new ArrayList<>();
         if(board.getBackendExpect()>0){
-            response.add(new BoardRoleDto("backend", board.getBackendExpect(), board.getBackendEntry()));
+            response.add(new BoardRoleDto("#백", board.getBackendExpect(), board.getBackendEntry()));
         }
         if(board.getFrontendExpect()>0){
-            response.add(new BoardRoleDto("frontend", board.getFrontendExpect(), board.getFrontendEntry()));
+            response.add(new BoardRoleDto("#프론트", board.getFrontendExpect(), board.getFrontendEntry()));
         }
         if(board.getPmExpect()>0){
-            response.add(new BoardRoleDto("pm", board.getPmExpect(), board.getPmEntry()));
+            response.add(new BoardRoleDto("#PM", board.getPmExpect(), board.getPmEntry()));
         }
         if(board.getAndroidExpect()>0){
-            response.add(new BoardRoleDto("android", board.getAndroidExpect(), board.getAndroidEntry()));
+            response.add(new BoardRoleDto("#Android", board.getAndroidExpect(), board.getAndroidEntry()));
         }
         if(board.getIosExpect()>0){
-            response.add(new BoardRoleDto("ios", board.getIosExpect(), board.getIosEntry()));
+            response.add(new BoardRoleDto("#iOS", board.getIosExpect(), board.getIosEntry()));
         }
         if(board.getAiExpect()>0){
-            response.add(new BoardRoleDto("ai", board.getAiExpect(), board.getAiEntry()));
+            response.add(new BoardRoleDto("#AI", board.getAiExpect(), board.getAiEntry()));
         }
         if(board.getBigdataExpect()>0){
-            response.add(new BoardRoleDto("bigdata", board.getBigdataExpect(), board.getBigdataEntry()));
+            response.add(new BoardRoleDto("#빅데이터", board.getBigdataExpect(), board.getBigdataEntry()));
         }
         if(board.getBlockchainExpect()>0){
-            response.add(new BoardRoleDto("blockchain", board.getBlockchainExpect(), board.getBlockchainEntry()));
+            response.add(new BoardRoleDto("#블록체인", board.getBlockchainExpect(), board.getBlockchainEntry()));
         }
         return response;
     }
+
+    public List<String> getRole(Board board){
+        List<String> response = new ArrayList<>();
+        if(board.getBackendExpect()>0){
+            response.add("#백");
+        }
+        if(board.getFrontendExpect()>0){
+            response.add("#프론트");
+        }
+        if(board.getPmExpect()>0){
+            response.add("#PM");
+        }
+        if(board.getAndroidExpect()>0){
+            response.add("#Android");
+        }
+        if(board.getIosExpect()>0){
+            response.add("#iOS");
+        }
+        if(board.getAiExpect()>0){
+            response.add("#AI");
+        }
+        if(board.getBigdataExpect()>0){
+            response.add("#빅데이터");
+        }
+        if(board.getBlockchainExpect()>0){
+            response.add("#블록체인");
+        }
+        return response;
+    }
+
+
+
 
     /**
      * update status (ACCEPT case)

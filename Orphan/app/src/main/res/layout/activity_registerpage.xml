@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#283149"
+    android:orientation="vertical"
+    tools:context=".Registerpage">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/regtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="60dp"
+                android:text="Register"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="#F73859" />
+
+            <View
+                android:id="@+id/dividr"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="E-mail"
+                    android:textColor="@color/pink"></TextView>
+
+                <EditText
+                    android:id="@+id/editTextTextEmailAddress"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/pink"
+                    android:ems="10"
+                    android:textSize="16dp"
+                    android:hint="ex) abc@google.com"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/milk"
+                    android:textCursorDrawable="@drawable/custom_cursor" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button3"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK"
+                    android:textColor="#DBEDF3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/certmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/pink"
+                    android:ems="10"
+                    android:hint="Please enter the code."
+                    android:textSize="16dp"
+                    android:textColorHint="@color/milk"
+                    android:textCursorDrawable="@drawable/custom_cursor" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button4"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="20dp"
+                    android:text="Password"
+                    android:textColor="@color/pink"></TextView>
+
+                <EditText
+                    android:id="@+id/passmade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/pink"
+                    android:ems="10"
+                    android:hint="enter your password."
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/milk"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+
+                    android:text="Password Check"
+                    android:textColor="@color/pink"
+                    android:textSize="20dp"></TextView>
+
+                <EditText
+                    android:id="@+id/passmade2"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/pink"
+                    android:ems="10"
+                    android:hint="enter your password."
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/milk"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="16dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button6"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+
+                    android:text="Name"
+                    android:textColor="@color/pink"
+                    android:textSize="20dp"></TextView>
+
+                <EditText
+                    android:id="@+id/regname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:textColorHint="@color/milk"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:backgroundTint="@color/pink"
+                    android:textSize="16dp"
+                    android:hint="Name" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/div"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="77dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Birth"
+                    android:textSize="20dp"
+                    android:textColor="@color/pink"></TextView>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/di3v"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Phone Number"
+                    android:textColor="@color/pink"
+                    android:textSize="20dp"></TextView>
+
+                <EditText
+                    android:id="@+id/regphone"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:backgroundTint="@color/pink"
+                    android:textColorHint="#B3D3CC" />
+
+                <EditText
+                    android:id="@+id/rephone2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:backgroundTint="@color/pink"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/regphone2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:backgroundTint="@color/pink"
+                    android:inputType="textPersonName" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/d1iv"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Nickname"
+                    android:textSize="20dp"
+                    android:textColor="@color/pink"></TextView>
+
+                <EditText
+                    android:id="@+id/regnick"
+                    android:layout_width="178dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Please set your Nickname."
+                    android:textSize="16dp"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:backgroundTint="@color/pink"
+                    android:textColorHint="@color/milk" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button13"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/custom_button"
+                    android:text="CHECK" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/div651"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/b2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="40dp">
+
+                <TextView
+                    android:layout_width="114dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:text="Gender"
+                    android:textSize="20dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/pink"></TextView>
+
+
+                <RadioGroup
+                    android:id="@+id/gendergroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/malebox"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:buttonTint="@color/pink"
+                        android:text="Male"
+                        android:textSize="20dp" />
+
+                    <View
+                        android:id="@+id/divider7"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/b2" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/femalebox"
+                        android:layout_width="120dp"
+                        android:buttonTint="@color/pink"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:text="Female"
+                        android:textSize="20dp"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Register"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:textColor="@color/milk"
+                android:background="@drawable/custom_button"
+                android:text="Complete!" />
+
+            <View
+                android:id="@+id/divider21"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

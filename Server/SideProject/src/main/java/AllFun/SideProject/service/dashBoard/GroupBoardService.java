@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.*;
 import java.util.*;
 
 @Service
@@ -68,14 +69,27 @@ public class GroupBoardService {
 
     /**
      * {group Id} 의 그룹게시판 (pageable)
-     * @param pageable
      * @param groupId
      * @return
      */
-    public Page<GroupBoard> boardList(Pageable pageable, Long groupId){
+    public List<GroupBoardListDto> boardList(Long groupId){
         DashGroup dashGroup = dashGroupRepository.findById(groupId).orElse(null);
-        Page<GroupBoard> groupBoards = groupBoardRepository.findAllByGroup(dashGroup, pageable);
-        return groupBoards;
+        List<GroupBoard> groupBoards = groupBoardRepository.findAllByGroupOrderByCreatedDateDesc(dashGroup).orElse(null);
+        List<GroupBoardListDto> response = new ArrayList<>();
+        for (GroupBoard groupBoard : groupBoards) {
+            response.add(
+                    new GroupBoardListDto(
+                            groupBoard.getId(),
+                            groupBoard.getMember().getId(),
+                            groupBoard.getMember().getNickname(),
+                            groupBoard.getTitle(),
+                            groupBoard.getCreatedDate(),
+                            groupBoard.getKinds()
+                    )
+            );
+        }
+
+        return response;
     }
 
     /**
