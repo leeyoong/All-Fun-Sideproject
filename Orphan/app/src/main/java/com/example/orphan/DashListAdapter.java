@@ -2,6 +2,7 @@ package com.example.orphan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,8 @@ public class DashListAdapter extends BaseAdapter {
 
     private TextView dashtitle;
     private TextView dashtitle2;
-   /* private ImageView dashfix;
+    private Long memberid;
+/* private ImageView dashfix;
     private ImageView dashalarm;
     private ImageView dashass; */
 
@@ -74,6 +76,12 @@ public class DashListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DashMain.class);
+
+                System.out.println(dashListItem.getMemberId());
+
+                intent.putExtra("memberid" , dashListItem.getMemberId() );
+                intent.putExtra( "groupid", dashListItem.getGroupId()  );
+
                 v.getContext().startActivity(intent);
             }
         });
@@ -82,14 +90,14 @@ public class DashListAdapter extends BaseAdapter {
 
     }
 
-    public void addItem(String dashtitleStr, String dashtitle2Str/*, int dashfixDrawable, int dashalarmDrawable, int dashassDrawable*/){
+    public void addItem(String dashtitleStr, String dashtitle2Str, Long groupId, Long memberId/*, int dashfixDrawable, int dashalarmDrawable, int dashassDrawable*/){
         DashListItem item = new DashListItem();
 
         item.setDashtitleStr(dashtitleStr);
         item.setDashtitle2Str(dashtitle2Str);
-        /*item.setDashalarmDrawable(dashalarmDrawable);
-        item.setDashfixDrawable(dashfixDrawable);
-        item.setDashassDrawable(dashassDrawable);*/
+
+        item.setGroupId(groupId);
+        item.setMemberId(memberId);
 
         dashListItemsList.add(item);
 

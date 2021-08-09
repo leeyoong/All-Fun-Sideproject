@@ -2,6 +2,9 @@ package com.example.orphan.WEB.web;
 
 import android.util.Log;
 
+import com.example.orphan.WEB.DTO.dashBoard.group.MyGroupListDto;
+import com.example.orphan.WEB.DTO.dashBoard.groupBoard.GroupBoardListDto;
+import com.example.orphan.WEB.DTO.dashBoard.todo.GroupToDoDto;
 import com.example.orphan.WEB.DTO.mainPage.MyGroupBoardDto;
 import com.example.orphan.WEB.DTO.mainPage.MyNoHitBoardDto;
 import com.example.orphan.WEB.DTO.mainPage.MyToDoDto;
@@ -534,7 +537,108 @@ public class web {
 
 
     }
+    public Response<List<MyGroupListDto>> GET_groupBoard(Long memberid){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<MyGroupListDto>> call = apiService.GroupController_GET_myGroup(memberid);
+        Response<List<MyGroupListDto>>
+                response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response;
+        }
+        else{
+            return null;
+        }
 
 
+
+    }
+
+    public Response<List<GroupToDoDto>> GET_GroupToDoList_sync(Long groupid, String year, String month){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<GroupToDoDto>> call = apiService.ToDoController_GET_toDoList(groupid,year,month);
+        Response<List<GroupToDoDto>>
+                response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response;
+        }
+        else{
+            return null;
+        }
+
+
+
+    }
+    public GroupBoardListDto GET_groupNotice(Long groupid){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<GroupBoardListDto> call = apiService.board_GET_groupBoardNotice(groupid);
+        Response<GroupBoardListDto>
+                response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+            return response.body();
+        }
+        else{
+            return null;
+        }
+
+
+
+    }public List<GroupBoardListDto> GET_groupBoardList_sync(Long groupid){
+        //Web 생성
+        ApiInterface apiService = web.getClient().create(ApiInterface.class);
+        //보낼 오브젝트 생성
+        // 요청 시작
+        Call<List<GroupBoardListDto>> call = apiService.board_GET_groupBoardList(groupid);
+        Response<List<GroupBoardListDto>>
+                response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            System.out.println("sync ----연결실패");
+        }
+        System.out.println("sync ----web완료");
+        if(response != null){
+            System.out.println(response.headers().toString());
+
+            return response.body();
+        }
+        else{
+            return null;
+        }
+
+
+
+    }
 
 }

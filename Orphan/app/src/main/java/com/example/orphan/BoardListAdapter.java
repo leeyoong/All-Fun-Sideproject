@@ -63,8 +63,8 @@ public class BoardListAdapter extends BaseAdapter {
 
         boardtextTextView.setText(boardListItem.getBoardtextStr());
         boardtitleTextView.setText(boardListItem.getBoardtitleStr());
+        boardwriterTextView.setText(boardListItem.getBoardwriterStr());
         boarddateTextView.setText(boardListItem.getBoarddateStr());
-        boarddateTextView.setText(boardListItem.getBoardwriterStr());
 
 
 

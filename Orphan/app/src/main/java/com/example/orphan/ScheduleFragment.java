@@ -3,6 +3,7 @@ package com.example.orphan;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,14 +20,33 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import com.example.orphan.WEB.DTO.dashBoard.todo.GroupToDoDto;
+import com.example.orphan.WEB.DTO.mainPage.MyToDoDto;
+import com.example.orphan.WEB.Thread.GroupBoard_TaskThread;
+import com.example.orphan.WEB.Thread.groupToDoList_TaskThread;
+import com.example.orphan.WEB.helper.EventDecorator;
+import com.example.orphan.WEB.helper.Time;
+import com.example.orphan.calendarColor.sundayDecorator;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ScheduleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ScheduleFragment extends Fragment {
-    private RecentListAdapter adapter;
+
     private ListView listView;
+    private RecentListAdapter adapter;
+
+    private List<GroupToDoDto> todoList;
+    private List<GroupToDoDto> someDayTodoList;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -91,14 +111,36 @@ public class ScheduleFragment extends Fragment {
         listView.requestLayout();
     }
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        // 추가하는 내용
+        Bundle bundle = getArguments();
+        Long memberid;
+        Long groupid;
+
+
+        if (bundle != null) {
+            groupid = bundle.getLong("groupid");
+            memberid = bundle.getLong("memberid");
+        }
+        else{
+            groupid = 0L;
+            memberid = 0L;
+        }
+
+        groupToDoList_TaskThread task = new groupToDoList_TaskThread(groupid, Integer.toString(CalendarDay.today().getYear()),
+                Integer.toString(CalendarDay.today().getMonth() + 1));
+        task.start();
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        todoList = task.getDTO();
 
         LinearLayout scheset = (LinearLayout) view.findViewById(R.id.scheset);
         TextView scheplus = (TextView) view.findViewById(R.id.scheplus);
@@ -106,21 +148,86 @@ public class ScheduleFragment extends Fragment {
         Button schenono = (Button) view.findViewById(R.id.schenono);
 
 
+        /*
         adapter = new RecentListAdapter();
-
-
         listView = (ListView) view.findViewById(R.id.scheduleview);
         listView.setAdapter(adapter);
-
-
-
-        adapter.addItem("hi");
-        adapter.addItem("키스하기");
-        adapter.addItem("화해하기");
         setListViewHeightBasedOnChildren(listView);
 
         adapter.notifyDataSetChanged();
+        */
+        MaterialCalendarView materialCalendarView = view.findViewById(R.id.calendarView2);
+        materialCalendarView.setSelectedDate(CalendarDay.today());
 
+        materialCalendarView.addDecorators(
+                //new monDecorator(),
+                //new tueDecorator(),
+                //new wedDecorator(),
+                //new thuDecorator(),
+                //new friDecorator(),
+                //new saturdayDecorator(),
+                new sundayDecorator()
+
+        );
+       for (int i = 0; i < todoList.size(); i++) {
+            Time helper = new Time();
+            helper.setTime(todoList.get(i).getEndDateTime());
+            materialCalendarView.addDecorator(
+                    new EventDecorator(Color.CYAN, Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
+            );
+        }
+
+        materialCalendarView.setOnMonthChangedListener(
+                (widget, date) -> {
+                    groupToDoList_TaskThread newTask = new groupToDoList_TaskThread(groupid, Integer.toString(date.getYear()),
+                            Integer.toString(date.getMonth() + 1));
+                    newTask.start();
+                    try {
+                        newTask.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    todoList = newTask.getDTO();
+
+                    materialCalendarView.removeDecorators();
+                    materialCalendarView.addDecorators(
+                            //new monDecorator(),
+                            //new tueDecorator(),
+                            //new wedDecorator(),
+                            //new thuDecorator(),
+                            //new friDecorator(),
+                            //new saturdayDecorator(),
+                            new sundayDecorator()
+
+                    );
+                    for (int i = 0; i < todoList.size(); i++) {
+                        Time helper = new Time();
+                        helper.setTime(todoList.get(i).getEndDateTime());
+                        materialCalendarView.addDecorator(
+                                new EventDecorator(Color.CYAN,Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
+                        );
+                    }
+
+
+
+                }
+        );
+
+        materialCalendarView.setOnDateChangedListener(
+                (widget, date, selected) -> {
+                    GetSomedayToDoList( date.getYear(), date.getMonth()+1, date.getDay());
+                    //Add_item_to_Adapter(view,someDayTodoList);
+
+                    for (GroupToDoDto groupToDoDto : someDayTodoList) {
+                        System.out.println(groupToDoDto.getTitle());
+                    }
+
+                    String Tmonth = String.format("%02d", (date.getMonth()+1));
+                    String Tday = String.format("%02d", ((date.getDay())));
+                    //SeletedDay.setText(Tmonth+"/"+Tday);
+
+                }
+        );
 
 
 
@@ -151,5 +258,41 @@ public class ScheduleFragment extends Fragment {
 
 
         return view;
+    }
+
+    public void Add_item_to_Adapter(View view, List<GroupToDoDto> list){ //
+        adapter = new CalListAdapter();
+
+
+        listView = (ListView) view.findViewById(R.id.calviewList);
+        listView.setAdapter(adapter);
+
+        for(int i = 0; i <list.size() ; i++ ){
+            //adapter.addItem(list.get(i).getTitle());
+
+        }
+
+        setListViewHeightBasedOnChildren(listView);
+        adapter.notifyDataSetChanged();
+
+
+
+    }
+
+    public void GetSomedayToDoList(int year,int month, int day){
+        someDayTodoList = new ArrayList<>();
+        Time helper = new Time();
+
+
+        for(int i = 0 ; i < todoList.size(); i++){
+            if(todoList.get(i) != null){
+                String listtime = todoList.get(i).getEndDateTime();
+                if(helper.isEqual(listtime,year,month,day)){
+                    someDayTodoList.add(todoList.get(i));
+                }
+            }
+        }
+
+
     }
 }

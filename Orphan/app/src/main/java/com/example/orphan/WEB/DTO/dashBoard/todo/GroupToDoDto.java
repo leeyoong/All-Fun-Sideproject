@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class GroupToDoDto {
     private Long todoId;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private String startDateTime;
+    private String endDateTime;
     private String title;
 
     public Long getTodoId() {
@@ -16,19 +16,19 @@ public class GroupToDoDto {
         this.todoId = todoId;
     }
 
-    public LocalDateTime getStartDateTime() {
+    public String getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
+    public void setStartDateTime(String startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public LocalDateTime getEndDateTime() {
+    public String getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
+    public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
     }
 
@@ -40,7 +40,7 @@ public class GroupToDoDto {
         this.title = title;
     }
 
-    public GroupToDoDto(Long todoId, LocalDateTime startDateTime, LocalDateTime endDateTime, String title) {
+    public GroupToDoDto(Long todoId, String startDateTime, String endDateTime, String title) {
         this.todoId = todoId;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;

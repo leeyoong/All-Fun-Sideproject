@@ -39,7 +39,6 @@ import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 
-
 public class HomeFragment extends Fragment {
 
     private CalListAdapter adapter;
@@ -341,10 +340,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-
-
-
-
 
 
     }
