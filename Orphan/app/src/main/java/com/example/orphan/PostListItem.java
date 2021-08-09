@@ -7,6 +7,7 @@ public class PostListItem {
     private String postnowStr;
     private String postmaxStr;
 
+
     public String getPosttitleStr() {
         return posttitleStr;
     }
@@ -33,8 +34,12 @@ public class PostListItem {
 
 
 
-
-
-
-
 }
+
+
+
+
+
+
+
+

@@ -2,10 +2,10 @@ package com.example.orphan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +15,8 @@ public class PostDetail extends AppCompatActivity {
 
     private PostListAdapter adapter;
     private ListView listView;
+    private ApplyListAdapter adapter2;
+    private ListView listView2;
 
 
 
@@ -52,9 +54,12 @@ public class PostDetail extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
 
         TextView backtomatch = (TextView) findViewById(R.id.backtomatch);
+        LinearLayout aplicant = (LinearLayout) findViewById(R.id.aplicant);
 
+        aplicant.setVisibility(View.VISIBLE);
 
         adapter = new PostListAdapter();
+
 
 
         listView = (ListView) findViewById(R.id.postview);
@@ -69,6 +74,26 @@ public class PostDetail extends AppCompatActivity {
 
         setListViewHeightBasedOnChildren(listView);
         adapter.notifyDataSetChanged();
+
+
+        adapter2 = new ApplyListAdapter();
+
+
+
+        listView2 = (ListView) findViewById(R.id.applyview);
+        listView2.setAdapter(adapter2);
+
+
+        adapter2.addItem("김민수","프론트");
+        adapter2.addItem("이융","백");
+        adapter2.addItem("고성주","병신");
+
+
+
+        setListViewHeightBasedOnChildren(listView2);
+        adapter2.notifyDataSetChanged();
+
+
 
 
 

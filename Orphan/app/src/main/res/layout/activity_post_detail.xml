@@ -274,6 +274,51 @@
                         </ListView>
 
                     </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider19"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_height="1dp"
+                        android:background="@color/teal_700" />
+
+                    <LinearLayout
+                        android:id="@+id/aplicant"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="83dp"
+                            android:layout_height="34dp"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/custom_layout2"
+                            android:gravity="center"
+                            android:text="지원자 목록"
+                            android:textAlignment="center"
+                            android:textColor="@color/teal_200"
+                            android:textSize="16dp" />
+
+
+                        <View
+                            android:id="@+id/divider20"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/teal_700" />
+
+                        <ListView
+                            android:id="@+id/applyview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </ListView>
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
 

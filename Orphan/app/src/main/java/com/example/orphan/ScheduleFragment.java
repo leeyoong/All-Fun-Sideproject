@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -22,7 +25,8 @@ import android.widget.EditText;
  * create an instance of this fragment.
  */
 public class ScheduleFragment extends Fragment {
-
+    private RecentListAdapter adapter;
+    private ListView listView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,6 +67,33 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            //listItem.measure(0, 0);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+        params.height = totalHeight;
+        listView.setLayoutParams(params);
+
+        listView.requestLayout();
+    }
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +104,26 @@ public class ScheduleFragment extends Fragment {
         TextView scheplus = (TextView) view.findViewById(R.id.scheplus);
         Button schesign = (Button) view.findViewById(R.id.schesign);
         Button schenono = (Button) view.findViewById(R.id.schenono);
+
+
+        adapter = new RecentListAdapter();
+
+
+        listView = (ListView) view.findViewById(R.id.scheduleview);
+        listView.setAdapter(adapter);
+
+
+
+        adapter.addItem("hi");
+        adapter.addItem("키스하기");
+        adapter.addItem("화해하기");
+        setListViewHeightBasedOnChildren(listView);
+
+        adapter.notifyDataSetChanged();
+
+
+
+
 
         scheset.setVisibility(View.GONE);
 

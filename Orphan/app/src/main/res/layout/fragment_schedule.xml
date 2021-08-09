@@ -50,42 +50,16 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="106dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_height="match_parent"
+
                         android:orientation="vertical">
 
-                        <TextView
+                        <ListView
+                            android:id="@+id/scheduleview"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-캘린더 뷰 마무리 짓기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
+                            android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-쪽지기능 마무리 짓기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-UI 배색 수정 및 마무리"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="이 부분 리스트뷰로 구성하기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
+                        </ListView>
 
 
                     </LinearLayout>

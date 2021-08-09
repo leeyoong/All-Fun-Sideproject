@@ -45,6 +45,14 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <TextView
+        android:id="@+id/newproject"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:gravity="right"
+        android:text="+ 프로젝트 생성하기" />
+
     <ListView
         android:id="@+id/dashview"
         android:layout_width="match_parent"

@@ -53,8 +53,6 @@ public class PostListAdapter extends BaseAdapter {
         TextView postmax = (TextView) convertView.findViewById(R.id.postmax);
 
 
-
-
         PostListItem postListItem = postListItemsList.get(position);
 
         posttitle.setText(postListItem.getPosttitleStr());
@@ -72,12 +70,12 @@ public class PostListAdapter extends BaseAdapter {
     }
 
     public void addItem(String posttitleStr, String postnowStr, String postmaxStr){
+
         PostListItem item = new PostListItem();
 
         item.setPosttitleStr(posttitleStr);
         item.setPostnowStr(postnowStr);
         item.setPostmaxStr(postmaxStr);
-
 
         postListItemsList.add(item);
 

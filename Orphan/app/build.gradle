@@ -47,7 +47,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.android.volley:volley:1.1.1'
     // 커스텀 달력
-    implementation 'com.github.prolificinteractive:material-calendarview:1.4.2'
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
     // Retrofit 라이브러리
     implementation 'com.squareup.retrofit2:retrofit:2.6.4'
     // Gson 변환기 라이브러리

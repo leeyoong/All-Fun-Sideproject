@@ -52,6 +52,7 @@ public class MatchMake extends AppCompatActivity {
         setContentView(R.layout.activity_match_make);
 
         Button cateadd = (Button) findViewById(R.id.cateadd);
+        TextView backtomatch = (TextView) findViewById(R.id.backtomatch);
 
 
 
@@ -70,6 +71,15 @@ public class MatchMake extends AppCompatActivity {
 
         setListViewHeightBasedOnChildren(listView);
         adapter.notifyDataSetChanged();
+
+
+        backtomatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
 
 

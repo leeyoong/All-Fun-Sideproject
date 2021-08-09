@@ -1,5 +1,6 @@
 package com.example.orphan;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -30,6 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +44,8 @@ public class HomeFragment extends Fragment {
 
     private CalListAdapter adapter;
     private ListView listView;
+    private RecentListAdapter adapter2;
+    private ListView listView2;
     private List<MyToDoDto> todoList;
     private List<MyToDoDto> someDayTodoList;
     private List<MyGroupBoardDto> GroupBoardList;
@@ -179,20 +184,37 @@ public class HomeFragment extends Fragment {
         System.out.println(memberid);
 
         TextView Nickname = (TextView) view.findViewById(R.id.textView4);
+        Button mypagebt = (Button) view.findViewById(R.id.mypagebt);
         TextView StatusHit = (TextView) view.findViewById(R.id.textView7);
         TextView SeletedDay = (TextView) view.findViewById(R.id.calendarViewDay);//?월 ?일 양식
         Nickname.setText(nick);
         //StatusHit.setText();
 
 
+        mypagebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent Intent = new Intent(view.getContext(), MyPage.class);
+                view.getContext().startActivity(Intent);
 
 
 
+            }
+        });
+
+
+
+
+        /*
         REQUEST_GroupBoard(memberid);
         REQUEST_Mytodo(memberid,Integer.toString(CalendarDay.today().getYear()),Integer.toString(CalendarDay.today().getMonth()+1));
         REQUEST_NoHit(memberid);
 
-        StatusHit.setText(Integer.toString(nohit));
+         */
+
+        //StatusHit.setText(Integer.toString(nohit));
         //System.out.println("NONONONONONO : " + nohit);
         //System.out.println(todoList.get(0).getStartDateTime());
         //System.out.println(CalendarDay.today());
@@ -209,18 +231,18 @@ public class HomeFragment extends Fragment {
                 //new saturdayDecorator(),
                 new sundayDecorator()
 
-        );
+        );/*
         for (int i = 0; i < todoList.size(); i++) {
             Time helper = new Time();
             helper.setTime(todoList.get(i).getEndDateTime());
             materialCalendarView.addDecorator(
                     new EventDecorator(Color.CYAN,Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
             );
-        }
+        }*/
 
         materialCalendarView.setOnMonthChangedListener(
                 (widget, date) -> {
-                    REQUEST_Mytodo(memberid,Integer.toString(date.getYear()),Integer.toString(date.getMonth()+1));
+                    /*REQUEST_Mytodo(memberid,Integer.toString(date.getYear()),Integer.toString(date.getMonth()+1));
                     materialCalendarView.removeDecorators();
                     materialCalendarView.addDecorators(
                             //new monDecorator(),
@@ -238,7 +260,7 @@ public class HomeFragment extends Fragment {
                         materialCalendarView.addDecorator(
                                 new EventDecorator(Color.CYAN,Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
                         );
-                    }
+                    }*/
 
 
 
@@ -270,19 +292,19 @@ public class HomeFragment extends Fragment {
  */
 
 
-     /*   adapter = new CalListAdapter();
+        adapter2 = new RecentListAdapter();
 
 
-        listView = (ListView) view.findViewById(R.id.calviewList);
-        listView.setAdapter(adapter);
+        listView2 = (ListView) view.findViewById(R.id.recentlist);
+        listView2.setAdapter(adapter2);
 
-        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
-        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
-        adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
+        adapter2.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트");
+        adapter2.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트");
+        adapter2.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트");
 
-        setListViewHeightBasedOnChildren(listView);
-        adapter.notifyDataSetChanged();
-        */
+        setListViewHeightBasedOnChildren(listView2);
+        adapter2.notifyDataSetChanged();
+
         return view;
 
     }
