@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         settingFragment = new SettingsFragment();
 
         Bundle bundle = new Bundle(4); // 파라미터의 숫자는 전달하려는 값의 갯수
-        bundle.putLong("memberid",0L);
+        bundle.putLong("memberid",Memberid);
         bundle.putString("email",email);
         bundle.putString("password",password);
         bundle.putString("nick",nick);

@@ -241,8 +241,9 @@ public interface ApiInterface {
 
 
     // 미구현
-    @GET("/board/list/recently/filter/{filter}")
-    Call<Page<SearchResponseDto>> MatchingBoardController_GET_listRecently(@Body Object obejct,
+    @GET("/board/list/recently/filter/{filter}?page={page}")
+
+    Call<Page<SearchResponseDto>> MatchingBoardController_GET_listRecently(@Path("page") int page,
                                                                             @Path("filter") String filter);
 
 

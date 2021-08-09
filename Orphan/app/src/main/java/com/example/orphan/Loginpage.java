@@ -71,7 +71,7 @@ public class Loginpage extends AppCompatActivity {
 
                 Login_TaskThread task = new Login_TaskThread(idname.getText().toString(),
                         passname.getText().toString());
-                /*task.start();
+                task.start();
                 try {
                     task.join();
 
@@ -79,23 +79,23 @@ public class Loginpage extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                 */
-                if(true){
-                //if(task.getSTATUSCODE()==200){
+
+
+                if(task.getSTATUSCODE()==200){
 
 
 
                     Intent loginIntent = new Intent(Loginpage.this, MainActivity.class);
                     // main DTO 보내기
-                    /*loginIntent.putExtra("memberid" , task.getDTO().getId() );
+                    loginIntent.putExtra("memberid" , task.getDTO().getId() );
                     loginIntent.putExtra( "email", task.getDTO().getEmail() );
                     loginIntent.putExtra("password" , task.getDTO().getPasswd() );
                     loginIntent.putExtra("nick" , task.getDTO().getNickname() );
-*/
-                    loginIntent.putExtra("memberid" , 1234 );
-                    loginIntent.putExtra( "email", "sibal" );
-                    loginIntent.putExtra("password" ,"sibal" );
-                    loginIntent.putExtra("nick" , "리융" );
+
+                    //loginIntent.putExtra("memberid" , 1234 );
+                   // loginIntent.putExtra( "email", "sibal" );
+                   // loginIntent.putExtra("password" ,"sibal" );
+                    //loginIntent.putExtra("nick" , "리융" );
 
 
                     Loginpage.this.startActivity(loginIntent);

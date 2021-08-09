@@ -155,13 +155,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         // 여기가 이벤트 시작좀
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView SeletedDay = (TextView) view.findViewById(R.id.calendarViewDay);//?월 ?일 양식
+
         // 추가하는 내용
         Bundle bundle = getArguments();
         String email;
         String password;
         String nick;
         Long memberid;
+
 
         if (bundle != null) {
             email = bundle.getString("email");
@@ -175,9 +176,11 @@ public class HomeFragment extends Fragment {
             nick = null;
             memberid = 0L;
         }
+        System.out.println(memberid);
 
         TextView Nickname = (TextView) view.findViewById(R.id.textView4);
         TextView StatusHit = (TextView) view.findViewById(R.id.textView7);
+        TextView SeletedDay = (TextView) view.findViewById(R.id.calendarViewDay);//?월 ?일 양식
         Nickname.setText(nick);
         //StatusHit.setText();
 
@@ -185,17 +188,18 @@ public class HomeFragment extends Fragment {
 
 
 
-        //REQUEST_GroupBoard(1001L);
-        //REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
-        //REQUEST_NoHit(1001L);
+        REQUEST_GroupBoard(memberid);
+        REQUEST_Mytodo(memberid,Integer.toString(CalendarDay.today().getYear()),Integer.toString(CalendarDay.today().getMonth()+1));
+        REQUEST_NoHit(memberid);
 
-        //StatusHit.setText(Integer.toString(nohit));
+        StatusHit.setText(Integer.toString(nohit));
         //System.out.println("NONONONONONO : " + nohit);
         //System.out.println(todoList.get(0).getStartDateTime());
         //System.out.println(CalendarDay.today());
 
-        MaterialCalendarView  materialCalendarView = view.findViewById(R.id.calendarView);
+        MaterialCalendarView materialCalendarView = view.findViewById(R.id.calendarView);
         materialCalendarView.setSelectedDate(CalendarDay.today());
+
         materialCalendarView.addDecorators(
                 //new monDecorator(),
                 //new tueDecorator(),
@@ -203,12 +207,38 @@ public class HomeFragment extends Fragment {
                 //new thuDecorator(),
                 //new friDecorator(),
                 //new saturdayDecorator(),
-                new sundayDecorator(),
-                new EventDecorator(Color.CYAN, Collections.singleton(CalendarDay.from(2021,0,15)))
+                new sundayDecorator()
+
         );
+        for (int i = 0; i < todoList.size(); i++) {
+            Time helper = new Time();
+            helper.setTime(todoList.get(i).getEndDateTime());
+            materialCalendarView.addDecorator(
+                    new EventDecorator(Color.CYAN,Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
+            );
+        }
+
         materialCalendarView.setOnMonthChangedListener(
                 (widget, date) -> {
-                    //REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
+                    REQUEST_Mytodo(memberid,Integer.toString(date.getYear()),Integer.toString(date.getMonth()+1));
+                    materialCalendarView.removeDecorators();
+                    materialCalendarView.addDecorators(
+                            //new monDecorator(),
+                            //new tueDecorator(),
+                            //new wedDecorator(),
+                            //new thuDecorator(),
+                            //new friDecorator(),
+                            //new saturdayDecorator(),
+                            new sundayDecorator()
+
+                    );
+                    for (int i = 0; i < todoList.size(); i++) {
+                        Time helper = new Time();
+                        helper.setTime(todoList.get(i).getEndDateTime());
+                        materialCalendarView.addDecorator(
+                                new EventDecorator(Color.CYAN,Collections.singleton(CalendarDay.from(helper.getYear(),helper.getMonth()-1,helper.getDay())))
+                        );
+                    }
 
 
 
@@ -217,8 +247,12 @@ public class HomeFragment extends Fragment {
 
         materialCalendarView.setOnDateChangedListener(
                 (widget, date, selected) -> {
+                    GetSomedayToDoList( date.getYear(), date.getMonth()+1, date.getDay());
+                    Add_item_to_Adapter(view,someDayTodoList);
 
-
+                    String Tmonth = String.format("%02d", (date.getMonth()+1));
+                    String Tday = String.format("%02d", ((date.getDay())));
+                    SeletedDay.setText(Tmonth+"/"+Tday);
 
                 }
         );
@@ -235,7 +269,7 @@ public class HomeFragment extends Fragment {
 
  */
 
-        Add_item_to_Adapter(view,someDayTodoList);
+
      /*   adapter = new CalListAdapter();
 
 
@@ -273,7 +307,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void GetSomedayToDoList(int year,int month, int day){
-        someDayTodoList = new ArrayList<MyToDoDto>();
+        someDayTodoList = new ArrayList<>();
         Time helper = new Time();
 
 
