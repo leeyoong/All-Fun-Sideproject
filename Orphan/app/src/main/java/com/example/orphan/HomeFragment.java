@@ -3,6 +3,8 @@ package com.example.orphan;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,16 +18,23 @@ import com.example.orphan.WEB.Thread.GroupBoard_TaskThread;
 import com.example.orphan.WEB.Thread.Mytodo_TaskThread;
 import com.example.orphan.WEB.Thread.groupBoardNoHit_TaskThread;
 import com.example.orphan.WEB.helper.EventDecorator;
+import com.example.orphan.WEB.helper.Time;
 import com.example.orphan.calendarColor.sundayDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class HomeFragment extends Fragment {
@@ -33,6 +42,7 @@ public class HomeFragment extends Fragment {
     private CalListAdapter adapter;
     private ListView listView;
     private List<MyToDoDto> todoList;
+    private List<MyToDoDto> someDayTodoList;
     private List<MyGroupBoardDto> GroupBoardList;
     private int nohit;
 
@@ -143,8 +153,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        // 여기가 이벤트 시작좀
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
+        TextView SeletedDay = (TextView) view.findViewById(R.id.calendarViewDay);//?월 ?일 양식
         // 추가하는 내용
         Bundle bundle = getArguments();
         String email;
@@ -174,13 +185,13 @@ public class HomeFragment extends Fragment {
 
 
 
-        REQUEST_GroupBoard(1001L);
-        REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
-        REQUEST_NoHit(1001L);
+        //REQUEST_GroupBoard(1001L);
+        //REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
+        //REQUEST_NoHit(1001L);
 
-        StatusHit.setText(Integer.toString(nohit));
-        System.out.println("NONONONONONO : " + nohit);
-        System.out.println(todoList.get(0).getStartDateTime());
+        //StatusHit.setText(Integer.toString(nohit));
+        //System.out.println("NONONONONONO : " + nohit);
+        //System.out.println(todoList.get(0).getStartDateTime());
         //System.out.println(CalendarDay.today());
 
         MaterialCalendarView  materialCalendarView = view.findViewById(R.id.calendarView);
@@ -195,10 +206,11 @@ public class HomeFragment extends Fragment {
                 new sundayDecorator(),
                 new EventDecorator(Color.CYAN, Collections.singleton(CalendarDay.from(2021,0,15)))
         );
-
         materialCalendarView.setOnMonthChangedListener(
                 (widget, date) -> {
-                    REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
+                    //REQUEST_Mytodo(1001L,Integer.toString(2021),Integer.toString(8));
+
+
 
                 }
         );
@@ -223,17 +235,12 @@ public class HomeFragment extends Fragment {
 
  */
 
-        adapter = new CalListAdapter();
+        Add_item_to_Adapter(view,someDayTodoList);
+     /*   adapter = new CalListAdapter();
 
 
-
-
-
-        listView = (ListView) view.findViewById(R.id.calview);
+        listView = (ListView) view.findViewById(R.id.calviewList);
         listView.setAdapter(adapter);
-
-
-
 
         adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
         adapter.addItem("2021 제 1회 해커톤 All Fun 사이드프로젝트", "싸우지 말고 키스하기");
@@ -241,8 +248,51 @@ public class HomeFragment extends Fragment {
 
         setListViewHeightBasedOnChildren(listView);
         adapter.notifyDataSetChanged();
-        
+        */
         return view;
 
     }
+
+    public void Add_item_to_Adapter(View view, List<MyToDoDto> list){ //
+        adapter = new CalListAdapter();
+
+
+        listView = (ListView) view.findViewById(R.id.calviewList);
+        listView.setAdapter(adapter);
+
+        for(int i = 0; i <list.size() ; i++ ){
+            adapter.addItem(list.get(i).getGroupName() ,list.get(i).getTitle());
+
+        }
+
+        setListViewHeightBasedOnChildren(listView);
+        adapter.notifyDataSetChanged();
+
+
+
+    }
+
+    public void GetSomedayToDoList(int year,int month, int day){
+        someDayTodoList = new ArrayList<MyToDoDto>();
+        Time helper = new Time();
+
+
+        for(int i = 0 ; i < todoList.size(); i++){
+            if(todoList.get(i) != null){
+                String listtime = todoList.get(i).getEndDateTime();
+                if(helper.isEqual(listtime,year,month,day)){
+                    someDayTodoList.add(todoList.get(i));
+                }
+            }
+        }
+
+
+
+
+
+
+    }
+
+
+
 }
