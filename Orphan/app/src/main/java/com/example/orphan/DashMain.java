@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,7 +13,8 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
 public class DashMain extends AppCompatActivity {
-
+    Long Memberid;
+    Long Groupid;
     Fragment boardFragment;
     Fragment scheduleFragment;
     Fragment chatFragment;
@@ -21,10 +23,20 @@ public class DashMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_main);
+        Intent inten = getIntent();
 
+        Memberid = getIntent().getLongExtra("memberid",0L);
+        Groupid = getIntent().getLongExtra("groupid",0L);
 
         boardFragment = new BoardFragment();
         scheduleFragment = new ScheduleFragment();
+
+        Bundle bundle = new Bundle(2); // 파라미터의 숫자는 전달하려는 값의 갯수
+        bundle.putLong("memberid",Memberid);
+        bundle.putLong("groupid",Groupid);
+
+        boardFragment.setArguments(bundle);
+        scheduleFragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, scheduleFragment).commit();
 

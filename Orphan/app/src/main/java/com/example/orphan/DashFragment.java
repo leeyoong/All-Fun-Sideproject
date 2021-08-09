@@ -10,10 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.orphan.WEB.DTO.dashBoard.group.MyGroupListDto;
+import com.example.orphan.WEB.Thread.GroupBoard_TaskThread;
+import com.example.orphan.WEB.Thread.getDashboard_TaskThread;
+
+import java.util.List;
+
+import retrofit2.Response;
+
 public class DashFragment extends Fragment {
 
     private DashListAdapter adapter;
     private ListView listView;
+    private List<MyGroupListDto> GroupList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,10 +68,42 @@ public class DashFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dash, container, false);
+        Bundle bundle = getArguments();
+        String email;
+        String password;
+        String nick;
+        Long memberid;
 
-        adapter = new DashListAdapter();
+
+        if (bundle != null) {
+            email = bundle.getString("email");
+            password = bundle.getString("password");
+            nick = bundle.getString("nick");
+            memberid = bundle.getLong("memberid");
+        }
+        else{
+            email = null;
+            password = null;
+            nick = null;
+            memberid = 0L;
+        }
+
+        getDashboard_TaskThread task = new getDashboard_TaskThread(memberid);
+        task.start();
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        GroupList = task.getStatus();
+        Add_Dash_board(view, GroupList, memberid);
+
+
+
+       /* adapter = new DashListAdapter();
 
         listView = (ListView) view.findViewById(R.id.dashview);
         listView.setAdapter(adapter);
@@ -73,7 +114,23 @@ public class DashFragment extends Fragment {
 
 
         adapter.notifyDataSetChanged();
-
+*/
         return view;
+    }
+
+
+    public void Add_Dash_board(View view, List<MyGroupListDto> list, Long memberid){
+        adapter = new DashListAdapter();
+
+        listView = (ListView) view.findViewById(R.id.dashview);
+        listView.setAdapter(adapter);
+
+        for (MyGroupListDto myGroupListDto : list) {
+            adapter.addItem(myGroupListDto.getTitle(), myGroupListDto.getTitle(), myGroupListDto.getGroupId(), memberid);
+        }
+
+        adapter.notifyDataSetChanged();
+
+
     }
 }

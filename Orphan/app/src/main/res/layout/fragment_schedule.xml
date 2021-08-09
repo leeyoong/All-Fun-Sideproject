@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#1C2323"
     tools:context=".ScheduleFragment">
 
@@ -15,11 +16,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <CalendarView
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                     android:id="@+id/calendarView2"
+                    app:mcv_selectionColor="#84FFFF"
+                    app:mcv_showOtherDates="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp" />
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="32dp" />
 
 
                 <LinearLayout
@@ -53,42 +57,7 @@
                         android:layout_height="106dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-캘린더 뷰 마무리 짓기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-쪽지기능 마무리 짓기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="-UI 배색 수정 및 마무리"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="이 부분 리스트뷰로 구성하기"
-                            android:textColor="@color/teal_200"
-                            android:textSize="12dp" />
-
-
-                    </LinearLayout>
+                        android:orientation="vertical"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

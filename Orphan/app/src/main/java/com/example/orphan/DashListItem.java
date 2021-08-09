@@ -4,7 +4,26 @@ public class DashListItem {
 
     private String dashtitleStr;
     private String dashtitle2Str;
- /*   private int dashfixDrawable;
+
+    private Long groupId;
+    private Long memberId;
+
+    public Long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+    /*   private int dashfixDrawable;
     private int dashassDrawable;
     private int dashalarmDrawable; */
 

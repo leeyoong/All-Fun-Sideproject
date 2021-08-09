@@ -14,9 +14,9 @@ public class GroupBoardListDto {
 
     private String title;
 
-    private LocalDateTime createdDate;
+    private String createdDate;
 
-    private BoardKinds kinds;
+    private String kinds;
 
     public Long getGroupBoardId() {
         return groupBoardId;
@@ -50,23 +50,23 @@ public class GroupBoardListDto {
         this.title = title;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
-    public BoardKinds getKinds() {
+    public String getKinds() {
         return kinds;
     }
 
-    public void setKinds(BoardKinds kinds) {
+    public void setKinds(String kinds) {
         this.kinds = kinds;
     }
 
-    public GroupBoardListDto(Long groupBoardId, Long memberId, String memberNickname, String title, LocalDateTime createdDate, BoardKinds kinds) {
+    public GroupBoardListDto(Long groupBoardId, Long memberId, String memberNickname, String title, String createdDate, String kinds) {
         this.groupBoardId = groupBoardId;
         this.memberId = memberId;
         this.memberNickname = memberNickname;

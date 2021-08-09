@@ -147,7 +147,7 @@ public interface ApiInterface {
 
 // 여기 미구현 시팔 개어렵네 (*이융 참조)
     @GET("/dashboard/{groupId}/board/list")
-    Call<Page<GroupBoardListDto>> board_GET_groupBoardList(@Path("groupId")Long groupId);
+    Call<List<GroupBoardListDto>> board_GET_groupBoardList(@Path("groupId")Long groupId);
 
 
 

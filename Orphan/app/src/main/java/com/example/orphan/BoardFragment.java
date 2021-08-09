@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.orphan.WEB.DTO.dashBoard.groupBoard.GroupBoardListDto;
+import com.example.orphan.WEB.Thread.groupBoardList_TaskThread;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +25,8 @@ import android.widget.ListView;
  * create an instance of this fragment.
  */
 public class BoardFragment extends Fragment {
-
+    private GroupBoardListDto notice;
+    private List<GroupBoardListDto> other;
 
     private BoardListAdapter adapter;
     private ListView listView;
@@ -94,6 +101,36 @@ public class BoardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board, container, false);
 
+        // 추가하는 내용
+        Bundle bundle = getArguments();
+        Long memberid;
+        Long groupid;
+
+
+        if (bundle != null) {
+            groupid = bundle.getLong("groupid");
+            memberid = bundle.getLong("memberid");
+        }
+        else{
+            groupid = 0L;
+            memberid = 0L;
+        }
+
+        groupBoardList_TaskThread task = new groupBoardList_TaskThread(groupid);
+        task.start();
+
+        try {
+            task.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        notice = task.getNotice();
+        other = task.getOther();
+
+
+        TextView noticeTitle = (TextView) view.findViewById(R.id.textView14);
+        noticeTitle.setText(notice.getTitle().toString());
+
         adapter = new BoardListAdapter();
 
         ImageView boardpencil = (ImageView) view.findViewById(R.id.boardpencil);
@@ -101,9 +138,17 @@ public class BoardFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.boardview);
         listView.setAdapter(adapter);
 
+        for (GroupBoardListDto groupBoardListDto : other) {
+            System.out.println(groupBoardListDto.getCreatedDate());
+            adapter.addItem(groupBoardListDto.getTitle(), "비워주세요", groupBoardListDto.getCreatedDate().substring(0,10), groupBoardListDto.getMemberNickname());
+        }
+/*
         adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
         adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
         adapter.addItem("우리 열심히 하죠", "마감까지 500일 남았어요 이 씨발년들아 이제 좀 열심히 합시다 개 새끼들아", "07.23", "김민수");
+
+
+ */
 
         setListViewHeightBasedOnChildren(listView);
         adapter.notifyDataSetChanged();
